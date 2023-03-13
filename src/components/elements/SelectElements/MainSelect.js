@@ -1,4 +1,4 @@
-import TrackList from './TrackList'
+import TrackList from './Tracklist'
 import GenreList from './GenreList'
 import PlaylistList from './PlaylistList'
 

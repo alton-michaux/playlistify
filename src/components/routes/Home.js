@@ -5,7 +5,7 @@ import Footer from '../elements/Footer'
 
 const Home = () => {
   return (
-    <div className='container'>
+    <div>
       <Input></Input>
       <Nav></Nav>
       <Main></Main>
