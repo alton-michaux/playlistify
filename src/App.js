@@ -1,8 +1,8 @@
-import './App.css';
+import Input from 'components/elements/Input'
 
 function App() {
   return (
-    <div>
+    <div className='container'>
     </div>
   );
 }
