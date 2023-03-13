@@ -1,22 +1,27 @@
-import Input from ',/components/elements/Input'
-import Nav from './components/elements/Nav'
-import Main from './components/elements/Main'
-import MainSong from './components/elements/SongElements/MainSong'
-import MainPlaylist from './components/elements/PlaylistElements/MainPlaylist'
-import Metadata from './components/elements/SelectElements/Metadata'
-import Footer from './components/elements/Footer'
+import { Routes, Route } from "react-router-dom";
+import Home from './components/routes/Home'
+import LandingPage from './components/routes/LandingPage'
+import NotFound from './components/routes/NotFound'
 
 function App() {
   return (
     <div className='container'>
-      <Input></Input>
-      <Nav></Nav>
-      <Main>
-        <MainSong></MainSong>
-        <MainPlaylist></MainPlaylist>
-        <Metadata></Metadata>
-      </Main>
-      <Footer></Footer>
+      <Routes>
+        <Route
+          exact
+          path='/'
+          element={Home}
+        ></Route>
+        <Route
+          exact
+          path='/login'
+          element={LandingPage}
+        ></Route>
+        <Route
+          path='*'
+          element={NotFound}
+        ></Route>
+      </Routes>
     </div>
   );
 }
