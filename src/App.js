@@ -1,9 +1,9 @@
 import Input from 'components/elements/Input'
 import Nav from 'components/elements/Nav'
 import Main from 'components/elements/Main'
-import TrackWindow from 'components/elements/TrackWindow'
-import MainPlaylist from 'components/elements/MainPlaylist'
-import Metadata from './components/elements/Metadata'
+import MainSong from 'components/elements/SongElements/MainSong'
+import MainPlaylist from 'components/elements/PlaylistElements/MainPlaylist'
+import Metadata from './components/elements/SelectElements/Metadata'
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <Input></Input>
       <Nav></Nav>
       <Main>
-        <TrackWindow></TrackWindow>
+        <MainSong></MainSong>
         <MainPlaylist></MainPlaylist>
         <Metadata></Metadata>
       </Main>
