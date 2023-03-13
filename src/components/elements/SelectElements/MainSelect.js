@@ -2,7 +2,7 @@ import TrackList from './TrackList'
 import GenreList from './GenreList'
 import PlaylistList from './PlaylistList'
 
-const Metadata = () => {
+const MainSelect = () => {
   return (
     <div>
       <TrackList></TrackList>
@@ -12,4 +12,4 @@ const Metadata = () => {
   )
 }
 
-export default Metadata
+export default MainSelect
