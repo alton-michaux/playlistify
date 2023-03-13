@@ -1,9 +1,10 @@
-import Input from 'components/elements/Input'
-import Nav from 'components/elements/Nav'
-import Main from 'components/elements/Main'
-import MainSong from 'components/elements/SongElements/MainSong'
-import MainPlaylist from 'components/elements/PlaylistElements/MainPlaylist'
+import Input from ',/components/elements/Input'
+import Nav from './components/elements/Nav'
+import Main from './components/elements/Main'
+import MainSong from './components/elements/SongElements/MainSong'
+import MainPlaylist from './components/elements/PlaylistElements/MainPlaylist'
 import Metadata from './components/elements/SelectElements/Metadata'
+import Footer from './components/elements/Footer'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <MainPlaylist></MainPlaylist>
         <Metadata></Metadata>
       </Main>
+      <Footer></Footer>
     </div>
   );
 }
