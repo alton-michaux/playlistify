@@ -6,7 +6,7 @@ import styles from '../../assets/modules/componentModules/Main.module.css'
 
 const Main = () => {
   return (
-    <main>
+    <main className={globalStyles.mainDiv}>
       <MainSong></MainSong>
       <MainPlaylist></MainPlaylist>
       <MainSelect></MainSelect>

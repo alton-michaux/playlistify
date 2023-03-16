@@ -3,9 +3,9 @@ import styles from '../../../assets/modules/componentModules/PlaylistList.module
 
 const PlaylistList = () => {
   return (
-    <section>
+    <div>
       <p>PlaylistList Div</p>
-    </section>
+    </div>
   )
 }
 

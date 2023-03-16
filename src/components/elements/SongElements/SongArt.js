@@ -3,9 +3,17 @@ import styles from '../../../assets/modules/componentModules/SongArt.module.css'
 
 const SongArt = () => {
   return (
-    <div>
-      <p>SongArt Div</p>
-    </div>
+    <>
+      <section>
+        <p>SongArt Div</p>
+      </section>
+      <section>
+        <p>SongArt Div</p>
+      </section>
+      <section>
+        <p>SongArt Div</p>
+      </section>
+    </>
   )
 }
 

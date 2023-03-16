@@ -6,11 +6,13 @@ import styles from '../../../assets/modules/componentModules/MainSelect.module.c
 
 const MainSelect = () => {
   return (
-    <div>
+    <>
       <TrackList></TrackList>
-      <GenreList></GenreList>
-      <PlaylistList></PlaylistList>
-    </div>
+      <section>
+        <GenreList></GenreList>
+        <PlaylistList></PlaylistList>
+      </section>
+    </>
   )
 }
 

@@ -3,7 +3,8 @@ import styles from '../../../assets/modules/componentModules/GenreList.module.cs
 
 const GenreList = () => {
   return (
-    <select style={{width: '100px'}}>
+    <select>
+      <option value="" disabled select>Sort by Genre</option>
     </select>
   )
 }

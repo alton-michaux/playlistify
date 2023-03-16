@@ -53,8 +53,22 @@ footer {
   background-color: black;
   grid-template-columns: auto;
   grid-template-rows: repeat(3, auto);
+  border: 1px solid red;
 }
 
-.subRoot {
-  border: 1px solid red;
+.mainDiv {
+  display: grid;
+  height: 90vh;
+  grid-gap: 0.1%;
+  grid-template-columns: minmax(225px, 1.5fr) minmax(150px, 1fr) minmax(
+      200px,
+      2fr
+    );
+  background-color: black;
+  grid-template-rows: repeat(auto-fit, 1fr);
+}
+
+.centerItems {
+  margin: 0;
+  width: 100%;
 }

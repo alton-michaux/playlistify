@@ -11,3 +11,18 @@
   transition: transform 1s ease-in-out;
   z-index: 1000;
 }
+
+.navItem {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(200px, 1fr));
+}
+
+.navBox {
+  height: inherit;
+}
+
+.centerBox {
+  margin-top: 10px;
+  text-align: center;
+  color: white;
+}

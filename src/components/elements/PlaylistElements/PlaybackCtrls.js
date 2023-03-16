@@ -3,9 +3,9 @@ import styles from '../../../assets/modules/componentModules/PlaybackCtrls.modul
 
 const PlaybackCtrl = () => {
   return (
-    <div>
-      <p>PlaybackCtrl Div</p>
-    </div>
+    <button>
+      PlaybackCtrl Div
+    </button>
   )
 }
 
