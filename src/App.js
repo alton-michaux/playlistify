@@ -3,10 +3,11 @@ import { Routes, Route } from "react-router-dom";
 import Home from './components/routes/Home'
 import LandingPage from './components/routes/LandingPage'
 import NotFound from './components/routes/NotFound'
+import globalStyles from './assets/modules/App.module.css'
 
 function App() {
   return (
-    <div>
+    <div className={[globalStyles.subRoot, globalStyles.container].join(' ')}>
       <Routes>
         <Route
           exact

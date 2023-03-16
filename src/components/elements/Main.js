@@ -6,11 +6,11 @@ import styles from '../../assets/modules/componentModules/Main.module.css'
 
 const Main = () => {
   return (
-    <div>
+    <main>
       <MainSong></MainSong>
       <MainPlaylist></MainPlaylist>
       <MainSelect></MainSelect>
-    </div>
+    </main>
   )
 }
 

@@ -3,9 +3,9 @@ import styles from '../../assets/modules/componentModules/Nav.module.css'
 
 const Nav = () => {
   return (
-    <div>
+    <nav className={styles.navList}>
       <p>Nav Div</p>
-    </div>
+    </nav>
   )
 }
 

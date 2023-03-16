@@ -3,9 +3,8 @@ import styles from '../../../assets/modules/componentModules/GenreList.module.cs
 
 const GenreList = () => {
   return (
-    <div>
-      <p>GenreList Div</p>
-    </div>
+    <select style={{width: '100px'}}>
+    </select>
   )
 }
 

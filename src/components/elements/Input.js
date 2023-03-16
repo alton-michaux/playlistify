@@ -3,9 +3,7 @@ import styles from '../../assets/modules/componentModules/Input.module.css'
 
 const Input = () => {
   return (
-    <div>
-      <p>Input Div</p>
-    </div>
+    <input/>
   )
 }
 
