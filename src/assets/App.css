@@ -14,7 +14,7 @@ main {
 main:after {
   content: "";
   display: block;
-  height: 18vh;
+  height: 8vh;
 }
 
 footer {

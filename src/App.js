@@ -10,7 +10,7 @@ import "./assets/App.css"
 function App() {
   return (
     <Container
-      style={{ paddingTop: "8%", height: "100%" }}
+      style={{ paddingTop: "8%", height: "100vh" }}
       fluid
     >
       <Routes>
