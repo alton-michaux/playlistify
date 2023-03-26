@@ -6,13 +6,13 @@ import MainSelect from './SelectElements/MainSelect'
 const Main = () => {
   return (
     <>
-      <Col className='m-5'>
+      <Col>
         <MainSong></MainSong>
       </Col>
-      <Col className='m-5'>
+      <Col>
         <MainPlaylist></MainPlaylist>
       </Col>
-      <Col className='m-5'>
+      <Col>
         <MainSelect></MainSelect>
       </Col>
     </>
