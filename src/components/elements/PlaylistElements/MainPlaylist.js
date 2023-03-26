@@ -5,7 +5,7 @@ import PlaybackCtrls from './PlaybackCtrls'
 const MainPlaylist = () => {
   return (
     <section
-      style={{ backgroundImage: "linear-gradient(#738091, #147EB3)" }}
+      style={{ backgroundImage: "linear-gradient(#1C2127, #D33D17)" }}
     >
       <PlaylistTitle></PlaylistTitle>
       <PlaylistArt></PlaylistArt>
