@@ -10,9 +10,7 @@ import "../../assets/App.css"
 const Home = () => {
   return (
     <>
-      <main
-        // style={{ minHeight: "74vh", marginBottom: "5%" }}
-      >
+      <main>
         <Row>
           <Input></Input>
           <Col>

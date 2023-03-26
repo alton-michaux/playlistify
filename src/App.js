@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './components/routes/Home'
 import LandingPage from './components/routes/LandingPage'
 import NotFound from './components/routes/NotFound'
-import "./assets/App.css"
 
 function App() {
   return (

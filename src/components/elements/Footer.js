@@ -1,5 +1,3 @@
-import "../../assets/App.css"
-
 const Footer = () => {
   return (
     <footer
@@ -9,7 +7,7 @@ const Footer = () => {
       <div
         className="m-3"
         style={{color: "white"}}
-      >Footer Div</div>
+      >&copy; Alton Michaux</div>
     </footer>
   )
 }
