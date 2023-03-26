@@ -1,6 +1,9 @@
-const Input = () => {
+const Input = ({ value }) => {
   return (
-    <input type="hidden"/>
+    <input
+      type="hidden"
+      value={value}
+    />
   )
 }
 
