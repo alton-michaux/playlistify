@@ -16,7 +16,12 @@ main:after {
 }
 
 section {
-  margin: 2.5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 0 auto;
   padding: 5%;
   min-height: 100%;
+  outline: 1px solid red;
+  text-align: center;
 }

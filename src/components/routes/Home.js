@@ -13,9 +13,7 @@ const Home = () => {
       <main>
         <Row>
           <Input></Input>
-          <Col>
-            <Nav></Nav>
-          </Col>
+          <Nav></Nav>
         </Row>
         <Row>
           <Main></Main>
