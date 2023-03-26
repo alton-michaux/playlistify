@@ -1,10 +1,10 @@
 const SongData = () => {
   return (
-    <div
+    <section
       style={{ backgroundColor: "#8ABBFF" }}
     >
       <p>SongData Div</p>
-    </div>
+    </section>
   )
 }
 

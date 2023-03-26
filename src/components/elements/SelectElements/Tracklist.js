@@ -1,10 +1,10 @@
 const TrackList = () => {
   return (
-    <div
+    <section
       style={{ backgroundColor: "#184A90" }}
     >
       <p>TrackList Div</p>
-    </div>
+    </section>
   )
 }
 

@@ -3,10 +3,10 @@ import SongData from './SongData'
 
 const TrackWindow = () => {
   return (
-    <div>
+    <section>
       <SongArt></SongArt>
       <SongData></SongData>
-    </div>
+    </section>
   )
 }
 

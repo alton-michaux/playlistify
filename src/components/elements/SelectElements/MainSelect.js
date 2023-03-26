@@ -4,13 +4,13 @@ import PlaylistList from './PlaylistList'
 
 const MainSelect = () => {
   return (
-    <>
+    <section>
       <TrackList></TrackList>
-      <section>
+      <div>
         <GenreList></GenreList>
         <PlaylistList></PlaylistList>
-      </section>
-    </>
+      </div>
+    </section>
   )
 }
 

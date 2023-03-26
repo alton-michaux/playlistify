@@ -4,11 +4,11 @@ import PlaybackCtrls from './PlaybackCtrls'
 
 const MainPlaylist = () => {
   return (
-    <div>
+    <section>
       <PlaylistTitle></PlaylistTitle>
       <PlaylistArt></PlaylistArt>
       <PlaybackCtrls></PlaybackCtrls>
-    </div>
+    </section>
   )
 }
 

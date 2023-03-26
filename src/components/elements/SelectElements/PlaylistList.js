@@ -1,10 +1,10 @@
 const PlaylistList = () => {
   return (
-    <div
+    <section
       style={{ backgroundColor: "#8ABBFF" }}
     >
       <p>PlaylistList Div</p>
-    </div>
+    </section>
   )
 }
 
