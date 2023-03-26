@@ -1,8 +1,6 @@
 const PlaylistList = () => {
   return (
-    <section
-      style={{ backgroundColor: "#8ABBFF" }}
-    >
+    <section>
       <p>PlaylistList Div</p>
     </section>
   )

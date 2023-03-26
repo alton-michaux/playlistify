@@ -1,8 +1,6 @@
 const PlaylistTitle = () => {
   return (
-    <section
-      style={{ backgroundColor: "#184A90" }}
-    >
+    <section>
       <p>PlaylistTitle Div</p>
     </section>
   )

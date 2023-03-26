@@ -3,7 +3,9 @@ import SongData from './SongData'
 
 const TrackWindow = () => {
   return (
-    <section>
+    <section
+      style={{ backgroundImage: "linear-gradient(#738091, #147EB3)" }}
+    >
       <SongArt></SongArt>
       <SongData></SongData>
     </section>

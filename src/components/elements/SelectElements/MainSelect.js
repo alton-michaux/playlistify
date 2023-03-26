@@ -4,7 +4,9 @@ import PlaylistList from './PlaylistList'
 
 const MainSelect = () => {
   return (
-    <section>
+    <section
+      style={{ backgroundImage: "linear-gradient(#738091, #147EB3)" }}
+    >
       <TrackList></TrackList>
       <div>
         <GenreList></GenreList>
