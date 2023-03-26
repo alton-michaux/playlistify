@@ -4,7 +4,7 @@ import Input from '../elements/Input'
 import Nav from '../elements/Nav'
 import Main from '../elements/Main'
 import Footer from '../elements/Footer'
-import "../../assets/App.css"
+import "../../styles/App.css"
 
 const Home = () => {
   return (
