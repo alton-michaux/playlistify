@@ -1,6 +1,8 @@
 const PlaylistTitle = () => {
   return (
-    <div>
+    <div
+      style={{ backgroundColor: "#184A90" }}
+    >
       <p>PlaylistTitle Div</p>
     </div>
   )

@@ -1,6 +1,8 @@
 const SongArt = () => {
   return (
-    <>
+    <div
+      style={{ backgroundColor: "#184A90" }}
+    >
       <section>
         <p>SongArt Div</p>
       </section>
@@ -10,7 +12,7 @@ const SongArt = () => {
       <section>
         <p>SongArt Div</p>
       </section>
-    </>
+    </div>
   )
 }
 

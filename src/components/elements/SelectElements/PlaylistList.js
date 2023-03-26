@@ -1,6 +1,8 @@
 const PlaylistList = () => {
   return (
-    <div>
+    <div
+      style={{ backgroundColor: "#8ABBFF" }}
+    >
       <p>PlaylistList Div</p>
     </div>
   )

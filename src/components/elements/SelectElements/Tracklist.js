@@ -1,6 +1,8 @@
 const TrackList = () => {
   return (
-    <div>
+    <div
+      style={{ backgroundColor: "#184A90" }}
+    >
       <p>TrackList Div</p>
     </div>
   )

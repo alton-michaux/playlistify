@@ -1,6 +1,8 @@
 const SongData = () => {
   return (
-    <div>
+    <div
+      style={{ backgroundColor: "#8ABBFF" }}
+    >
       <p>SongData Div</p>
     </div>
   )

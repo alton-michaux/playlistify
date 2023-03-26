@@ -1,6 +1,8 @@
 const PlaybackCtrl = () => {
   return (
-    <button>
+    <button
+      style={{ backgroundColor: "#8ABBFF" }}
+    >
       PlaybackCtrl Div
     </button>
   )
