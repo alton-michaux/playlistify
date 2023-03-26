@@ -8,21 +8,23 @@ import NotFound from './components/routes/NotFound'
 
 function App() {
   return (
-    <Container>
+    <Container
+      style={{ paddingTop: "10%" }}
+    >
       <Routes>
         <Route
           exact
           path='/'
-          element={<Home/>}
+          element={<Home />}
         ></Route>
         <Route
           exact
           path='/login'
-          element={<LandingPage/>}
+          element={<LandingPage />}
         ></Route>
         <Route
           path='*'
-          element={<NotFound/>}
+          element={<NotFound />}
         ></Route>
       </Routes>
     </Container>
