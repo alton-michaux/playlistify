@@ -9,15 +9,19 @@ import Footer from '../elements/Footer'
 const Home = () => {
   return (
     <>
-      <Row>
-        <Input></Input>
-        <Col>
-          <Nav></Nav>
-        </Col>
-      </Row>
-      <Row>
-        <Main></Main>
-      </Row>
+      <main
+        style={{ height: "74vh", marginBottom: "5%" }}
+      >
+        <Row>
+          <Input></Input>
+          <Col>
+            <Nav></Nav>
+          </Col>
+        </Row>
+        <Row>
+          <Main></Main>
+        </Row>
+      </main>
       <Row>
         <Footer></Footer>
       </Row>

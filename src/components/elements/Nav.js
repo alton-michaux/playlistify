@@ -7,7 +7,7 @@ const Nav = () => {
   return (
     <Navbar
       className="bp4-navbar bp4-dark"
-      style={{margin: "0 auto", width: "100vw"}}
+      style={{margin: "0 auto", width: "100%", height: "8vh"}}
       fixedToTop 
     >
       <Navbar.Group align={Alignment.RIGHT}>

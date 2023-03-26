@@ -9,7 +9,7 @@ import NotFound from './components/routes/NotFound'
 function App() {
   return (
     <Container
-      style={{ paddingTop: "10%" }}
+      style={{ paddingTop: "8%", minHeight: "100vh" }}
     >
       <Routes>
         <Route
