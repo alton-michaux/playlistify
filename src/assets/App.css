@@ -1,0 +1,22 @@
+html, body {
+  height: 100%;
+}
+
+#root {
+  min-height: 100%;
+}
+
+main {
+  min-height: 100%;
+  margin-bottom: -8vh;
+}
+
+main:after {
+  content: "";
+  display: block;
+  height: 18vh;
+}
+
+footer {
+  min-width: 100%;
+}

@@ -5,12 +5,13 @@ import Input from '../elements/Input'
 import Nav from '../elements/Nav'
 import Main from '../elements/Main'
 import Footer from '../elements/Footer'
+import "../../assets/App.css"
 
 const Home = () => {
   return (
     <>
       <main
-        style={{ height: "74vh", marginBottom: "5%" }}
+        // style={{ minHeight: "74vh", marginBottom: "5%" }}
       >
         <Row>
           <Input></Input>
