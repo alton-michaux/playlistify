@@ -1,12 +1,14 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import Container from 'react-bootstrap/Container'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './components/routes/Home'
 import LandingPage from './components/routes/LandingPage'
 import NotFound from './components/routes/NotFound'
 
 function App() {
   return (
-    <div>
+    <Container>
       <Routes>
         <Route
           exact
@@ -23,7 +25,7 @@ function App() {
           element={<NotFound/>}
         ></Route>
       </Routes>
-    </div>
+    </Container>
   );
 }
 
