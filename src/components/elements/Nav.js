@@ -1,6 +1,6 @@
 const Nav = () => {
   return (
-    <nav>
+    <nav className="text-center">
       <div>
       </div>
       <div>Underground Music Hub</div>

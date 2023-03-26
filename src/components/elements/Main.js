@@ -9,7 +9,7 @@ const Main = () => {
       <Col>
         <MainSong></MainSong>
       </Col>
-      <Col xs={5}>
+      <Col>
         <MainPlaylist></MainPlaylist>
       </Col>
       <Col>
