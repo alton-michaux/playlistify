@@ -12,10 +12,12 @@ const Home = () => {
   const [token, setToken] = useState("")
   const [genres, setGenres] = useState([])
 
-  const tokenRef = useRef(null)
+  const tokenRef = useRef({
+    value: ''
+  })
 
   useEffect(() => {
-    if (tokenRef != "[object Object]") {
+    if (tokenRef.current.value != "") {
       setToken(tokenRef.current.value)
     } else {
       async function fetchToken() {
@@ -24,15 +26,17 @@ const Home = () => {
       }
       fetchToken()
     }
-  }, [])
+  }, [tokenRef])
 
   useEffect(() => {
-    async function fetchGenres() {
-      const genres = await API.genres(tokenRef.current.value)
-      setGenres(genres)
+    if (token) {
+      async function fetchGenres() {
+        const genres = await API.genres(tokenRef.current.value)
+        setGenres(genres)
+      }
+      fetchGenres()
     }
-    fetchGenres(token)
-  }, [tokenRef])
+  }, [token])
 
   return (
     <>
