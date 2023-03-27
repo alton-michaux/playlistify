@@ -13,9 +13,10 @@ async function getToken() {
     }
   ).then(async (response) => {
     return response.data.access_token
-  }).catch(() => {
+  }).catch((response) => {
     throw new Error(`Error! status: ${response.status}`);
   })
+  return response
 }
 
 export default getToken

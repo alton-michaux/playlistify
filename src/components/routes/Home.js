@@ -5,14 +5,18 @@ import Input from '../elements/Input'
 import Nav from '../elements/Nav'
 import Main from '../elements/Main'
 import Footer from '../elements/Footer'
-import getToken from '../../api/auth/tokens/getToken.js'
+import API from '../../api/spotifyAPI.js'
 import "../../styles/App.css"
 
 const Home = () => {
   const [token, setToken] = useState("")
 
   useEffect(() => {
-    setToken(getToken())
+    async function fetchToken() {
+      const newToken = await API.token()
+      return newToken
+    }
+    setToken(fetchToken())
     console.log('token', token)
   }, [])
 
