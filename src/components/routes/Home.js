@@ -13,6 +13,7 @@ const Home = () => {
   const [genres, setGenres] = useState([])
   const [playlists, setPlaylists] = useState([])
   const [playlist, setPlaylist] = useState({})
+  const [tracklist, setTracklist] = useState([])
 
   const tokenRef = useRef({
     value: ''
@@ -53,8 +54,16 @@ const Home = () => {
       setPlaylist(playlist)
     }
     fetchPlaylist()
-  } 
-// console.log('token ->', token, 'genres ->', genres, 'playlists ->', playlists, 'playlist ->', playlist)
+  }
+
+  const handleTracklistFetch = (id, token) => {
+    async function fetchTracklist() {
+      const tracklist = await API.tracklist(id, token)
+      setTracklist(tracklist)
+    }
+    fetchTracklist()
+  }
+// console.log('token ->', token, 'genres ->', genres, 'playlists ->', playlists, 'playlist ->', playlist, 'tracklist ->', tracklist)
   return (
     <>
       <main>
@@ -71,6 +80,9 @@ const Home = () => {
             genres={genres}
             playlists={playlists}
             handlePlaylistFetch={handlePlaylistFetch}
+            handleTracklistFetch={handleTracklistFetch}
+            selectedPlaylist={playlist}
+            tracklist={tracklist}
           ></Main>
         </Row>
       </main>
