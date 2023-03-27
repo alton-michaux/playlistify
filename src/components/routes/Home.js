@@ -14,10 +14,13 @@ const Home = () => {
   const [playlists, setPlaylists] = useState([])
   const [playlist, setPlaylist] = useState({})
   const [tracklist, setTracklist] = useState([])
+  const [song, setSong] = useState({})
 
   const tokenRef = useRef({
     value: ''
   })
+
+  // initial api calls
 
   useEffect(() => {
     if (tokenRef.current.value !== "") {
@@ -48,6 +51,8 @@ const Home = () => {
     }
   }, [token])
 
+  // handlers
+
   const handlePlaylistFetch = (id, token) => {
     async function fetchPlaylist() {
       const playlist = await API.playlist(id, token)
@@ -62,6 +67,14 @@ const Home = () => {
       setTracklist(tracklist)
     }
     fetchTracklist()
+  }
+
+  const handleTrackInfo = (id, token) => {
+    async function fetchTrackInfo() {
+      const track = await API.trackInfo(id, token)
+      setSong(track)
+    }
+    fetchTrackInfo()
   }
 // console.log('token ->', token, 'genres ->', genres, 'playlists ->', playlists, 'playlist ->', playlist, 'tracklist ->', tracklist)
   return (
@@ -81,8 +94,10 @@ const Home = () => {
             playlists={playlists}
             handlePlaylistFetch={handlePlaylistFetch}
             handleTracklistFetch={handleTracklistFetch}
+            handleSongInfoFetch={handleTrackInfo}
             selectedPlaylist={playlist}
             tracklist={tracklist}
+            song={song}
           ></Main>
         </Row>
       </main>
