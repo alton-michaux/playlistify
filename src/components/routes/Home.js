@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Input from '../elements/Input'
@@ -10,26 +10,45 @@ import "../../styles/App.css"
 
 const Home = () => {
   const [token, setToken] = useState("")
+  const [genres, setGenres] = useState([])
+
+  const tokenRef = useRef(null)
 
   useEffect(() => {
-    async function fetchToken() {
-      const newToken = await API.token()
-      setToken(newToken)
+    if (tokenRef != "[object Object]") {
+      setToken(tokenRef.current.value)
+    } else {
+      async function fetchToken() {
+        const newToken = await API.token()
+        setToken(newToken)
+      }
+      fetchToken()
     }
-    fetchToken()
   }, [])
+
+  useEffect(() => {
+    async function fetchGenres() {
+      const genres = await API.genres(tokenRef.current.value)
+      setGenres(genres)
+    }
+    fetchGenres(token)
+  }, [tokenRef])
 
   return (
     <>
       <main>
         <Row>
           <Input
+            type="hidden"
             value={token}
+            inputRef={tokenRef}
           ></Input>
           <Nav></Nav>
         </Row>
         <Row>
-          <Main></Main>
+          <Main
+            genres={genres}
+          ></Main>
         </Row>
       </main>
       <Row>

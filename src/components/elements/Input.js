@@ -1,8 +1,9 @@
-const Input = ({ value }) => {
+const Input = ({ type, value, inputRef }) => {
   return (
     <input
-      type="hidden"
+      type={type}
       value={value}
+      ref={inputRef}
     />
   )
 }
