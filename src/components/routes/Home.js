@@ -14,10 +14,9 @@ const Home = () => {
   useEffect(() => {
     async function fetchToken() {
       const newToken = await API.token()
-      return newToken
+      setToken(newToken)
     }
-    setToken(fetchToken())
-    console.log('token', token)
+    fetchToken()
   }, [])
 
   return (
