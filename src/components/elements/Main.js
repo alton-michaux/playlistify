@@ -28,7 +28,6 @@ const Main = ({
       </Col>
       <Col>
         <MainSelect
-          selectedPlaylist={selectedPlaylist}
           tracklist={tracklist}
           genres={genres}
           playlists={playlists}
