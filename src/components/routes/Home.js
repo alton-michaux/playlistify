@@ -11,13 +11,14 @@ import "../../styles/App.css"
 const Home = () => {
   const [token, setToken] = useState("")
   const [genres, setGenres] = useState([])
+  const [playlists, setPlaylists] = useState([])
 
   const tokenRef = useRef({
     value: ''
   })
 
   useEffect(() => {
-    if (tokenRef.current.value != "") {
+    if (tokenRef.current.value !== "") {
       setToken(tokenRef.current.value)
     } else {
       async function fetchToken() {
@@ -34,7 +35,14 @@ const Home = () => {
         const genres = await API.genres(tokenRef.current.value)
         setGenres(genres)
       }
+
+      async function fetchPlaylists() {
+        const myPlaylists = await API.playlists(tokenRef.current.value)
+        setPlaylists(myPlaylists)
+      }
+
       fetchGenres()
+      fetchPlaylists()
     }
   }, [token])
 
@@ -52,6 +60,7 @@ const Home = () => {
         <Row>
           <Main
             genres={genres}
+            playlists={playlists}
           ></Main>
         </Row>
       </main>
