@@ -76,11 +76,11 @@ const Home = () => {
     }
     fetchTrackInfo()
   }
-  
+
   const fetchHandler = (type, target) => {
     if (type === "song") {
       handleTrackInfo(target)
-    } 
+    }
     if (type === "genre") {
       handlePlaylistFetch(target)
     }
