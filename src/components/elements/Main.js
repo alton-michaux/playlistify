@@ -3,17 +3,38 @@ import MainSong from './SongElements/MainSong'
 import MainPlaylist from './PlaylistElements/MainPlaylist'
 import MainSelect from './SelectElements/MainSelect'
 
-const Main = () => {
+const Main = ({
+  genres,
+  playlists,
+  handlePlaylistFetch,
+  handleTracklistFetch,
+  handleSongInfoFetch,
+  selectedPlaylist,
+  tracklist,
+  song
+}) => {
   return (
     <>
       <Col>
-        <MainSong></MainSong>
+        <MainSong
+          song={song}
+        ></MainSong>
       </Col>
       <Col>
-        <MainPlaylist></MainPlaylist>
+        <MainPlaylist
+          selectedPlaylist={selectedPlaylist}
+          song={song}
+        ></MainPlaylist>
       </Col>
       <Col>
-        <MainSelect></MainSelect>
+        <MainSelect
+          tracklist={tracklist}
+          genres={genres}
+          playlists={playlists}
+          handlePlaylistFetch={handlePlaylistFetch}
+          handleTracklistFetch={handleTracklistFetch}
+          handleSongInfoFetch={handleSongInfoFetch}
+        ></MainSelect>
       </Col>
     </>
   )
