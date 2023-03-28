@@ -6,9 +6,7 @@ const MainSelect = ({
   tracklist,
   genres,
   playlists,
-  handlePlaylistFetch,
-  handleTracklistFetch,
-  handleSongInfoFetch
+  globalHandler
 }) => {
   return (
     <section
@@ -16,16 +14,16 @@ const MainSelect = ({
     >
       <TrackList
         tracklist={tracklist}
-        handleTracklistFetch={handleTracklistFetch}
-        handleSongInfoFetch={handleSongInfoFetch}
+        handleSongInfoFetch={globalHandler}
       ></TrackList>
       <div>
         <GenreList
           genres={genres}
+          handlePlaylistFetch={globalHandler}
         ></GenreList>
         <PlaylistList
           playlists={playlists}
-          handlePlaylistFetch={handlePlaylistFetch}
+          handleTracklistFetch={globalHandler}
         ></PlaylistList>
       </div>
     </section>

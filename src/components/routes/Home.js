@@ -76,6 +76,18 @@ const Home = () => {
     }
     fetchTrackInfo()
   }
+  
+  const fetchHandler = (type, target) => {
+    if (type === "song") {
+      handleTrackInfo(target)
+    } 
+    if (type === "genre") {
+      handlePlaylistFetch(target)
+    }
+    if (type === "playlist") {
+      handleTracklistFetch(target)
+    }
+  }
 
   return (
     <>
@@ -92,9 +104,7 @@ const Home = () => {
           <Main
             genres={genres}
             playlists={playlists}
-            handlePlaylistFetch={handlePlaylistFetch}
-            handleTracklistFetch={handleTracklistFetch}
-            handleSongInfoFetch={handleTrackInfo}
+            globalHandler={fetchHandler}
             selectedPlaylist={playlist}
             tracklist={tracklist}
             song={song}

@@ -1,6 +1,7 @@
 import axios from "axios";
 
 async function getMyPlaylists(token) {
+  console.log('token', token)
   const limit = 21;
 
   const response = await axios.get(
@@ -13,6 +14,7 @@ async function getMyPlaylists(token) {
       }
     }
   ).then((response) => {
+    console.log('response', response)
     return response.data.items;
   }).catch((response) => {
     throw new Error(`Error! status: ${response.status}`);

@@ -1,14 +1,18 @@
-const GenreList = ({ genres }) => {
+const GenreList = ({ genres, handlePlaylistFetch }) => {
+ const handleGenreSelect = (selected) => {
+  handlePlaylistFetch("playlist", selected)
+ }
   return (
     <section>
       <select
         style={{ minWidth: "100%" }}
+        value="Sort by Genre"
+        onChange={(event) => handleGenreSelect(event.target.value)}
       >
-        <option value="" disabled>Sort by Genre</option>
         {
           genres.map((genre) => {
             return (
-              <option>{genre}</option>
+              <option key={genres.indexOf(genre, 0)}>{genre}</option>
             )
           })
         }

@@ -1,4 +1,4 @@
-const TrackList = () => {
+const TrackList = ({Tracklist, handleSongInfoFetch}) => {
   return (
     <section>
       <p>TrackList Div</p>
