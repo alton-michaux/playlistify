@@ -76,7 +76,7 @@ const Home = () => {
     }
     fetchTrackInfo()
   }
-// console.log('token ->', token, 'genres ->', genres, 'playlists ->', playlists, 'playlist ->', playlist, 'tracklist ->', tracklist)
+
   return (
     <>
       <main>

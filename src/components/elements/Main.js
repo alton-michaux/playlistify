@@ -13,6 +13,7 @@ const Main = ({
   tracklist,
   song
 }) => {
+  // console.log('genres ->', genres, 'playlists ->', playlists, 'selectedPlaylist ->', selectedPlaylist, 'tracklist ->', tracklist, 'song ->', song)
   return (
     <>
       <Col>
