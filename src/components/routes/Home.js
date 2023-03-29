@@ -100,7 +100,9 @@ const Home = () => {
           ></Input>
           <Nav></Nav>
         </Row>
-        <Row>
+        <Row
+          className="mainRow"
+        >
           <Main
             genres={genres}
             playlists={playlists}

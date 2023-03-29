@@ -1,37 +1,31 @@
-import { Button, Card, Elevation } from "@blueprintjs/core";
+import Carousel from 'react-bootstrap/Carousel';
+import styles from "../../../styles/App.css"
 
 const PlaylistList = ({ playlists, handleTracklistFetch }) => {
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "32% 32% 32%",
-        columnGap: "1%"
-      }}
+    <Carousel
+      onSelect={handleTracklistFetch}
+      className={styles.carousel}
     >
       {
         playlists.map((playlist) => {
           return (
-            <Card
-              key={playlist.id}
-              interactive={true}
-              elevation={Elevation.FOUR}
-              style={{ width: "100%", padding: "1%" }}
-              className="bp4-interactive bp4-dark"
-            >
+            <Carousel.Item>
               <img
+                fluid
                 src={playlist.images[0].url}
                 alt={playlist.description}
-                style={{ width: "100%", padding: "0" }}
+                className="d-block w-100"
               />
-              <Button
-                style={{ width: "100%" }}
-              >{playlist.name}</Button>
-            </Card>
+              <Carousel.Caption>
+                <h3>{playlist.name}</h3>
+                <p>{playlist.description}</p>
+              </Carousel.Caption>
+            </Carousel.Item>
           )
         })
       }
-    </div>
+    </Carousel>
   )
 }
 
