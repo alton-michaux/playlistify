@@ -78,6 +78,7 @@ const Home = () => {
   }
 
   const fetchHandler = (type, target) => {
+    // console.log('type', type, 'target', target)
     if (type === "song") {
       handleTrackInfo(target)
     }

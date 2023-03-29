@@ -30,11 +30,6 @@ main:after {
   height: -12vh;
 }
 
-.row {
-  display: flex;
-  flex-direction: column;
-}
-
 section {
   justify-content: space-between;
   margin: 0 auto;
@@ -44,22 +39,36 @@ section {
   text-align: center;
 }
 
+img {
+  height: 100%;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+}
+
 .mainRow {
   top: 0;
 }
 
-.carousel-item {
-  width: 500px;
-  height: 300px;
-  /* margin: 0 auto; */
-}
-
-.carousel-item, carousel-item.active {
+.carousel-item.active,
+.carousel-item-next,
+.carousel-item-prev {
+  display: block;
   cursor: pointer;
 }
 
-.carousel-inner>.item {
+.carousel-item {
+  max-width: 500px;
+  height: 300px;
+}
+
+.carousel-caption {
+  left: 6%;
+  transform: translateX(-6%);
   width: 100%;
+  padding: 5%;
 }
 
 @media screen and (min-width: 1000px) {
@@ -81,5 +90,5 @@ section {
   }
 }
 
-/* @media screen and (min-width: 1800px) {
+/* @media screen and (max-width: 1000px) {
 } */

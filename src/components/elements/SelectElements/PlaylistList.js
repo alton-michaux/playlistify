@@ -1,23 +1,35 @@
+import React, { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import "../../../styles/App.css"
 
 const PlaylistList = ({ playlists, handleTracklistFetch }) => {
+  const [index, setIndex] = useState(0);
+
+  const handleFetch = (selectedIndex, e) => {
+    // console.log('e', e, 'index', index, 'selectedIndex', selectedIndex)
+    setIndex(selectedIndex);
+    handleTracklistFetch('playlist', e)
+  };
   return (
     <Carousel
-      onSelect={handleTracklistFetch}
+      activeIndex={index}
+      onSelect={handleFetch}
     >
       {
         playlists.map((playlist) => {
           return (
-            <Carousel.Item>
+            <Carousel.Item
+              key={playlist.id}
+              interval={30000}
+            >
               <img
-                fluid
-                thumbnail={true}
                 src={playlist.images[0].url}
                 alt={playlist.description}
                 className="d-block w-100"
               />
-              <Carousel.Caption>
+              <Carousel.Caption
+                style={{ margin: "0 auto", justifyContent: "center" }}
+              >
                 <h3>{playlist.name}</h3>
                 <p>{playlist.description}</p>
               </Carousel.Caption>
