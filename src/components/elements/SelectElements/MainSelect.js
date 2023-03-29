@@ -16,16 +16,14 @@ const MainSelect = ({
         tracklist={tracklist}
         handleSongInfoFetch={globalHandler}
       ></TrackList>
-      <div>
-        <GenreList
-          genres={genres}
-          handlePlaylistFetch={globalHandler}
-        ></GenreList>
-        <PlaylistList
-          playlists={playlists}
-          handleTracklistFetch={globalHandler}
-        ></PlaylistList>
-      </div>
+      <GenreList
+        genres={genres}
+        handlePlaylistFetch={globalHandler}
+      ></GenreList>
+      <PlaylistList
+        playlists={playlists}
+        handleTracklistFetch={globalHandler}
+      ></PlaylistList>
     </section>
   )
 }

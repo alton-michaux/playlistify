@@ -14,6 +14,7 @@ const PlaylistList = ({ playlists, handleTracklistFetch }) => {
     <Carousel
       activeIndex={index}
       onSelect={handleFetch}
+      className="playlist-carousel"
     >
       {
         playlists.map((playlist) => {

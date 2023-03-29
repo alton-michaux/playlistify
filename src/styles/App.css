@@ -52,6 +52,11 @@ img {
   top: 0;
 }
 
+.playlist-carousel {
+  justify-content: center;
+  padding: 2%;
+}
+
 .carousel-item.active,
 .carousel-item-next,
 .carousel-item-prev {

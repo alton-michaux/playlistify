@@ -5,12 +5,21 @@ const GenreList = ({ genres, handlePlaylistFetch }) => {
     console.log('selected', selected)
     handlePlaylistFetch("playlist", selected)
   }
+
+  const styles = {
+    container: base => ({
+      ...base,
+      flex: 1
+    })
+  };
   return (
     <section>
       <Form.Select
+        size='sm'
         aria-label="genre-select"
         onChange={(event) => handleGenreSelect(event.target.value)}
         variant="dark"
+        style={styles}
       >
         <option>Sort by Genre</option>
         {
