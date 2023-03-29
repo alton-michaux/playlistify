@@ -13,7 +13,6 @@ body {
 .container-fluid {
   background-color: #111418;
   height: 100%;
-  /* outline: 1px solid yellow; */
 }
 
 main {
@@ -49,17 +48,20 @@ section {
   top: 0;
 }
 
-.active-carousel-item {
-  width: 300px;
-  max-height: 400px;
+.carousel-item {
+  width: 500px;
+  height: 300px;
   margin: 0 auto;
 }
 
-/* .carousel > .item > img {
+.carousel-item, carousel-item.active {
+  cursor: pointer;
+}
+
+.carousel-inner>.item {
   width: 100%;
-  max-height: 300px;
-  margin: 0 auto;
-} */
+
+}
 
 @media screen and (min-width: 1000px) {
   body {
@@ -69,12 +71,10 @@ section {
   main {
     min-height: 92%;
     margin: 0 auto;
-    outline: 1px solid yellow;
   }
 
   .mainRow {
     margin-top: 1%;
-    /* outline: 2px solid blue; */
   }
 
   .row {

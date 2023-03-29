@@ -1,11 +1,10 @@
 import Carousel from 'react-bootstrap/Carousel';
-import styles from "../../../styles/App.css"
+import "../../../styles/App.css"
 
 const PlaylistList = ({ playlists, handleTracklistFetch }) => {
   return (
     <Carousel
       onSelect={handleTracklistFetch}
-      className={styles.carousel}
     >
       {
         playlists.map((playlist) => {
@@ -13,6 +12,7 @@ const PlaylistList = ({ playlists, handleTracklistFetch }) => {
             <Carousel.Item>
               <img
                 fluid
+                thumbnail={true}
                 src={playlist.images[0].url}
                 alt={playlist.description}
                 className="d-block w-100"
