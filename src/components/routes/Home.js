@@ -86,6 +86,7 @@ const Home = () => {
       handlePlaylistFetch(target)
     }
     if (type === "playlist") {
+      console.log('target', target)
       handleTracklistFetch(target)
     }
   }

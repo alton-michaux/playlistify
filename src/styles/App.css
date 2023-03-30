@@ -75,8 +75,6 @@ img {
   width: 100%;
   padding: 5%;
   background: rgba(64, 72, 84, .5);
-  /* opacity: 50%; */
-  /* background-blend-mode: color-burn; */
 }
 
 @media screen and (min-width: 1000px) {
