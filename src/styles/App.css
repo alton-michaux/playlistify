@@ -68,6 +68,11 @@ li {
   max-height: 300px;
 }
 
+.buttonDiv {
+  min-height: auto;
+  max-height: 250px;
+}
+
 .carousel-item.active,
 .carousel-item-next,
 .carousel-item-prev {
