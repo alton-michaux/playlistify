@@ -1,6 +1,7 @@
 import axios from "axios";
 
 async function getTrackInfo(trackID, token) {
+  console.log('trackID', trackID)
   const response = await axios.get(`https://api.spotify.com/v1/tracks/${trackID}`,
     {
       headers: {

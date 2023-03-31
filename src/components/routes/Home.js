@@ -16,6 +16,9 @@ const Home = () => {
   const [tracklist, setTracklist] = useState([])
   const [song, setSong] = useState({})
 
+  const [title, setTitle] = useState("None Selected")
+  const [image, setImage] = useState("https://techcrunch.com/wp-content/uploads/2021/02/alexander-shatov-JlO3-oY5ZlQ-unsplash.jpg")
+
   const tokenRef = useRef({
     value: ''
   })
@@ -50,6 +53,15 @@ const Home = () => {
       fetchPlaylists()
     }
   }, [token])
+
+  useEffect(() => {
+    const positiveLength = Object.keys(playlist).length > 0
+  
+    if (positiveLength) {
+      setTitle(playlist.name)
+      setImage(playlist.images[0].url)
+    }
+  }, [playlist])
 
   // handlers
 
@@ -114,6 +126,8 @@ const Home = () => {
             selectedPlaylist={playlist}
             tracklist={tracklist}
             song={song}
+            title={title}
+            image={image}
           ></Main>
         </Row>
       </main>
