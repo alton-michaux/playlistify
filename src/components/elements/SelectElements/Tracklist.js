@@ -1,28 +1,48 @@
+import Badge from 'react-bootstrap/Badge';
+import ListGroup from 'react-bootstrap/ListGroup';
 import "../../../styles/App.css"
 
 const TrackList = ({ tracklist, handleSongInfoFetch }) => {
   const parsedTracks = tracklist.items?.map((item) => item)
-  console.log('parsed', parsedTracks)
+
+  function millisecondsToMinutes(millis) {
+    const minutes = Math.floor(millis / 60000);
+    const seconds = ((millis % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+  }
+
   return (
-    <ul
+    <ListGroup
+      as="ol"
+      numbered
       style={{ listStyleType: "None" }}
       className="tracklist"
     >
       {
         parsedTracks ?
           parsedTracks.map((item) => {
-            console.log('track', item)
+            console.log('item', item)
             return (
-              <li
+              <ListGroup.Item
                 key={item.track.id}
+                as="li"
+                className="d-flex justify-content-between align-items-start"
               >
-                {item.track.name}
-              </li>
+                <div className="ms-2 me-auto">
+                  <div className="fw-bold">
+                    {item.track.name}
+                  </div>
+                  {item.track.artists.map((artist) => artist.name)}
+                </div>
+                <Badge bg="primary" pill>
+                  {millisecondsToMinutes(item.track.duration_ms)}
+                </Badge>
+              </ListGroup.Item>
             )
           }) :
           <li>None Selected</li>
       }
-    </ul>
+    </ListGroup>
   )
 }
 

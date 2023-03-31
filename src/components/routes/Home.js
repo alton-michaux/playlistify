@@ -53,7 +53,7 @@ const Home = () => {
 
   // handlers
 
-  const handlePlaylistFetch = (id, token) => {
+  const handlePlaylistFetch = (id) => {
     async function fetchPlaylist() {
       const newToken = tokenRef.current.defaultValue
       const playlist = await API.playlist(id, newToken)
