@@ -63,7 +63,8 @@ const Home = () => {
 
   const handleTracklistFetch = (id, token) => {
     async function fetchTracklist() {
-      const tracklist = await API.tracklist(id, token)
+      const newToken = tokenRef.current.defaultValue
+      const tracklist = await API.tracklist(id, newToken)
       setTracklist(tracklist)
     }
     fetchTracklist()
@@ -86,7 +87,6 @@ const Home = () => {
       handlePlaylistFetch(target)
     }
     if (type === "playlist") {
-      console.log('target', target)
       handleTracklistFetch(target)
     }
   }

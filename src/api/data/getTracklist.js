@@ -1,6 +1,7 @@
 import axios from "axios";
 
 async function getMyPlaylistsTrackList(playlistID, token) {
+  console.log('id', playlistID, 'token', token)
   const response = await axios.get(`https://api.spotify.com/v1/playlists/${playlistID}/tracks`,
     {
       headers: {

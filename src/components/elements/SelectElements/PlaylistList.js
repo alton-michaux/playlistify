@@ -12,15 +12,18 @@ const PlaylistList = ({ playlists, handleTracklistFetch }) => {
     setIndex(selectedIndex);
   };
 
-  const handleFetch = (index) => {
-    // console.log('playlist', itemRef.current.element.children[1].children[index])
-    handleTracklistFetch('playlist', itemRef.current.element.children[1].children[index])
+  const handleFetch = () => {
+    const regexExtract = new RegExp('value=(.*)');
+    const target = itemRef.current.element.children[1].children[index].innerHTML
+    const id = target.match(regexExtract)[1].substr(1, 22)
+
+    handleTracklistFetch('playlist', id)
   }
   return (
     <Carousel
       activeIndex={index}
       onSelect={handleIndex}
-      onSlid={handleFetch(index)}
+      onSlid={handleFetch}
       className="playlist-carousel"
       ref={itemRef}
       fade
@@ -30,7 +33,6 @@ const PlaylistList = ({ playlists, handleTracklistFetch }) => {
           return (
             <Carousel.Item
               key={playlist.id}
-              as="Image"
               interval={30000}
             >
               <img
