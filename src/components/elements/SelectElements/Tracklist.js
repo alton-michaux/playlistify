@@ -16,7 +16,6 @@ const TrackList = ({ tracklist, handleSongInfoFetch }) => {
       {
         parsedTracks ?
           parsedTracks.map((item) => {
-            // console.log('item', item)
             return (
               <ListGroup.Item
                 key={item.track.id}

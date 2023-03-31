@@ -1,11 +1,8 @@
-import React, { useState } from "react"
 import PlaylistTitle from './PlaylistTitle'
 import PlaylistArt from './PlaylistArt'
 import PlaybackCtrls from './PlaybackCtrls'
 
-const MainPlaylist = ({ selectedPlaylist }) => {
-  const [title, setTitle] = useState("None Selected")
-  const [image, setImage] = useState("https://techcrunch.com/wp-content/uploads/2021/02/alexander-shatov-JlO3-oY5ZlQ-unsplash.jpg")
+const MainPlaylist = ({ selectedPlaylist, title, setTitle, image, setImage }) => {
 
   const positiveLength = Object.keys(selectedPlaylist).length > 0
 

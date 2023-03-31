@@ -2,7 +2,7 @@ import Form from 'react-bootstrap/Form';
 
 const GenreList = ({ genres, handlePlaylistFetch }) => {
   const handleGenreSelect = (selected) => {
-    console.log('selected', selected)
+    // console.log('selected', selected)
     handlePlaylistFetch("playlist", selected)
   }
 
