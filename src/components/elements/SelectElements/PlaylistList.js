@@ -41,7 +41,7 @@ const PlaylistList = ({ playlists, handleTracklistFetch }) => {
                 src="https://thumbs.dreamstime.com/b/abstract-black-red-blue-background-vector-illustration-abstract-black-red-blue-background-vector-illustration-beautiful-204073511.jpg"
                 alt={playlist.description}
                 className="d-block w-100"
-                style={{marginTop: "10%", height: "100%"}}
+                style={{marginTop: "2%", height: "100%"}}
               />
               <Input
                 type="hidden"
