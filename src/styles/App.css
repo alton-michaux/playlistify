@@ -77,6 +77,12 @@ img {
   background: rgba(64, 72, 84, .5);
 }
 
+.tracklist {
+  max-height: 150px;
+  outline: 1px solid red;
+  overflow-y: auto;
+}
+
 @media screen and (min-width: 1000px) {
   body {
     overflow: hidden;

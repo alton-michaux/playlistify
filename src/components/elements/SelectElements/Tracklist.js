@@ -1,8 +1,28 @@
-const TrackList = ({ Tracklist, handleSongInfoFetch }) => {
+import "../../../styles/App.css"
+
+const TrackList = ({ tracklist, handleSongInfoFetch }) => {
+  const parsedTracks = tracklist.items?.map((item) => item)
+  console.log('parsed', parsedTracks)
   return (
-    <section>
-      <p>TrackList Div</p>
-    </section>
+    <ul
+      style={{ listStyleType: "None" }}
+      className="tracklist"
+    >
+      {
+        parsedTracks ?
+          parsedTracks.map((item) => {
+            console.log('track', item)
+            return (
+              <li
+                key={item.track.id}
+              >
+                {item.track.name}
+              </li>
+            )
+          }) :
+          <li>None Selected</li>
+      }
+    </ul>
   )
 }
 

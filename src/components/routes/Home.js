@@ -92,7 +92,7 @@ const Home = () => {
       handleTracklistFetch(target)
     }
   }
-  // console.log('song', song, 'tracklist', tracklist, 'playlist', playlist)
+
   return (
     <>
       <main>
