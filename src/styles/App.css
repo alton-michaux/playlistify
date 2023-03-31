@@ -39,9 +39,9 @@ section {
   text-align: center;
 }
 
-img {
+/* img {
   height: 100%;
-}
+} */
 
 ol::-webkit-scrollbar {
   display: none;
@@ -69,7 +69,7 @@ li {
 
 .playlistImageDiv {
   max-height: 500px;
-  outline: 1px solid yellow;
+  /* outline: 1px solid yellow; */
 }
 
 .carousel-item.active,

@@ -35,11 +35,13 @@ const PlaylistList = ({ playlists, handleTracklistFetch }) => {
             <Carousel.Item
               key={playlist.id}
               interval={30000}
+              style={{alignContent: "center"}}
             >
               <img
-                src={playlist.images[0].url}
+                src="https://thumbs.dreamstime.com/b/abstract-black-red-blue-background-vector-illustration-abstract-black-red-blue-background-vector-illustration-beautiful-204073511.jpg"
                 alt={playlist.description}
                 className="d-block w-100"
+                style={{marginTop: "10%", height: "100%"}}
               />
               <Input
                 type="hidden"

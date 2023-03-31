@@ -10,7 +10,8 @@ const GenreList = ({ genres, handlePlaylistFetch }) => {
     container: base => ({
       ...base,
       flex: 1
-    })
+    }),
+    marginTop: "5%"
   };
   return (
     <section>
