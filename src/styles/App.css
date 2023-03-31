@@ -43,6 +43,16 @@ img {
   height: 100%;
 }
 
+ol::-webkit-scrollbar {
+  display: none;
+}
+
+li {
+  left: 0;
+  text-align: left;
+  outline: 1px solid #96290D;
+}
+
 .row {
   display: flex;
   flex-direction: column;

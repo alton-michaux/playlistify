@@ -16,20 +16,20 @@ const TrackList = ({ tracklist, handleSongInfoFetch }) => {
       {
         parsedTracks ?
           parsedTracks.map((item) => {
-            console.log('item', item)
+            // console.log('item', item)
             return (
               <ListGroup.Item
                 key={item.track.id}
                 as="li"
                 className="d-flex justify-content-between align-items-start"
               >
-                <div className="ms-2 me-auto">
+                <div className="ms-2 me-auto ml-o">
                   <div className="fw-bold">
                     {item.track.name}
                   </div>
-                  {item.track.artists.map((artist) => artist.name)}
+                {item.track.artists.map((artist) => artist.name).join(', ')}
                 </div>
-                <Badge bg="primary" pill>
+                <Badge bg="danger" pill>
                   {utils.msConverter(item.track.duration_ms)}
                 </Badge>
               </ListGroup.Item>
