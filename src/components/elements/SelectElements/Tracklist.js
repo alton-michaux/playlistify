@@ -1,15 +1,10 @@
 import Badge from 'react-bootstrap/Badge';
 import ListGroup from 'react-bootstrap/ListGroup';
+import utils from "../../../utils/utils.js"
 import "../../../styles/App.css"
 
 const TrackList = ({ tracklist, handleSongInfoFetch }) => {
   const parsedTracks = tracklist.items?.map((item) => item)
-
-  function millisecondsToMinutes(millis) {
-    const minutes = Math.floor(millis / 60000);
-    const seconds = ((millis % 60000) / 1000).toFixed(0);
-    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-  }
 
   return (
     <ListGroup
@@ -35,7 +30,7 @@ const TrackList = ({ tracklist, handleSongInfoFetch }) => {
                   {item.track.artists.map((artist) => artist.name)}
                 </div>
                 <Badge bg="primary" pill>
-                  {millisecondsToMinutes(item.track.duration_ms)}
+                  {utils.msConverter(item.track.duration_ms)}
                 </Badge>
               </ListGroup.Item>
             )
