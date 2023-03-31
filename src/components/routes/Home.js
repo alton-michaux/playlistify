@@ -55,13 +55,14 @@ const Home = () => {
 
   const handlePlaylistFetch = (id, token) => {
     async function fetchPlaylist() {
-      const playlist = await API.playlist(id, token)
+      const newToken = tokenRef.current.defaultValue
+      const playlist = await API.playlist(id, newToken)
       setPlaylist(playlist)
     }
     fetchPlaylist()
   }
 
-  const handleTracklistFetch = (id, token) => {
+  const handleTracklistFetch = (id) => {
     async function fetchTracklist() {
       const newToken = tokenRef.current.defaultValue
       const tracklist = await API.tracklist(id, newToken)
@@ -70,9 +71,10 @@ const Home = () => {
     fetchTracklist()
   }
 
-  const handleTrackInfo = (id, token) => {
+  const handleTrackInfo = (id) => {
     async function fetchTrackInfo() {
-      const track = await API.trackInfo(id, token)
+      const newToken = tokenRef.current.defaultValue
+      const track = await API.trackInfo(id, newToken)
       setSong(track)
     }
     fetchTrackInfo()
@@ -90,7 +92,7 @@ const Home = () => {
       handleTracklistFetch(target)
     }
   }
-
+  // console.log('song', song, 'tracklist', tracklist, 'playlist', playlist)
   return (
     <>
       <main>
