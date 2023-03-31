@@ -67,6 +67,11 @@ li {
   padding: 2%;
 }
 
+.playlistImageDiv {
+  max-height: 500px;
+  outline: 1px solid yellow;
+}
+
 .carousel-item.active,
 .carousel-item-next,
 .carousel-item-prev {
