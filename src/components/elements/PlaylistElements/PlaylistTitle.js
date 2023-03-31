@@ -1,7 +1,8 @@
-const PlaylistTitle = () => {
+const PlaylistTitle = ({title}) => {
+  console.log('title', title)
   return (
     <section>
-      <p>PlaylistTitle Div</p>
+      <h2>{title}</h2>
     </section>
   )
 }

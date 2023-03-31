@@ -18,6 +18,7 @@ const PlaylistList = ({ playlists, handleTracklistFetch }) => {
     const id = target.match(regexExtract)[1].substr(1, 22)
 
     handleTracklistFetch('playlist', id)
+    handleTracklistFetch('genre', id)
   }
   return (
     <Carousel

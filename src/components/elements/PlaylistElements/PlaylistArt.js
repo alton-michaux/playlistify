@@ -1,10 +1,10 @@
 import Image from 'react-bootstrap/Image'
 
-const PlaylistArt = () => {
+const PlaylistArt = ({image}) => {
   return (
     <section>
       <Image
-        src="https://techcrunch.com/wp-content/uploads/2021/02/alexander-shatov-JlO3-oY5ZlQ-unsplash.jpg"
+        src={image}
         fluid
       >
       </Image>
