@@ -1,8 +1,7 @@
 import PlaylistTitle from './PlaylistTitle'
 import PlaylistArt from './PlaylistArt'
-import PlaybackCtrls from './PlaybackCtrls'
 
-const MainPlaylist = ({ selectedPlaylist, title, image }) => {
+const MainPlaylist = ({ title, image }) => {
   return (
     <section
       style={{ backgroundImage: "linear-gradient(#1C2127, #D33D17)" }}
@@ -13,9 +12,6 @@ const MainPlaylist = ({ selectedPlaylist, title, image }) => {
       <PlaylistArt
         image={image}
       ></PlaylistArt>
-      <PlaybackCtrls
-        playlist={selectedPlaylist}
-      ></PlaybackCtrls>
     </section>
   )
 }

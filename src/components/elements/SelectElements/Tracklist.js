@@ -50,7 +50,7 @@ const TrackList = ({ tracklist, handleSongInfoFetch }) => {
               </ListGroup.Item>
             )
           }) :
-          <li>None Selected</li>
+          <></>
       }
     </ListGroup>
   )

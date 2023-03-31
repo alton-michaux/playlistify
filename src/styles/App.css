@@ -96,7 +96,6 @@ li {
 .tracklist {
   min-height: auto;
   max-height: 155px;
-  outline: 1px solid red;
   overflow-y: auto;
 }
 
