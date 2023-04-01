@@ -49,6 +49,7 @@ const Home = () => {
       async function fetchPlaylists() {
         const myPlaylists = await API.playlists(tokenRef.current.value)
         setPlaylists(myPlaylists)
+        localStorage.setItem('playlists', JSON.stringify(playlists))
       }
 
       fetchGenres()
@@ -107,15 +108,19 @@ const Home = () => {
   }
 
   const filterPlaylists = (genre) => {
-    playlists.filter((playlist) => {
-      console.log('genre', genre, 'descriptions', playlist.description.toLowerCase())
-      const filtered = playlist.description.toLowerCase().includes(genre)
+    const storedPlaylists = JSON.parse(localStorage.getItem('playlists'))
+    function applyFilter() {
+      const filtered = storedPlaylists.filter((playlist) => {
+        return (
+          playlist.description.toLowerCase().includes(genre.toLowerCase())
+        )
+      })
       setPlaylists(filtered)
-    })
+    }
+    applyFilter()
   }
 
   const fetchHandler = (type, target) => {
-    // console.log('type', type, 'target', target)
     if (type === "song") {
       handleTrackInfo(target)
     }
