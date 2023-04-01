@@ -12,6 +12,11 @@ const utils = {
     const regexExtractComma = /&#x2F;/gi
     playlist.description = str.replaceAll(regexExtractComma, ',')
     return playlist
+  },
+  truncate:
+
+  function truncateText(str) {
+    return str.length > 30 ? str.substring(0, 35) + "..." : str;
   }
 }
 
