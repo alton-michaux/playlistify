@@ -49,7 +49,7 @@ const Home = () => {
 
       async function fetchPlaylists() {
         const myPlaylists = await API.playlists(tokenRef.current.value)
-        
+
         const updatedPlaylists = myPlaylists.map((playlist) => {
           return (
             utils.charConverter(playlist, playlist.description)
