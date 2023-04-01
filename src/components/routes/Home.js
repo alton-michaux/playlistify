@@ -50,13 +50,13 @@ const Home = () => {
       async function fetchPlaylists() {
         const myPlaylists = await API.playlists(tokenRef.current.value)
         
-        localStorage.setItem('playlists', JSON.stringify(myPlaylists))
-
         const updatedPlaylists = myPlaylists.map((playlist) => {
           return (
             utils.charConverter(playlist, playlist.description)
           )
         })
+
+        localStorage.setItem('playlists', JSON.stringify(updatedPlaylists))
 
         setPlaylists(updatedPlaylists)
       }
