@@ -56,6 +56,8 @@ const Home = () => {
     }
   }, [token])
 
+  // state management
+
   useEffect(() => {
     const positiveLength = Object.keys(playlist).length > 0
 
