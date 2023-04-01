@@ -11,14 +11,15 @@ const Main = ({
   tracklist,
   title,
   image,
-  song
+  song,
+  songImage
 }) => {
-  // console.log('genres ->', genres, 'playlists ->', playlists, 'selectedPlaylist ->', selectedPlaylist, 'tracklist ->', tracklist, 'song ->', song)
   return (
     <>
       <Col>
         <MainSong
           song={song}
+          songImage={songImage}
         ></MainSong>
       </Col>
       <Col>
