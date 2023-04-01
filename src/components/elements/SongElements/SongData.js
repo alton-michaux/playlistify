@@ -1,8 +1,23 @@
-const SongData = () => {
+import { Card, Elevation } from "@blueprintjs/core";
+
+const SongData = ({ song }) => {
+  const styles = {
+    maxHeight: "100px",
+    color: "black"
+  }
   return (
-    <section>
-      <p>SongData Div</p>
-    </section>
+    Object.keys(song).length > 0 ?
+      <Card
+        elevation={Elevation.FIVE}
+        style={styles}
+      >
+        <div>
+          <p>{song.name}</p>
+          <p>{song.artists[0]?.name}</p>
+          <p>{song.album.name}</p>
+        </div>
+      </Card> :
+      <p>Select a Song from the Tracklist</p>
   )
 }
 

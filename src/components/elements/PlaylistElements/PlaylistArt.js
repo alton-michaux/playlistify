@@ -1,14 +1,18 @@
 import Image from 'react-bootstrap/Image'
+import "../../../styles/App.css"
 
-const PlaylistArt = () => {
+const PlaylistArt = ({ image }) => {
   return (
-    <section>
+    <div
+      className="playlistImageDiv"
+    >
       <Image
-        src="https://techcrunch.com/wp-content/uploads/2021/02/alexander-shatov-JlO3-oY5ZlQ-unsplash.jpg"
+        src={image}
+        style={{height: "300px"}}
         fluid
       >
       </Image>
-    </section>
+    </div>
   )
 }
 

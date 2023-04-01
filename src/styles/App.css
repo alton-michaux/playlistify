@@ -6,19 +6,22 @@
 
 html,
 body {
-  /* min-height: 100%; */
+  min-height: 100%;
   color: white;
 }
 
 .container-fluid {
   background-color: #111418;
-  min-height: 100%;
+  height: 100%;
 }
 
 main {
   min-height: 100%;
   margin-top: 5vh;
   margin-bottom: 12vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 main:after {
@@ -27,22 +30,77 @@ main:after {
   height: -12vh;
 }
 
+section {
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 5%;
+  min-height: 100%;
+  min-width: 100%;
+  text-align: center;
+}
+
+ol::-webkit-scrollbar {
+  display: none;
+}
+
+li {
+  left: 0;
+  text-align: left;
+  outline: 1px solid #96290D;
+}
+
 .row {
   display: flex;
   flex-direction: column;
 }
 
-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 1%;
+.mainRow {
+  top: 0;
+}
+
+.songInfoDiv {
+  margin-top: 0;
+}
+
+.playlist-carousel {
+  justify-content: center;
+  padding: 2%;
+}
+
+.playlistImageDiv {
+  min-height: auto;
+  max-height: 300px;
+}
+
+.buttonDiv {
+  min-height: auto;
+  max-height: 250px;
+}
+
+.carousel-item.active,
+.carousel-item-next,
+.carousel-item-prev {
+  display: block;
+  cursor: pointer;
+}
+
+.carousel-item {
+  max-width: 500px;
+  height: 300px;
+}
+
+.carousel-caption {
+  left: 6%;
+  transform: translateX(-6%);
+  width: 100%;
   padding: 5%;
-  min-height: 100%;
-  min-width: 100%;
-  /* background-color: #2F343C; */
-  /* outline: 1px solid red; */
-  text-align: center;
+  background: rgba(64, 72, 84, .5);
+}
+
+.tracklist {
+  min-height: auto;
+  max-height: 155px;
+  overflow-y: auto;
 }
 
 @media screen and (min-width: 1000px) {
@@ -51,8 +109,12 @@ section {
   }
 
   main {
-    margin-top: -7vh;
     min-height: 92%;
+    margin: 0 auto;
+  }
+
+  .mainRow {
+    margin-top: 1%;
   }
 
   .row {
@@ -60,9 +122,5 @@ section {
   }
 }
 
-@media screen and (min-width: 1800px) {
-  main {
-    margin-top: 5vh;
-    min-height: 92%;
-  }
-}
+/* @media screen and (max-width: 1000px) {
+} */

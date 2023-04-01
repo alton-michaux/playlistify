@@ -7,6 +7,7 @@ import Main from '../elements/Main'
 import Footer from '../elements/Footer'
 import API from '../../api/spotifyAPI.js'
 import "../../styles/App.css"
+import utils from '../../utils/utils';
 
 const Home = () => {
   const [token, setToken] = useState("")
@@ -15,6 +16,11 @@ const Home = () => {
   const [playlist, setPlaylist] = useState({})
   const [tracklist, setTracklist] = useState([])
   const [song, setSong] = useState({})
+
+  const [title, setTitle] = useState("None Selected")
+  const [image, setImage] = useState("https://techcrunch.com/wp-content/uploads/2021/02/alexander-shatov-JlO3-oY5ZlQ-unsplash.jpg")
+
+  const [songImage, setSongImage] = useState("https://techcrunch.com/wp-content/uploads/2021/02/alexander-shatov-JlO3-oY5ZlQ-unsplash.jpg")
 
   const tokenRef = useRef({
     value: ''
@@ -43,7 +49,15 @@ const Home = () => {
 
       async function fetchPlaylists() {
         const myPlaylists = await API.playlists(tokenRef.current.value)
-        setPlaylists(myPlaylists)
+
+        const updatedPlaylists = myPlaylists.map((playlist) => {
+          return (
+            utils.charConverter(playlist, playlist.description)
+          )
+        })
+
+        setPlaylists(updatedPlaylists)
+        localStorage.setItem('playlists', JSON.stringify(playlists))
       }
 
       fetchGenres()
@@ -51,32 +65,81 @@ const Home = () => {
     }
   }, [token])
 
+  // state management
+
+  useEffect(() => {
+    const positiveLength = Object.keys(playlist).length > 0
+
+    if (positiveLength) {
+      setTitle(playlist.name)
+      setImage(playlist.images[0].url)
+    }
+  }, [playlist])
+
+  useEffect(() => {
+    function assignImage() {
+      if (Object.keys(song).length > 0) {
+        setSongImage(song.album.images[0].url)
+      }
+    }
+
+    assignImage()
+  }, [song])
+
   // handlers
 
-  const handlePlaylistFetch = (id, token) => {
+  const handlePlaylistFetch = (id) => {
     async function fetchPlaylist() {
-      const playlist = await API.playlist(id, token)
+      const newToken = tokenRef.current.defaultValue
+      const playlist = await API.playlist(id, newToken)
       setPlaylist(playlist)
     }
     fetchPlaylist()
   }
 
-  const handleTracklistFetch = (id, token) => {
+  const handleTracklistFetch = (id) => {
     async function fetchTracklist() {
-      const tracklist = await API.tracklist(id, token)
+      const newToken = tokenRef.current.defaultValue
+      const tracklist = await API.tracklist(id, newToken)
       setTracklist(tracklist)
     }
     fetchTracklist()
   }
 
-  const handleTrackInfo = (id, token) => {
+  const handleTrackInfo = (id) => {
     async function fetchTrackInfo() {
-      const track = await API.trackInfo(id, token)
+      const newToken = tokenRef.current.defaultValue
+      const track = await API.song(id, newToken)
       setSong(track)
     }
     fetchTrackInfo()
   }
-// console.log('token ->', token, 'genres ->', genres, 'playlists ->', playlists, 'playlist ->', playlist, 'tracklist ->', tracklist)
+
+  const filterPlaylists = (genre) => {
+    const storedPlaylists = JSON.parse(localStorage.getItem('playlists'))
+    function applyFilter() {
+      const filtered = storedPlaylists.filter((playlist) => {
+        return (
+          playlist.description.toLowerCase().includes(genre.toLowerCase())
+        )
+      })
+      setPlaylists(filtered)
+    }
+    applyFilter()
+  }
+
+  const fetchHandler = (type, target) => {
+    if (type === "song") {
+      handleTrackInfo(target)
+    }
+    if (type === "genre") {
+      handlePlaylistFetch(target)
+    }
+    if (type === "playlist") {
+      handleTracklistFetch(target)
+    }
+  }
+
   return (
     <>
       <main>
@@ -88,16 +151,20 @@ const Home = () => {
           ></Input>
           <Nav></Nav>
         </Row>
-        <Row>
+        <Row
+          className="mainRow"
+        >
           <Main
             genres={genres}
             playlists={playlists}
-            handlePlaylistFetch={handlePlaylistFetch}
-            handleTracklistFetch={handleTracklistFetch}
-            handleSongInfoFetch={handleTrackInfo}
+            globalHandler={fetchHandler}
+            filterPlaylists={filterPlaylists}
             selectedPlaylist={playlist}
             tracklist={tracklist}
             song={song}
+            title={title}
+            image={image}
+            songImage={songImage}
           ></Main>
         </Row>
       </main>

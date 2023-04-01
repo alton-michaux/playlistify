@@ -2,16 +2,29 @@ import TrackList from './Tracklist'
 import GenreList from './GenreList'
 import PlaylistList from './PlaylistList'
 
-const MainSelect = () => {
+const MainSelect = ({
+  tracklist,
+  genres,
+  playlists,
+  filterPlaylists,
+  globalHandler
+}) => {
   return (
     <section
       style={{ backgroundImage: "linear-gradient(#1C2127, #D33D17)" }}
     >
-      <TrackList></TrackList>
-      <div>
-        <GenreList></GenreList>
-        <PlaylistList></PlaylistList>
-      </div>
+      <TrackList
+        tracklist={tracklist}
+        handleSongInfoFetch={globalHandler}
+      ></TrackList>
+      <GenreList
+        genres={genres}
+        handlePlaylistFilter={filterPlaylists}
+      ></GenreList>
+      <PlaylistList
+        playlists={playlists}
+        handleTracklistFetch={globalHandler}
+      ></PlaylistList>
     </section>
   )
 }

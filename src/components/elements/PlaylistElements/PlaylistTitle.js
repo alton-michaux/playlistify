@@ -1,7 +1,7 @@
-const PlaylistTitle = () => {
+const PlaylistTitle = ({title}) => {
   return (
     <section>
-      <p>PlaylistTitle Div</p>
+      <h2>{title}</h2>
     </section>
   )
 }
