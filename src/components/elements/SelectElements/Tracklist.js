@@ -33,7 +33,7 @@ const TrackList = ({ tracklist, handleSongInfoFetch }) => {
                   <div className="fw-bold">
                     {item.track.name}
                   </div>
-                  {item.track.artists.map((artist) => artist.name).join(', ')}
+                  {utils.multiObjectNameString(item.track.artists)}
                 </div>
                 <Button
                   onClick={() => handleFetch(item.track.id)}

@@ -17,6 +17,11 @@ const utils = {
 
   function truncateText(str) {
     return str.length > 30 ? str.substring(0, 35) + "..." : str;
+  },
+  multiObjectNameString:
+
+  function parseObjectNames(objects) {
+    return objects.map((object) => object.name).join(', ')
   }
 }
 
