@@ -6,6 +6,7 @@ const MainSelect = ({
   tracklist,
   genres,
   playlists,
+  filterPlaylists,
   globalHandler
 }) => {
   return (
@@ -18,7 +19,7 @@ const MainSelect = ({
       ></TrackList>
       <GenreList
         genres={genres}
-        handlePlaylistFetch={globalHandler}
+        handlePlaylistFilter={filterPlaylists}
       ></GenreList>
       <PlaylistList
         playlists={playlists}

@@ -6,6 +6,7 @@ import MainSelect from './SelectElements/MainSelect'
 const Main = ({
   genres,
   playlists,
+  filterPlaylists,
   globalHandler,
   selectedPlaylist,
   tracklist,
@@ -35,6 +36,7 @@ const Main = ({
           tracklist={tracklist}
           genres={genres}
           playlists={playlists}
+          filterPlaylists={filterPlaylists}
           globalHandler={globalHandler}
         ></MainSelect>
       </Col>

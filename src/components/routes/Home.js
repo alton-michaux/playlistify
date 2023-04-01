@@ -106,6 +106,14 @@ const Home = () => {
     fetchTrackInfo()
   }
 
+  const filterPlaylists = (genre) => {
+    playlists.filter((playlist) => {
+      console.log('genre', genre, 'descriptions', playlist.description.toLowerCase())
+      const filtered = playlist.description.toLowerCase().includes(genre)
+      setPlaylists(filtered)
+    })
+  }
+
   const fetchHandler = (type, target) => {
     // console.log('type', type, 'target', target)
     if (type === "song") {
@@ -137,6 +145,7 @@ const Home = () => {
             genres={genres}
             playlists={playlists}
             globalHandler={fetchHandler}
+            filterPlaylists={filterPlaylists}
             selectedPlaylist={playlist}
             tracklist={tracklist}
             song={song}

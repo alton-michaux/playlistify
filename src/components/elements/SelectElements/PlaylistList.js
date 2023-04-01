@@ -21,6 +21,7 @@ const PlaylistList = ({ playlists, handleTracklistFetch }) => {
     handleTracklistFetch('genre', id)
   }
   return (
+    Object.keys(playlists).length > 0 ?
     <Carousel
       activeIndex={index}
       onSelect={handleIndex}
@@ -57,7 +58,8 @@ const PlaylistList = ({ playlists, handleTracklistFetch }) => {
           )
         })
       }
-    </Carousel>
+    </Carousel> :
+    <p>No Matches for selected Genre</p>
   )
 }
 

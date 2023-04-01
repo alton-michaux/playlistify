@@ -17,7 +17,7 @@ const SongData = ({ song }) => {
           <p>{song.album.name}</p>
         </div>
       </Card> :
-      <></>
+      <p>Select a Song from the Tracklist</p>
   )
 }
 
