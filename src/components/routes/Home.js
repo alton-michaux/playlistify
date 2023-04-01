@@ -86,7 +86,7 @@ const Home = () => {
   const handleTrackInfo = (id) => {
     async function fetchTrackInfo() {
       const newToken = tokenRef.current.defaultValue
-      const track = await API.trackInfo(id, newToken)
+      const track = await API.song(id, newToken)
       setSong(track)
     }
     fetchTrackInfo()
