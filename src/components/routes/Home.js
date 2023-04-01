@@ -7,6 +7,7 @@ import Main from '../elements/Main'
 import Footer from '../elements/Footer'
 import API from '../../api/spotifyAPI.js'
 import "../../styles/App.css"
+import utils from '../../utils/utils';
 
 const Home = () => {
   const [token, setToken] = useState("")
@@ -48,7 +49,14 @@ const Home = () => {
 
       async function fetchPlaylists() {
         const myPlaylists = await API.playlists(tokenRef.current.value)
-        setPlaylists(myPlaylists)
+
+        const updatedPlaylists = myPlaylists.map((playlist) => {
+          return (
+            utils.charConverter(playlist, playlist.description)
+          )
+        })
+
+        setPlaylists(updatedPlaylists)
         localStorage.setItem('playlists', JSON.stringify(playlists))
       }
 
