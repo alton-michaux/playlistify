@@ -18,7 +18,7 @@ function App() {
   const [tracklist, setTracklist] = useState([])
   const [song, setSong] = useState({})
 
-  const [title, setTitle] = useState("None Selected")
+  const [title, setTitle] = useState("")
   const [image, setImage] = useState("https://techcrunch.com/wp-content/uploads/2021/02/alexander-shatov-JlO3-oY5ZlQ-unsplash.jpg")
 
   const [songImage, setSongImage] = useState("https://techcrunch.com/wp-content/uploads/2021/02/alexander-shatov-JlO3-oY5ZlQ-unsplash.jpg")
