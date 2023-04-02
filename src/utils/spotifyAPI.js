@@ -1,9 +1,9 @@
-import getToken from "./auth/tokens/getToken";
-import getGenres from "./data/getGenre";
-import getMyPlaylists from "./data/getPlaylists";
-import getPlaylistByID from "./data/getPlaylistByID";
-import getMyPlaylistsTrackList from "./data/getTracklist";
-import getTrackInfo from "./data/getTrackInfo";
+import getToken from "../api/auth/tokens/getToken";
+import getGenres from "../api/data/getGenre";
+import getMyPlaylists from "../api/data/getPlaylists";
+import getPlaylistByID from "../api/data/getPlaylistByID";
+import getMyPlaylistsTrackList from "../api/data/getTracklist";
+import getTrackInfo from "../api/data/getTrackInfo";
 
 const API = {
   // returns access_token

@@ -1,10 +1,10 @@
 import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState, useRef } from 'react';
-import API from './api/spotifyAPI.js'
+import API from './utils/spotifyAPI.js'
 import utils from './utils/utils.js';
 import { Routes, Route } from "react-router-dom";
 import Container from 'react-bootstrap/Container'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './components/routes/Home'
 import LandingPage from './components/routes/LandingPage'
 import NotFound from './components/routes/NotFound'
@@ -12,6 +12,7 @@ import NotFound from './components/routes/NotFound'
 function App() {
   const [token, setToken] = useState("")
   const [genres, setGenres] = useState([])
+  const [genre, setGenre] = useState("")
   const [playlists, setPlaylists] = useState([])
   const [playlist, setPlaylist] = useState({})
   const [tracklist, setTracklist] = useState([])
@@ -50,13 +51,12 @@ function App() {
       async function fetchPlaylists() {
         const myPlaylists = await API.playlists(tokenRef.current.value)
 
-        localStorage.setItem('playlists', JSON.stringify(myPlaylists))
-
         const updatedPlaylists = myPlaylists.map((playlist) => {
           return (
             utils.charConverter(playlist, playlist.description)
           )
         })
+        localStorage.setItem('playlists', JSON.stringify(updatedPlaylists))
 
         setPlaylists(updatedPlaylists)
       }
@@ -116,15 +116,18 @@ function App() {
     fetchTrackInfo()
   }
 
-  const filterPlaylists = (genre) => {
+  const filterPlaylists = (genreParam) => {
     const storedPlaylists = JSON.parse(localStorage.getItem('playlists'))
     function applyFilter() {
       const filtered = storedPlaylists.filter((playlist) => {
         return (
-          playlist.description.toLowerCase().includes(genre.toLowerCase())
+          playlist.description.toLowerCase().includes(genreParam.toLowerCase())
         )
       })
-      setPlaylists(filtered)
+      if (genreParam !== "Sort By Genre") {
+        setGenre(genreParam)
+        setPlaylists(filtered)
+      }
     }
     applyFilter()
   }
@@ -142,7 +145,7 @@ function App() {
   }
   return (
     <Container
-      style={{ paddingTop: "5%", height: "100vh" }}
+      style={{ paddingTop: "5%", height: "100%" }}
       fluid
     >
       <Routes>
@@ -154,6 +157,7 @@ function App() {
               token={token}
               tokenRef={tokenRef}
               genres={genres}
+              genre={genre}
               playlists={playlists}
               playlist={playlist}
               tracklist={tracklist}

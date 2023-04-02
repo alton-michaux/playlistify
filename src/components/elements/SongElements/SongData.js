@@ -1,22 +1,13 @@
-import { Card, Elevation } from "@blueprintjs/core";
+import utils from "../../../utils/utils"
 
 const SongData = ({ song }) => {
-  const styles = {
-    maxHeight: "100px",
-    color: "black"
-  }
   return (
     Object.keys(song).length > 0 ?
-      <Card
-        elevation={Elevation.FIVE}
-        style={styles}
-      >
-        <div>
-          <p>{song.name}</p>
-          <p>{song.artists[0]?.name}</p>
-          <p>{song.album.name}</p>
-        </div>
-      </Card> :
+      <div>
+        <h4>{utils.truncate(song.name)}</h4>
+        <h6>{utils.truncate(utils.multiObjectNameString(song.artists))}</h6>
+        <h5>{utils.truncate(song.album.name)}</h5>
+      </div> :
       <p>Select a Song from the Tracklist</p>
   )
 }

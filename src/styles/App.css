@@ -12,7 +12,9 @@ body {
 
 .container-fluid {
   background-color: #111418;
-  height: 100%;
+  min-height: 100vh;
+  font-family: 'Khand', sans-serif;
+  font-size: 20px;
 }
 
 main {
@@ -69,7 +71,7 @@ li {
 
 .playlistImageDiv {
   min-height: auto;
-  max-height: 300px;
+  max-height: 400px;
 }
 
 .buttonDiv {
@@ -111,6 +113,10 @@ li {
   main {
     min-height: 92%;
     margin: 0 auto;
+  }
+
+  .container-fluid {
+    font-size: 15px;
   }
 
   .mainRow {

@@ -28,16 +28,16 @@ const TrackList = ({ tracklist, handleSongInfoFetch }) => {
                 as="li"
                 className="d-flex justify-content-between align-items-start"
               >
-                
+
                 <div className="ms-2 me-auto ml-o">
                   <div className="fw-bold">
                     {item.track.name}
                   </div>
-                  {item.track.artists.map((artist) => artist.name).join(', ')}
+                  {utils.multiObjectNameString(item.track.artists)}
                 </div>
                 <Button
                   onClick={() => handleFetch(item.track.id)}
-                  style={{marginRight: "5%", backgroundColor: "#D3D8DE"}}
+                  style={{ marginRight: "5%", backgroundColor: "#D3D8DE" }}
                 >Play
                 </Button>
                 <Badge bg="danger" pill>
