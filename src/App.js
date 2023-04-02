@@ -124,7 +124,7 @@ function App() {
           playlist.description.toLowerCase().includes(genreParam.toLowerCase())
         )
       })
-      if (genreParam != "Sort By Genre") {
+      if (genreParam !== "Sort By Genre") {
         setGenre(genreParam)
         setPlaylists(filtered)
       }
