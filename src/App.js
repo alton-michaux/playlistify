@@ -12,6 +12,7 @@ import NotFound from './components/routes/NotFound'
 function App() {
   const [token, setToken] = useState("")
   const [genres, setGenres] = useState([])
+  const [genre, setGenre] = useState("")
   const [playlists, setPlaylists] = useState([])
   const [playlist, setPlaylist] = useState({})
   const [tracklist, setTracklist] = useState([])
@@ -115,14 +116,15 @@ function App() {
     fetchTrackInfo()
   }
 
-  const filterPlaylists = (genre) => {
+  const filterPlaylists = (genreParam) => {
     const storedPlaylists = JSON.parse(localStorage.getItem('playlists'))
     function applyFilter() {
       const filtered = storedPlaylists.filter((playlist) => {
         return (
-          playlist.description.toLowerCase().includes(genre.toLowerCase())
+          playlist.description.toLowerCase().includes(genreParam.toLowerCase())
         )
       })
+      setGenre(genreParam)
       setPlaylists(filtered)
     }
     applyFilter()
@@ -153,6 +155,7 @@ function App() {
               token={token}
               tokenRef={tokenRef}
               genres={genres}
+              genre={genre}
               playlists={playlists}
               playlist={playlist}
               tracklist={tracklist}

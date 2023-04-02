@@ -4,7 +4,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import utils from '../../../utils/utils';
 import "../../../styles/App.css"
 
-const PlaylistList = ({ playlists, handleTracklistFetch }) => {
+const PlaylistList = ({ playlists, handleTracklistFetch, genre }) => {
   const itemRef = useRef(null)
 
   const [index, setIndex] = useState(0);
@@ -18,6 +18,17 @@ const PlaylistList = ({ playlists, handleTracklistFetch }) => {
 
     handleTracklistFetch('playlist', id)
     handleTracklistFetch('genre', id)
+  }
+
+  const handleBackgroundImg = (genre) => {
+    switch (genre) {
+      case "chill":
+        return "https://i.pinimg.com/originals/58/9b/2b/589b2b8ebf2abfe7345747c768b7aa8e.jpg"
+      case "hip-hop":
+        return "https://i.ytimg.com/vi/rnV-znkfalg/maxresdefault.jpg"
+      default:
+        return "https://thumbs.dreamstime.com/b/abstract-black-red-blue-background-vector-illustration-abstract-black-red-blue-background-vector-illustration-beautiful-204073511.jpg"
+    }
   }
   return (
     Object.keys(playlists).length > 0 ?
@@ -38,7 +49,7 @@ const PlaylistList = ({ playlists, handleTracklistFetch }) => {
                 style={{ alignContent: "center", maxHeight: "250px" }}
               >
                 <img
-                  src="https://thumbs.dreamstime.com/b/abstract-black-red-blue-background-vector-illustration-abstract-black-red-blue-background-vector-illustration-beautiful-204073511.jpg"
+                  src={handleBackgroundImg(genre)}
                   alt={playlist.description}
                   className="d-block w-100"
                   style={{ marginTop: "2%", maxHeight: "250px" }}

@@ -10,6 +10,7 @@ const Home = ({
   token,
   tokenRef,
   genres,
+  genre,
   playlists,
   playlist,
   tracklist,
@@ -36,6 +37,7 @@ const Home = ({
         >
           <Main
             genres={genres}
+            genre={genre}
             playlists={playlists}
             globalHandler={fetchHandler}
             filterPlaylists={filterPlaylists}

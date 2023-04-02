@@ -8,7 +8,9 @@ const PlaylistArt = ({ image }) => {
     >
       <Image
         src={image}
-        style={{maxHeight: "400px"}}
+        style={{
+          maxHeight: "400px"
+        }}
         fluid
       >
       </Image>

@@ -5,6 +5,7 @@ import PlaylistList from './PlaylistList'
 const MainSelect = ({
   tracklist,
   genres,
+  genre,
   playlists,
   filterPlaylists,
   globalHandler
@@ -24,6 +25,7 @@ const MainSelect = ({
       <PlaylistList
         playlists={playlists}
         handleTracklistFetch={globalHandler}
+        genre={genre}
       ></PlaylistList>
     </section>
   )
