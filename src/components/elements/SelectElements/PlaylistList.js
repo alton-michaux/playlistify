@@ -34,7 +34,7 @@ const PlaylistList = ({ playlists, handleTracklistFetch }) => {
             return (
               <Carousel.Item
                 key={playlist.id}
-                interval={30000}
+                interval={50000}
                 style={{ alignContent: "center", maxHeight: "250px" }}
               >
                 <img
