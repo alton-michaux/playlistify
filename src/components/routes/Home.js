@@ -1,146 +1,25 @@
-import { useEffect, useState, useRef } from 'react';
 import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Input from '../elements/Input'
 import Nav from '../elements/Nav'
 import Main from '../elements/Main'
 import Footer from '../elements/Footer'
-import API from '../../api/spotifyAPI.js'
 import "../../styles/App.css"
-import utils from '../../utils/utils';
 
-const Home = () => {
-  const [token, setToken] = useState("")
-  const [genres, setGenres] = useState([])
-  const [playlists, setPlaylists] = useState([])
-  const [playlist, setPlaylist] = useState({})
-  const [tracklist, setTracklist] = useState([])
-  const [song, setSong] = useState({})
-
-  const [title, setTitle] = useState("None Selected")
-  const [image, setImage] = useState("https://techcrunch.com/wp-content/uploads/2021/02/alexander-shatov-JlO3-oY5ZlQ-unsplash.jpg")
-
-  const [songImage, setSongImage] = useState("https://techcrunch.com/wp-content/uploads/2021/02/alexander-shatov-JlO3-oY5ZlQ-unsplash.jpg")
-
-  const tokenRef = useRef({
-    value: ''
-  })
-
-  // initial api calls
-
-  useEffect(() => {
-    if (tokenRef.current.value !== "") {
-      setToken(tokenRef.current.value)
-    } else {
-      async function fetchToken() {
-        const newToken = await API.token()
-        setToken(newToken)
-      }
-      fetchToken()
-    }
-  }, [tokenRef])
-
-  useEffect(() => {
-    if (token) {
-      async function fetchGenres() {
-        const genres = await API.genres(tokenRef.current.value)
-        setGenres(genres)
-      }
-
-      async function fetchPlaylists() {
-        const myPlaylists = await API.playlists(tokenRef.current.value)
-        
-        localStorage.setItem('playlists', JSON.stringify(myPlaylists))
-
-        const updatedPlaylists = myPlaylists.map((playlist) => {
-          return (
-            utils.charConverter(playlist, playlist.description)
-          )
-        })
-
-        setPlaylists(updatedPlaylists)
-      }
-
-      fetchGenres()
-      fetchPlaylists()
-    }
-  }, [token])
-
-  // state management
-
-  useEffect(() => {
-    const positiveLength = Object.keys(playlist).length > 0
-
-    if (positiveLength) {
-      setTitle(playlist.name)
-      setImage(playlist.images[0].url)
-    }
-  }, [playlist])
-
-  useEffect(() => {
-    function assignImage() {
-      if (Object.keys(song).length > 0) {
-        setSongImage(song.album.images[0].url)
-      }
-    }
-
-    assignImage()
-  }, [song])
-
-  // handlers
-
-  const handlePlaylistFetch = (id) => {
-    async function fetchPlaylist() {
-      const newToken = tokenRef.current.defaultValue
-      const playlist = await API.playlist(id, newToken)
-      setPlaylist(playlist)
-    }
-    fetchPlaylist()
-  }
-
-  const handleTracklistFetch = (id) => {
-    async function fetchTracklist() {
-      const newToken = tokenRef.current.defaultValue
-      const tracklist = await API.tracklist(id, newToken)
-      setTracklist(tracklist)
-    }
-    fetchTracklist()
-  }
-
-  const handleTrackInfo = (id) => {
-    async function fetchTrackInfo() {
-      const newToken = tokenRef.current.defaultValue
-      const track = await API.song(id, newToken)
-      setSong(track)
-    }
-    fetchTrackInfo()
-  }
-
-  const filterPlaylists = (genre) => {
-    const storedPlaylists = JSON.parse(localStorage.getItem('playlists'))
-    function applyFilter() {
-      const filtered = storedPlaylists.filter((playlist) => {
-        return (
-          playlist.description.toLowerCase().includes(genre.toLowerCase())
-        )
-      })
-      setPlaylists(filtered)
-    }
-    applyFilter()
-  }
-
-  const fetchHandler = (type, target) => {
-    if (type === "song") {
-      handleTrackInfo(target)
-    }
-    if (type === "genre") {
-      handlePlaylistFetch(target)
-    }
-    if (type === "playlist") {
-      handleTracklistFetch(target)
-    }
-  }
-
+const Home = ({
+  token,
+  tokenRef,
+  genres,
+  playlists,
+  playlist,
+  tracklist,
+  song,
+  title,
+  image,
+  songImage,
+  fetchHandler,
+  filterPlaylists
+}) => {
   return (
     <>
       <main>
