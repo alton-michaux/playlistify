@@ -8,7 +8,7 @@ const SongData = ({ song }) => {
         <h6>{utils.truncate(utils.multiObjectNameString(song.artists))}</h6>
         <h5>{utils.truncate(song.album.name)}</h5>
       </div> :
-      <p>Select a Song from the Tracklist</p>
+      <p>Song data will appear here once a song is selected from tracklist</p>
   )
 }
 
