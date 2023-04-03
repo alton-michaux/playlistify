@@ -19,7 +19,9 @@ const Home = ({
   image,
   songImage,
   fetchHandler,
-  filterPlaylists
+  filterPlaylists,
+  isOpen,
+  popoverHandler
 }) => {
   return (
     <>
@@ -29,8 +31,12 @@ const Home = ({
             type="hidden"
             value={token}
             inputRef={tokenRef}
+            popoverHandler={popoverHandler}
           ></Input>
-          <Nav></Nav>
+          <Nav
+            isOpen={isOpen}
+            popoverHandler={popoverHandler}
+          ></Nav>
         </Row>
         <Row
           className="mainRow"

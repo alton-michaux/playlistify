@@ -51,6 +51,21 @@ li {
   outline: 1px solid #96290D;
 }
 
+.toggleSwitch {
+  height: inherit;
+}
+
+.innerToggleSwitch {
+  display: none;
+}
+
+.mainSections {
+  background-image: linear-gradient(#1C2127, #D33D17);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .row {
   display: flex;
   flex-direction: column;
@@ -67,6 +82,7 @@ li {
 .playlist-carousel {
   justify-content: center;
   padding: 2%;
+  z-index: 0;
 }
 
 .playlistImageDiv {
@@ -117,6 +133,16 @@ li {
 
   .container-fluid {
     font-size: 15px;
+  }
+
+  .toggleSwitch {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .innerToggleSwitch {
+    display: flex;
+    margin-top: 1%;
   }
 
   .mainRow {
