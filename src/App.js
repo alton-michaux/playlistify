@@ -17,8 +17,9 @@ function App() {
   const [playlist, setPlaylist] = useState({})
   const [tracklist, setTracklist] = useState([])
   const [song, setSong] = useState({})
+  const [isOpen, setIsOpen] = useState(false)
 
-  const [title, setTitle] = useState("None Selected")
+  const [title, setTitle] = useState("Playlist data will appear here once selected")
   const [image, setImage] = useState("https://techcrunch.com/wp-content/uploads/2021/02/alexander-shatov-JlO3-oY5ZlQ-unsplash.jpg")
 
   const [songImage, setSongImage] = useState("https://techcrunch.com/wp-content/uploads/2021/02/alexander-shatov-JlO3-oY5ZlQ-unsplash.jpg")
@@ -88,6 +89,10 @@ function App() {
   }, [song])
 
   // handlers
+
+  const handlePopover = (bool) => {
+    setIsOpen(bool)
+  }
 
   const handlePlaylistFetch = (id) => {
     async function fetchPlaylist() {
@@ -167,6 +172,8 @@ function App() {
               songImage={songImage}
               fetchHandler={fetchHandler}
               filterPlaylists={filterPlaylists}
+              isOpen={isOpen}
+              popoverHandler={handlePopover}
             />}
         ></Route>
         <Route
