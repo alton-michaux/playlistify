@@ -1,6 +1,7 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useContext } from 'react';
+import Store, { Context } from "./State.js";
 import API from './utils/spotifyAPI.js'
 import utils from './utils/utils.js';
 import { Routes, Route } from "react-router-dom";
@@ -10,19 +11,8 @@ import LandingPage from './components/routes/LandingPage'
 import NotFound from './components/routes/NotFound'
 
 function App() {
-  const [token, setToken] = useState("")
-  const [genres, setGenres] = useState([])
-  const [genre, setGenre] = useState("")
-  const [playlists, setPlaylists] = useState([])
-  const [playlist, setPlaylist] = useState({})
-  const [tracklist, setTracklist] = useState([])
-  const [song, setSong] = useState({})
-  const [isOpen, setIsOpen] = useState(false)
-
-  const [title, setTitle] = useState("Playlist data will appear here once selected")
-  const [image, setImage] = useState("https://techcrunch.com/wp-content/uploads/2021/02/alexander-shatov-JlO3-oY5ZlQ-unsplash.jpg")
-
-  const [songImage, setSongImage] = useState("https://techcrunch.com/wp-content/uploads/2021/02/alexander-shatov-JlO3-oY5ZlQ-unsplash.jpg")
+  console.log('context', Context)
+  const [state, dispatch] = useContext(Context)
 
   const tokenRef = useRef({
     value: ''
@@ -32,21 +22,22 @@ function App() {
 
   useEffect(() => {
     if (tokenRef.current.value !== "") {
-      setToken(tokenRef.current.value)
+      const token = tokenRef.current.value
+      dispatch({ type: 'token', payload: token })
     } else {
       async function fetchToken() {
         const newToken = await API.token()
-        setToken(newToken)
+        dispatch({ type: 'token', payload: newToken })
       }
       fetchToken()
     }
   }, [tokenRef])
 
   useEffect(() => {
-    if (token) {
+    if (state.token) {
       async function fetchGenres() {
         const genres = await API.genres(tokenRef.current.value)
-        setGenres(genres)
+        dispatch({ type: 'genres', payload: genres })
       }
 
       async function fetchPlaylists() {
@@ -59,46 +50,51 @@ function App() {
         })
         localStorage.setItem('playlists', JSON.stringify(updatedPlaylists))
 
-        setPlaylists(updatedPlaylists)
+        dispatch({ type: 'playlists', payload: updatedPlaylists })
       }
 
       fetchGenres()
       fetchPlaylists()
     }
-  }, [token])
+  }, [state.token])
 
   // state management
 
   useEffect(() => {
-    const positiveLength = Object.keys(playlist).length > 0
+    const positiveLength = Object.keys(state.playlist).length > 0
 
     if (positiveLength) {
-      setTitle(playlist.name)
-      setImage(playlist.images[0].url)
+      const title = state.playlist.name
+      const image = state.playlist.images[0].url
+  
+      dispatch({ type: 'title', payload: title })
+      dispatch({ type: 'image', payload: image })
     }
-  }, [playlist])
+  }, [state.playlist])
 
   useEffect(() => {
     function assignImage() {
-      if (Object.keys(song).length > 0) {
-        setSongImage(song.album.images[0].url)
+      if (Object.keys(state.song).length > 0) {
+        const songImage = state.song.album.images[0].url
+        dispatch({type: 'songImage', payload: songImage})
       }
     }
 
     assignImage()
-  }, [song])
+  }, [state.song])
 
   // handlers
 
   const handlePopover = (bool) => {
-    setIsOpen(bool)
+    const isOpen = bool
+    dispatch({type: 'isOpen', payload: isOpen})
   }
 
   const handlePlaylistFetch = (id) => {
     async function fetchPlaylist() {
       const newToken = tokenRef.current.defaultValue
       const playlist = await API.playlist(id, newToken)
-      setPlaylist(playlist)
+      dispatch({type: 'playlist', payload: playlist})
     }
     fetchPlaylist()
   }
@@ -107,7 +103,7 @@ function App() {
     async function fetchTracklist() {
       const newToken = tokenRef.current.defaultValue
       const tracklist = await API.tracklist(id, newToken)
-      setTracklist(tracklist)
+      dispatch({type: 'tracklist', payload: tracklist})
     }
     fetchTracklist()
   }
@@ -115,8 +111,8 @@ function App() {
   const handleTrackInfo = (id) => {
     async function fetchTrackInfo() {
       const newToken = tokenRef.current.defaultValue
-      const track = await API.song(id, newToken)
-      setSong(track)
+      const song = await API.song(id, newToken)
+      dispatch({type: 'song', payload: song})
     }
     fetchTrackInfo()
   }
@@ -130,8 +126,8 @@ function App() {
         )
       })
       if (genreParam !== "Sort By Genre") {
-        setGenre(genreParam)
-        setPlaylists(filtered)
+        dispatch({type: 'genre', payload: genreParam})
+        dispatch({type: 'playlists', payload: filtered})
       }
     }
     applyFilter()
@@ -149,44 +145,46 @@ function App() {
     }
   }
   return (
-    <Container
-      style={{ paddingTop: "5%", height: "100%" }}
-      fluid
-    >
-      <Routes>
-        <Route
-          exact
-          path='/'
-          element={
-            <Home
-              token={token}
-              tokenRef={tokenRef}
-              genres={genres}
-              genre={genre}
-              playlists={playlists}
-              playlist={playlist}
-              tracklist={tracklist}
-              song={song}
-              title={title}
-              image={image}
-              songImage={songImage}
-              fetchHandler={fetchHandler}
-              filterPlaylists={filterPlaylists}
-              isOpen={isOpen}
-              popoverHandler={handlePopover}
-            />}
-        ></Route>
-        <Route
-          exact
-          path='/login'
-          element={<LandingPage />}
-        ></Route>
-        <Route
-          path='*'
-          element={<NotFound />}
-        ></Route>
-      </Routes>
-    </Container>
+    <Store>
+      <Container
+        style={{ paddingTop: "5%", height: "100%" }}
+        fluid
+      >
+        <Routes>
+          <Route
+            exact
+            path='/'
+            element={
+              <Home
+                token={state.token}
+                tokenRef={state.tokenRef}
+                genres={state.genres}
+                genre={state.genre}
+                playlists={state.playlists}
+                playlist={state.playlist}
+                tracklist={state.tracklist}
+                song={state.song}
+                title={state.title}
+                image={state.image}
+                songImage={state.songImage}
+                isOpen={state.isOpen}
+                popoverHandler={handlePopover}
+                fetchHandler={fetchHandler}
+                filterPlaylists={filterPlaylists}
+              />}
+          ></Route>
+          <Route
+            exact
+            path='/login'
+            element={<LandingPage />}
+          ></Route>
+          <Route
+            path='*'
+            element={<NotFound />}
+          ></Route>
+        </Routes>
+      </Container>
+    </Store>
   );
 }
 

@@ -2,19 +2,17 @@ import React, { createContext, useReducer } from 'react'
 import stateHandler from './state/StateHandler'
 
 const initialState = {
-  data: {
-    tokenRef: {},
-    genres: [],
-    genre: [],
-    playlists: [],
-    playlist: [],
-    tracklist: [],
-    song: [],
-    isOpen: false,
-    title: "",
-    image: "",
-    songImage: "",
-  }, isLoading: false, isError: false
+  tokenRef: {},
+  genres: [],
+  genre: "",
+  playlists: [],
+  playlist: [],
+  tracklist: [],
+  song: [],
+  isOpen: false,
+  title: "Playlist data will appear here once selected",
+  image: "https://techcrunch.com/wp-content/uploads/2021/02/alexander-shatov-JlO3-oY5ZlQ-unsplash.jpg",
+  songImage: "https://techcrunch.com/wp-content/uploads/2021/02/alexander-shatov-JlO3-oY5ZlQ-unsplash.jpg",
 }
 
 const Store = ({ children }) => {
@@ -27,6 +25,6 @@ const Store = ({ children }) => {
   )
 }
 
-export const Context = createContext(initialState)
+export const Context = createContext([initialState])
 
 export default Store

@@ -1,34 +1,62 @@
 const stateHandler = (state, action) => {
   switch (action.type) {
-    case 'SUCCESS':
+    case 'token':
       return {
         ...state,
-        isLoading: false,
-        isError: false,
-        data: action.payload
+        token: action.payload
       };
-    case 'ERROR':
+    case 'genres':
       return {
         ...state,
-        isLoading: false,
-        isError: true
+        genres: action.payload
+      };
+    case 'genre':
+      return {
+        ...state,
+        genre: action.payload
+      };
+    case 'playlists':
+      return {
+        ...state,
+        playlists: action.payload
+      };
+    case 'playlist':
+      return {
+        ...state,
+        playlist: action.payload
+      };
+    case 'tracklist':
+      return {
+        ...state,
+        tracklist: action.payload
+      };
+    case 'song':
+      return {
+        ...state,
+        song: action.payload
+      };
+    case 'isOpen':
+      return {
+        ...state,
+        isOpen: action.payload
+      };
+    case 'title':
+      return {
+        ...state,
+        title: action.payload
+      };
+    case 'image':
+      return {
+        ...state,
+        image: action.payload
+      };
+    case 'songImage':
+      return {
+        ...state,
+        songImage: action.payload
       };
     default:
-      const playlists = JSON.parse(localStorage.getItem('playlists'))
-      if (playlists) {
-        return {
-          ...state,
-          isLoading: false,
-          isError: false,
-          data: playlists
-        };
-      } else {
-        return {
-          ...state,
-          isLoading: true,
-          isError: false
-        }
-      }
+      return state
   }
 }
 
