@@ -2,7 +2,7 @@ import React, { createContext, useReducer } from 'react'
 import stateHandler from './state/StateHandler'
 
 const initialState = {
-  tokenRef: {},
+  token: {},
   genres: [],
   genre: "",
   playlists: [],

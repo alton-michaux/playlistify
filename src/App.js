@@ -11,7 +11,6 @@ import LandingPage from './components/routes/LandingPage'
 import NotFound from './components/routes/NotFound'
 
 function App() {
-  console.log('context', Context)
   const [state, dispatch] = useContext(Context)
 
   const tokenRef = useRef({
@@ -23,11 +22,11 @@ function App() {
   useEffect(() => {
     if (tokenRef.current.value !== "") {
       const token = tokenRef.current.value
-      dispatch({ type: 'token', payload: token })
+      dispatch({ type: 'token', token })
     } else {
       async function fetchToken() {
         const newToken = await API.token()
-        dispatch({ type: 'token', payload: newToken })
+        dispatch({ type: 'token', newToken })
       }
       fetchToken()
     }
@@ -37,7 +36,7 @@ function App() {
     if (state.token) {
       async function fetchGenres() {
         const genres = await API.genres(tokenRef.current.value)
-        dispatch({ type: 'genres', payload: genres })
+        dispatch({ type: 'genres', genres })
       }
 
       async function fetchPlaylists() {
@@ -50,13 +49,13 @@ function App() {
         })
         localStorage.setItem('playlists', JSON.stringify(updatedPlaylists))
 
-        dispatch({ type: 'playlists', payload: updatedPlaylists })
+        dispatch({ type: 'playlists', updatedPlaylists })
       }
 
       fetchGenres()
       fetchPlaylists()
     }
-  }, [state.token])
+  }, [tokenRef])
 
   // state management
 
@@ -67,8 +66,8 @@ function App() {
       const title = state.playlist.name
       const image = state.playlist.images[0].url
   
-      dispatch({ type: 'title', payload: title })
-      dispatch({ type: 'image', payload: image })
+      dispatch({ type: 'title', title })
+      dispatch({ type: 'image', image })
     }
   }, [state.playlist])
 
@@ -76,7 +75,7 @@ function App() {
     function assignImage() {
       if (Object.keys(state.song).length > 0) {
         const songImage = state.song.album.images[0].url
-        dispatch({type: 'songImage', payload: songImage})
+        dispatch({type: 'songImage', songImage})
       }
     }
 
@@ -87,14 +86,14 @@ function App() {
 
   const handlePopover = (bool) => {
     const isOpen = bool
-    dispatch({type: 'isOpen', payload: isOpen})
+    dispatch({type: 'isOpen', isOpen})
   }
 
   const handlePlaylistFetch = (id) => {
     async function fetchPlaylist() {
       const newToken = tokenRef.current.defaultValue
       const playlist = await API.playlist(id, newToken)
-      dispatch({type: 'playlist', payload: playlist})
+      dispatch({type: 'playlist', playlist})
     }
     fetchPlaylist()
   }
@@ -103,7 +102,7 @@ function App() {
     async function fetchTracklist() {
       const newToken = tokenRef.current.defaultValue
       const tracklist = await API.tracklist(id, newToken)
-      dispatch({type: 'tracklist', payload: tracklist})
+      dispatch({type: 'tracklist', tracklist})
     }
     fetchTracklist()
   }
@@ -112,7 +111,7 @@ function App() {
     async function fetchTrackInfo() {
       const newToken = tokenRef.current.defaultValue
       const song = await API.song(id, newToken)
-      dispatch({type: 'song', payload: song})
+      dispatch({type: 'song', song})
     }
     fetchTrackInfo()
   }
@@ -126,8 +125,8 @@ function App() {
         )
       })
       if (genreParam !== "Sort By Genre") {
-        dispatch({type: 'genre', payload: genreParam})
-        dispatch({type: 'playlists', payload: filtered})
+        dispatch({type: 'genre', genreParam})
+        dispatch({type: 'playlists', filtered})
       }
     }
     applyFilter()
