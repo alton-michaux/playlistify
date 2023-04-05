@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useEffect, useRef, useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import { Routes, Route } from "react-router-dom";
 import stateHandler from "./reducers/StateHandler.js";
 import initialState from "./initialState.js"
@@ -13,23 +13,14 @@ import NotFound from './components/routes/NotFound'
 function App() {
   const [state, dispatch] = useReducer(stateHandler, initialState)
 
-  const tokenRef = useRef({
-    value: ''
-  })
-
   // initial api calls
 
   useEffect(() => {
-    if (tokenRef.current.value !== "") {
-      const token = tokenRef.current.value
+    async function fetchToken() {
+      const token = await API.token()
       dispatch({ type: 'token', payload: token })
-    } else {
-      async function fetchToken() {
-        const token = await API.token()
-        dispatch({ type: 'token', payload: token })
-      }
-      fetchToken()
     }
+    fetchToken()
   }, [])
 
   useEffect(() => {
@@ -57,7 +48,7 @@ function App() {
     }
   }, [state.token])
 
-  // state management
+  // song/playlist data update
 
   useEffect(() => {
     const positiveLength = Object.keys(state.playlist).length > 0
@@ -117,19 +108,19 @@ function App() {
   }
 
   const filterPlaylists = (genreParam) => {
-    const storedPlaylists = JSON.parse(localStorage.getItem('playlists'))
-    function applyFilter() {
-      const filtered = storedPlaylists.filter((playlist) => {
-        return (
-          playlist.description.toLowerCase().includes(genreParam.toLowerCase())
-        )
-      })
-      if (genreParam !== "Sort By Genre") {
+    if (genreParam !== "Sort By Genre") {
+      const storedPlaylists = JSON.parse(localStorage.getItem('playlists'))
+      function applyFilter() {
+        const filtered = storedPlaylists.filter((playlist) => {
+          return (
+            playlist.description.toLowerCase().includes(genreParam.toLowerCase())
+          )
+        })
         dispatch({ type: 'genre', payload: genreParam })
         dispatch({ type: 'playlists', payload: filtered })
       }
+      applyFilter()
     }
-    applyFilter()
   }
 
   const fetchHandler = (type, target) => {
@@ -156,7 +147,6 @@ function App() {
           element={
             <Home
               token={state.token}
-              tokenRef={state.tokenRef}
               genres={state.genres}
               genre={state.genre}
               playlists={state.playlists}
