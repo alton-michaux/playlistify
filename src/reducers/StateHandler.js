@@ -1,7 +1,6 @@
 const stateHandler = (state, action) => {
   switch (action.type) {
     case 'token':
-      console.log('reducer - token', action.payload)
       return {
         ...state,
         token: action.payload

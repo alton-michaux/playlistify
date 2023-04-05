@@ -1,17 +1,17 @@
-import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useEffect, useRef, useContext } from 'react';
-import Store, { Context } from "./State.js";
+import { useEffect, useRef, useReducer } from 'react';
+import { Routes, Route } from "react-router-dom";
+import stateHandler from "./reducers/StateHandler.js";
+import initialState from "./initialState.js"
 import API from './utils/spotifyAPI.js'
 import utils from './utils/utils.js';
-import { Routes, Route } from "react-router-dom";
 import Container from 'react-bootstrap/Container'
 import Home from './components/routes/Home'
 import LandingPage from './components/routes/LandingPage'
 import NotFound from './components/routes/NotFound'
 
 function App() {
-  const [state, dispatch] = useContext(Context)
+  const [state, dispatch] = useReducer(stateHandler, initialState)
 
   const tokenRef = useRef({
     value: ''
@@ -35,12 +35,13 @@ function App() {
   useEffect(() => {
     if (state.token) {
       async function fetchGenres() {
-        const genres = await API.genres(tokenRef.current.value)
+        const genres = await API.genres(state.token)
+        console.log('genres', genres)
         dispatch({ type: 'genres', payload: genres })
       }
 
       async function fetchPlaylists() {
-        const myPlaylists = await API.playlists(tokenRef.current.value)
+        const myPlaylists = await API.playlists(state.token)
 
         const updatedPlaylists = myPlaylists.map((playlist) => {
           return (
@@ -55,7 +56,7 @@ function App() {
       fetchGenres()
       fetchPlaylists()
     }
-  }, [tokenRef])
+  }, [state.token])
 
   // state management
 
@@ -65,7 +66,8 @@ function App() {
     if (positiveLength) {
       const title = state.playlist.name
       const image = state.playlist.images[0].url
-  
+      console.log('image', image)
+
       dispatch({ type: 'title', payload: title })
       dispatch({ type: 'image', payload: image })
     }
@@ -75,7 +77,7 @@ function App() {
     function assignImage() {
       if (Object.keys(state.song).length > 0) {
         const songImage = state.song.album.images[0].url
-        dispatch({type: 'songImage', payload: songImage})
+        dispatch({ type: 'songImage', payload: songImage })
       }
     }
 
@@ -86,32 +88,32 @@ function App() {
 
   const handlePopover = (bool) => {
     const isOpen = bool
-    dispatch({type: 'isOpen', payload: isOpen})
+    dispatch({ type: 'isOpen', payload: isOpen })
   }
 
   const handlePlaylistFetch = (id) => {
     async function fetchPlaylist() {
-      const newToken = tokenRef.current.defaultValue
+      const newToken = state.token
       const playlist = await API.playlist(id, newToken)
-      dispatch({type: 'playlist', payload: playlist})
+      dispatch({ type: 'playlist', payload: playlist })
     }
     fetchPlaylist()
   }
 
   const handleTracklistFetch = (id) => {
     async function fetchTracklist() {
-      const newToken = tokenRef.current.defaultValue
+      const newToken = state.token
       const tracklist = await API.tracklist(id, newToken)
-      dispatch({type: 'tracklist', payload: tracklist})
+      dispatch({ type: 'tracklist', payload: tracklist })
     }
     fetchTracklist()
   }
 
   const handleTrackInfo = (id) => {
     async function fetchTrackInfo() {
-      const newToken = tokenRef.current.defaultValue
+      const newToken = state.token
       const song = await API.song(id, newToken)
-      dispatch({type: 'song', payload: song})
+      dispatch({ type: 'song', payload: song })
     }
     fetchTrackInfo()
   }
@@ -125,8 +127,8 @@ function App() {
         )
       })
       if (genreParam !== "Sort By Genre") {
-        dispatch({type: 'genre', payload: genreParam})
-        dispatch({type: 'playlists', payload: filtered})
+        dispatch({ type: 'genre', payload: genreParam })
+        dispatch({ type: 'playlists', payload: filtered })
       }
     }
     applyFilter()
@@ -143,48 +145,46 @@ function App() {
       handleTracklistFetch(target)
     }
   }
-console.log('state', state)
+  console.log('state', state)
   return (
-    <Store>
-      <Container
-        style={{ paddingTop: "5%", height: "100%" }}
-        fluid
-      >
-        <Routes>
-          <Route
-            exact
-            path='/'
-            element={
-              <Home
-                token={state.token}
-                tokenRef={state.tokenRef}
-                genres={state.genres}
-                genre={state.genre}
-                playlists={state.playlists}
-                playlist={state.playlist}
-                tracklist={state.tracklist}
-                song={state.song}
-                title={state.title}
-                image={state.image}
-                songImage={state.songImage}
-                isOpen={state.isOpen}
-                popoverHandler={handlePopover}
-                fetchHandler={fetchHandler}
-                filterPlaylists={filterPlaylists}
-              />}
-          ></Route>
-          <Route
-            exact
-            path='/login'
-            element={<LandingPage />}
-          ></Route>
-          <Route
-            path='*'
-            element={<NotFound />}
-          ></Route>
-        </Routes>
-      </Container>
-    </Store>
+    <Container
+      style={{ paddingTop: "5%", height: "100%" }}
+      fluid
+    >
+      <Routes>
+        <Route
+          exact
+          path='/'
+          element={
+            <Home
+              token={state.token}
+              tokenRef={state.tokenRef}
+              genres={state.genres}
+              genre={state.genre}
+              playlists={state.playlists}
+              playlist={state.playlist}
+              tracklist={state.tracklist}
+              song={state.song}
+              title={state.title}
+              image={state.image}
+              songImage={state.songImage}
+              isOpen={state.isOpen}
+              popoverHandler={handlePopover}
+              fetchHandler={fetchHandler}
+              filterPlaylists={filterPlaylists}
+            />}
+        ></Route>
+        <Route
+          exact
+          path='/login'
+          element={<LandingPage />}
+        ></Route>
+        <Route
+          path='*'
+          element={<NotFound />}
+        ></Route>
+      </Routes>
+    </Container>
   );
 }
 
