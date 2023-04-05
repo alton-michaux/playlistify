@@ -15,6 +15,8 @@ const initialState = {
   songImage: "https://techcrunch.com/wp-content/uploads/2021/02/alexander-shatov-JlO3-oY5ZlQ-unsplash.jpg",
 }
 
+export const Context = createContext([initialState])
+
 const Store = ({ children }) => {
   const [state, dispatch] = useReducer(stateHandler, initialState)
 
@@ -24,7 +26,5 @@ const Store = ({ children }) => {
     </Context.Provider >
   )
 }
-
-export const Context = createContext([initialState])
 
 export default Store
