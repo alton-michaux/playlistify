@@ -36,7 +36,6 @@ function App() {
     if (state.token) {
       async function fetchGenres() {
         const genres = await API.genres(state.token)
-        console.log('genres', genres)
         dispatch({ type: 'genres', payload: genres })
       }
 
@@ -66,7 +65,6 @@ function App() {
     if (positiveLength) {
       const title = state.playlist.name
       const image = state.playlist.images[0].url
-      console.log('image', image)
 
       dispatch({ type: 'title', payload: title })
       dispatch({ type: 'image', payload: image })
@@ -145,7 +143,7 @@ function App() {
       handleTracklistFetch(target)
     }
   }
-  console.log('state', state)
+
   return (
     <Container
       style={{ paddingTop: "5%", height: "100%" }}
