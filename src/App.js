@@ -22,21 +22,21 @@ function App() {
   useEffect(() => {
     if (tokenRef.current.value !== "") {
       const token = tokenRef.current.value
-      dispatch({ type: 'token', token })
+      dispatch({ type: 'token', payload: token })
     } else {
       async function fetchToken() {
-        const newToken = await API.token()
-        dispatch({ type: 'token', newToken })
+        const token = await API.token()
+        dispatch({ type: 'token', payload: token })
       }
       fetchToken()
     }
-  }, [tokenRef])
+  }, [])
 
   useEffect(() => {
     if (state.token) {
       async function fetchGenres() {
         const genres = await API.genres(tokenRef.current.value)
-        dispatch({ type: 'genres', genres })
+        dispatch({ type: 'genres', payload: genres })
       }
 
       async function fetchPlaylists() {
@@ -49,7 +49,7 @@ function App() {
         })
         localStorage.setItem('playlists', JSON.stringify(updatedPlaylists))
 
-        dispatch({ type: 'playlists', updatedPlaylists })
+        dispatch({ type: 'playlists', payload: updatedPlaylists })
       }
 
       fetchGenres()
@@ -66,8 +66,8 @@ function App() {
       const title = state.playlist.name
       const image = state.playlist.images[0].url
   
-      dispatch({ type: 'title', title })
-      dispatch({ type: 'image', image })
+      dispatch({ type: 'title', payload: title })
+      dispatch({ type: 'image', payload: image })
     }
   }, [state.playlist])
 
@@ -75,7 +75,7 @@ function App() {
     function assignImage() {
       if (Object.keys(state.song).length > 0) {
         const songImage = state.song.album.images[0].url
-        dispatch({type: 'songImage', songImage})
+        dispatch({type: 'songImage', payload: songImage})
       }
     }
 
@@ -86,14 +86,14 @@ function App() {
 
   const handlePopover = (bool) => {
     const isOpen = bool
-    dispatch({type: 'isOpen', isOpen})
+    dispatch({type: 'isOpen', payload: isOpen})
   }
 
   const handlePlaylistFetch = (id) => {
     async function fetchPlaylist() {
       const newToken = tokenRef.current.defaultValue
       const playlist = await API.playlist(id, newToken)
-      dispatch({type: 'playlist', playlist})
+      dispatch({type: 'playlist', payload: playlist})
     }
     fetchPlaylist()
   }
@@ -102,7 +102,7 @@ function App() {
     async function fetchTracklist() {
       const newToken = tokenRef.current.defaultValue
       const tracklist = await API.tracklist(id, newToken)
-      dispatch({type: 'tracklist', tracklist})
+      dispatch({type: 'tracklist', payload: tracklist})
     }
     fetchTracklist()
   }
@@ -111,7 +111,7 @@ function App() {
     async function fetchTrackInfo() {
       const newToken = tokenRef.current.defaultValue
       const song = await API.song(id, newToken)
-      dispatch({type: 'song', song})
+      dispatch({type: 'song', payload: song})
     }
     fetchTrackInfo()
   }
@@ -125,8 +125,8 @@ function App() {
         )
       })
       if (genreParam !== "Sort By Genre") {
-        dispatch({type: 'genre', genreParam})
-        dispatch({type: 'playlists', filtered})
+        dispatch({type: 'genre', payload: genreParam})
+        dispatch({type: 'playlists', payload: filtered})
       }
     }
     applyFilter()
@@ -143,6 +143,7 @@ function App() {
       handleTracklistFetch(target)
     }
   }
+console.log('state', state)
   return (
     <Store>
       <Container
