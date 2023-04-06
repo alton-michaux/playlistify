@@ -45,6 +45,7 @@ const utils = {
         case "pop":
           return "https://media.istockphoto.com/id/1199262104/vector/illuminated-stage-with-scenic-lights-and-smoke-blue-vector-spotlight-with-smoke-volume-light.jpg?s=612x612&w=0&k=20&c=sGterFSNO2hzFRt6NRg_VDLkvur2UIloA5v5pDGFtVg="
         case "r-n-b":
+        case "soul":
         case "romance":
           return "https://wallpapers.com/images/hd/dark-heart-on-window-pane-a2fqmtwop8i9narh.jpg"
         case "sad":
