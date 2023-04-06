@@ -182,6 +182,8 @@ function App() {
           path='/'
           element={
             <Home
+              loading={state.isLoading}
+              error={state.isError}
               token={state.token}
               genres={state.genres}
               genre={state.genre}
