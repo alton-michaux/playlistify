@@ -121,6 +121,26 @@ li {
   overflow-y: auto;
 }
 
+.loader {
+  z-index: 1001;
+  display: block;
+}
+
+.errorDiv {
+  z-index: 1001;
+  display: block;
+}
+
+.nonError {
+  z-index: -1001;
+  display: none;
+}
+
+.nonLoader {
+  z-index: -1001;
+  display: none;
+}
+
 @media screen and (min-width: 1000px) {
   body {
     overflow: hidden;

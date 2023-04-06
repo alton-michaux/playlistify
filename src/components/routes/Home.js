@@ -24,38 +24,33 @@ const Home = ({
 }) => {
   return (
     <>
-      {
-        loading ? <div>Loading...</div> :
-          <main>
-            <Row>
-              <Nav
-                isOpen={isOpen}
-                popoverHandler={popoverHandler}
-              ></Nav>
-            </Row>
-            <Row
-              className="mainRow"
-            >
-              {error ? <div>Error</div> :
-                <Main
-                  loading={loading}
-                  error={error}
-                  genres={genres}
-                  genre={genre}
-                  playlists={playlists}
-                  globalHandler={fetchHandler}
-                  filterPlaylists={filterPlaylists}
-                  selectedPlaylist={playlist}
-                  tracklist={tracklist}
-                  song={song}
-                  title={title}
-                  image={image}
-                  songImage={songImage}
-                ></Main>
-              }
-            </Row>
-          </main>
-      }
+      <main>
+        <Row>
+          <Nav
+            isOpen={isOpen}
+            popoverHandler={popoverHandler}
+          ></Nav>
+        </Row>
+        <Row
+          className="mainRow"
+        >
+          <div className={loading ? "loader" : "nonLoader"}>Loading...</div>
+          <div className={error ? "errorDiv" : "nonError"}>Loading...</div>
+          <Main
+            genres={genres}
+            genre={genre}
+            playlists={playlists}
+            globalHandler={fetchHandler}
+            filterPlaylists={filterPlaylists}
+            selectedPlaylist={playlist}
+            tracklist={tracklist}
+            song={song}
+            title={title}
+            image={image}
+            songImage={songImage}
+          ></Main>
+        </Row>
+      </main>
       <Row>
         <Footer></Footer>
       </Row>
