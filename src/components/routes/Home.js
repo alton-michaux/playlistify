@@ -4,6 +4,8 @@ import Input from '../elements/Input'
 import Nav from '../elements/Nav'
 import Main from '../elements/Main'
 import Footer from '../elements/Footer'
+import BasicSpinner from '../elements/utitlityComponents/loadSpinner';
+import ErrorCallout from '../elements/utitlityComponents/errorCallout';
 import "../../styles/App.css"
 
 const Home = ({
@@ -41,6 +43,13 @@ const Home = ({
         <Row
           className="mainRow"
         >
+          <BasicSpinner
+            isLoading={loading}
+          >Loading...
+          </BasicSpinner>
+          <ErrorCallout
+            isError={error}
+          >There was an error...</ErrorCallout>
           <Main
             genres={genres}
             genre={genre}

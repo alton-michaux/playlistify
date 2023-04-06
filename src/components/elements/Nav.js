@@ -1,9 +1,8 @@
 import "normalize.css";
 import "@blueprintjs/core/lib/css/blueprint.css";
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
-import { Navbar, Button, Alignment, Switch } from "@blueprintjs/core"
-import { Classes, Tooltip2 } from "@blueprintjs/popover2";
-import Popover from 'react-bootstrap/Popover';
+import { Navbar, Button, Alignment } from "@blueprintjs/core"
+import PopoverComponent from "./utitlityComponents/popover";
 
 const Nav = ({ isOpen, popoverHandler }) => {
   const toggleControlledTooltip = () => {
@@ -19,27 +18,10 @@ const Nav = ({ isOpen, popoverHandler }) => {
         <div
           className="innerToggleSwitch"
         >
-          Toggle switch for tips to get started using Playlistify.
-          <Tooltip2
-            className={Classes.TOOLTIP2_INDICATOR}
-            content={
-              <Popover id="popoverTip" style={{marginTop: "20%", marginLeft: "5%"}}>
-                <Popover.Header as="h3" style={{color: "black"}}>Getting Started</Popover.Header>
-                <Popover.Body style={{backgroundColor: "black", color: "white"}}>
-                  <strong>Select a playlist</strong> from the card viewer or <strong>sort playlists by genre</strong> to start exploring new music.
-                </Popover.Body>
-              </Popover>
-            }
-            compact={true}
-            isOpen={isOpen}
-            style={{ marginRight: "2%" }}
-          >
-          </Tooltip2>
-          <Switch
+          <PopoverComponent
             checked={isOpen}
             onChange={toggleControlledTooltip}
-            style={{ display: "inline-block", marginBottom: 0, marginLeft: 20 }}
-          />
+          ></PopoverComponent>
         </div>
         <Navbar.Group align={Alignment.RIGHT}>
           <Navbar.Heading className="bp4-align-left">Playlistify</Navbar.Heading>
