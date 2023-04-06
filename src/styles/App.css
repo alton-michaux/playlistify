@@ -122,8 +122,12 @@ li {
 }
 
 .loader {
-  z-index: 1001;
-  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 60px;
+  width: 60px;
+  margin: 0 auto;
 }
 
 .errorDiv {
