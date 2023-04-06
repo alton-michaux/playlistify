@@ -17,30 +17,48 @@ function App() {
 
   useEffect(() => {
     async function fetchToken() {
-      const token = await API.token()
-      dispatch({ type: 'token', payload: token })
+      dispatch({ type: 'loading' })
+      try {
+        const token = await API.token()
+        dispatch({ type: 'token', payload: token })
+        dispatch({ type: 'success' })
+      } catch {
+        dispatch({ type: 'failure' })
+      }
     }
     fetchToken()
   }, [])
 
   useEffect(() => {
     if (state.token) {
+      dispatch({ type: 'loading' })
       async function fetchGenres() {
-        const genres = await API.genres(state.token)
-        dispatch({ type: 'genres', payload: genres })
+        try {
+          const genres = await API.genres(state.token)
+          dispatch({ type: 'genres', payload: genres })
+          dispatch({ type: 'success' })
+        } catch {
+          dispatch({ type: 'failure' })
+        }
       }
 
       async function fetchPlaylists() {
-        const myPlaylists = await API.playlists(state.token)
+        dispatch({ type: 'loading' })
+        try {
+          const myPlaylists = await API.playlists(state.token)
+          dispatch({ type: 'success' })
 
-        const updatedPlaylists = myPlaylists.map((playlist) => {
-          return (
-            utils.charConverter(playlist, playlist.description)
-          )
-        })
-        localStorage.setItem('playlists', JSON.stringify(updatedPlaylists))
+          const updatedPlaylists = myPlaylists.map((playlist) => {
+            return (
+              utils.charConverter(playlist, playlist.description)
+            )
+          })
+          localStorage.setItem('playlists', JSON.stringify(updatedPlaylists))
 
-        dispatch({ type: 'playlists', payload: updatedPlaylists })
+          dispatch({ type: 'playlists', payload: updatedPlaylists })
+        } catch {
+          dispatch({ type: 'failure' })
+        }
       }
 
       fetchGenres()
@@ -82,27 +100,45 @@ function App() {
 
   const handlePlaylistFetch = (id) => {
     async function fetchPlaylist() {
-      const newToken = state.token
-      const playlist = await API.playlist(id, newToken)
-      dispatch({ type: 'playlist', payload: playlist })
+      dispatch({ type: 'loading' })
+      try {
+        const newToken = state.token
+        const playlist = await API.playlist(id, newToken)
+        dispatch({ type: 'playlist', payload: playlist })
+        dispatch({ type: 'success' })
+      } catch {
+        dispatch({ type: 'failure' })
+      }
     }
     fetchPlaylist()
   }
 
   const handleTracklistFetch = (id) => {
     async function fetchTracklist() {
-      const newToken = state.token
-      const tracklist = await API.tracklist(id, newToken)
-      dispatch({ type: 'tracklist', payload: tracklist })
+      dispatch({ type: 'loading' })
+      try {
+        const newToken = state.token
+        const tracklist = await API.tracklist(id, newToken)
+        dispatch({ type: 'tracklist', payload: tracklist })
+        dispatch({ type: 'success' })
+      } catch {
+        dispatch({ type: 'failure' })
+      }
     }
     fetchTracklist()
   }
 
   const handleTrackInfo = (id) => {
     async function fetchTrackInfo() {
-      const newToken = state.token
-      const song = await API.song(id, newToken)
-      dispatch({ type: 'song', payload: song })
+      dispatch({ type: 'loading' })
+      try {
+        const newToken = state.token
+        const song = await API.song(id, newToken)
+        dispatch({ type: 'song', payload: song })
+        dispatch({ type: 'success' })
+      } catch {
+        dispatch({ type: 'failure' })
+      }
     }
     fetchTrackInfo()
   }

@@ -1,12 +1,18 @@
 const stateHandler = (state, action) => {
   switch (action.type) {
-    case "isLoading":
+    case "loading":
       return {
         ...state,
         isLoading: true,
         isError: false
       };
-    case "isError":
+    case "success":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false
+      }
+    case "failure":
       return {
         ...state,
         isLoading: false,
@@ -15,79 +21,57 @@ const stateHandler = (state, action) => {
     case 'token':
       return {
         ...state,
-        token: action.payload,
-        isLoading: false,
-        isError: false
+        token: action.payload
       };
     case 'genres':
       return {
         ...state,
-        genres: action.payload,
-        isLoading: false,
-        isError: false
+        genres: action.payload
       };
     case 'genre':
       return {
         ...state,
-        genre: action.payload,
-        isLoading: false,
-        isError: false
+        genre: action.payload
       };
     case 'playlists':
       return {
         ...state,
-        playlists: action.payload,
-        isLoading: false,
-        isError: false
+        playlists: action.payload
       };
     case 'playlist':
       return {
         ...state,
-        playlist: action.payload,
-        isLoading: false,
-        isError: false
+        playlist: action.payload
       };
     case 'tracklist':
       return {
         ...state,
-        tracklist: action.payload,
-        isLoading: false,
-        isError: false
+        tracklist: action.payload
       };
     case 'song':
       return {
         ...state,
-        song: action.payload,
-        isLoading: false,
-        isError: false
+        song: action.payload
       };
     case 'isOpen':
       return {
         ...state,
-        isOpen: action.payload,
-        isLoading: false,
-        isError: false
+        isOpen: action.payload
       };
     case 'title':
       return {
         ...state,
-        title: action.payload,
-        isLoading: false,
-        isError: false
+        title: action.payload
       };
     case 'image':
       return {
         ...state,
-        image: action.payload,
-        isLoading: false,
-        isError: false
+        image: action.payload
       };
     case 'songImage':
       return {
         ...state,
-        songImage: action.payload,
-        isLoading: false,
-        isError: false
+        songImage: action.payload
       };
     default:
       return state
