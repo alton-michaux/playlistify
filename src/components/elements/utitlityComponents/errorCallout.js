@@ -5,7 +5,7 @@ const ErrorCallout = ({ children, isError }) => {
     <Callout
       icon="error"
       intent="danger"
-      showheader={true}
+      showheader="true"
       className={isError ? "errorDiv" : "nonError"}
     >
       {children}
