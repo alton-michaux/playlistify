@@ -3,6 +3,7 @@ import Row from 'react-bootstrap/Row';
 import Nav from '../elements/Nav'
 import Main from '../elements/Main'
 import Footer from '../elements/Footer'
+import BasicSpinner from '../elements/utitlityComponents/loadSpinner';
 import "../../styles/App.css"
 
 const Home = ({
@@ -34,7 +35,10 @@ const Home = ({
         <Row
           className="mainRow"
         >
-          <div className={loading ? "loader" : "nonLoader"}>Loading...</div>
+          <BasicSpinner
+            isLoading={loading}
+          >Loading...
+          </BasicSpinner>
           <div className={error ? "errorDiv" : "nonError"}>Loading...</div>
           <Main
             genres={genres}
