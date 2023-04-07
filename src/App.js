@@ -66,6 +66,13 @@ function App() {
     }
   }, [state.token])
 
+  useEffect(() => {
+    if (window.location.search.length > 0) {
+      window.history.pushState("", "", process.env.REACT_APP_REDIRECT_URI)
+      API.access(state.authToken, dispatch)
+    }
+  }, [state.authToken])
+
   // song/playlist data update
 
   useEffect(() => {
@@ -143,6 +150,16 @@ function App() {
     fetchTrackInfo()
   }
 
+  const userhandler = (type, target) => {
+    if (type === "user") {
+      const token = API.login(state.token)
+      console.log('userToken', token)
+    }
+    if (type === "modal") {
+      dispatch({ type: 'show', payload: target})
+    }
+  }
+
   const filterPlaylists = (genreParam) => {
     if (genreParam !== "Sort By Genre") {
       const storedPlaylists = JSON.parse(localStorage.getItem('playlists'))
@@ -170,7 +187,7 @@ function App() {
       handleTracklistFetch(target)
     }
   }
-
+console.log('state', state)
   return (
     <Container
       style={{ paddingTop: "5%", height: "100%" }}
@@ -184,6 +201,9 @@ function App() {
             <Home
               loading={state.isLoading}
               error={state.isError}
+              handleUser={userhandler}
+              show={state.show}
+              user={state.user}
               token={state.token}
               genres={state.genres}
               genre={state.genre}

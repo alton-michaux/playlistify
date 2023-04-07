@@ -68,6 +68,11 @@ const stateHandler = (state, action) => {
         ...state,
         isOpen: action.payload
       };
+    case 'show':
+      return {
+        ...state,
+        show: action.payload
+      }
     case 'title':
       return {
         ...state,

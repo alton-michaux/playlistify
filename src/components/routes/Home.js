@@ -5,11 +5,14 @@ import Main from '../elements/Main'
 import Footer from '../elements/Footer'
 import BasicSpinner from '../elements/utitlityComponents/loadSpinner';
 import ErrorCallout from '../elements/utitlityComponents/errorCallout';
+// import Login from '../elements/Login';
 import "../../styles/App.css"
 
 const Home = ({
   loading,
   error,
+  handleUser,
+  user,
   genres,
   genre,
   playlists,
@@ -21,6 +24,7 @@ const Home = ({
   songImage,
   fetchHandler,
   filterPlaylists,
+  token,
   isOpen,
   popoverHandler
 }) => {
@@ -29,8 +33,11 @@ const Home = ({
       <main>
         <Row>
           <Nav
+            token={token}
             isOpen={isOpen}
             popoverHandler={popoverHandler}
+            handleUser={handleUser}
+            user={user}
           ></Nav>
         </Row>
         <Row
@@ -42,7 +49,13 @@ const Home = ({
           </BasicSpinner>
           <ErrorCallout
             isError={error}
-          >There was an error...</ErrorCallout>
+          >There was an error...
+          </ErrorCallout>
+          {/* <Login
+            show={show}
+            handleUser={handleUser}
+            user={user}
+          ></Login> */}
           <Main
             genres={genres}
             genre={genre}
