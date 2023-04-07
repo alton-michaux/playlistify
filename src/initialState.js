@@ -1,6 +1,8 @@
 const initialState = {
   isLoading: false,
   isError: false,
+  authToken: "",
+  user: {},
   token: "",
   genres: [],
   genre: "",

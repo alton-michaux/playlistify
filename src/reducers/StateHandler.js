@@ -11,13 +11,23 @@ const stateHandler = (state, action) => {
         ...state,
         isLoading: false,
         isError: false
-      }
+      };
     case "failure":
       return {
         ...state,
         isLoading: false,
         isError: true
-      }
+      };
+    case 'authToken':
+      return {
+        ...state,
+        token: action.payload
+      };
+    case 'user':
+      return {
+        ...state,
+        token: action.payload
+      };
     case 'token':
       return {
         ...state,
