@@ -71,9 +71,22 @@ function App() {
 
   useEffect(() => {
     const _spotifyToken = utils.URLToken().access_token
-    console.log('access token', _spotifyToken)
-    dispatch({ type: 'authToken', payload: _spotifyToken })
-  }, [window.location.hash])
+
+    window.location.hash = ""
+
+    if (_spotifyToken) {
+      dispatch({ type: 'authToken', payload: _spotifyToken })
+
+      spotify.setAccessToken(_spotifyToken)
+
+      spotify.getMe().then((user) => {
+        dispatch({ type: 'user', payload: user })
+        dispatch({ type: 'success' })
+      })
+    } else {
+      dispatch({ type: 'failure' })
+    }
+  }, [state.authToken])
 
   // song/playlist data update
 
@@ -157,10 +170,6 @@ function App() {
     try {
       const userToken = await API.login()
       dispatch({ type: "authToken", payload: userToken })
-      console.log('userToken', userToken)
-      const access = await API.access(userToken)
-      console.log('access token', access)
-      dispatch({ type: 'success' })
     } catch {
       dispatch({ type: 'failure' })
     }
@@ -193,7 +202,7 @@ function App() {
       handleTracklistFetch(target)
     }
   }
-  console.log('state', state)
+
   return (
     <Container
       style={{ paddingTop: "5%", height: "100%" }}
