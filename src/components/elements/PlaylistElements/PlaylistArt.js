@@ -13,6 +13,7 @@ const PlaylistArt = ({ image }) => {
     >
       <Image
         src={image}
+        alt="playlist image"
         fluid
       >
       </Image>
