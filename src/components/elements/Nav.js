@@ -20,7 +20,10 @@ const Nav = ({ isOpen, popoverHandler, user, handleUser }) => {
       style={{ margin: "0 auto", width: "100%", height: "8vh" }}
       fixedToTop
     >
-      <div className="toggleSwitch">
+      <div
+        className="toggleSwitch"
+        style={{marginTop: ".5%"}}
+      >
         <div
           className="innerToggleSwitch"
         >

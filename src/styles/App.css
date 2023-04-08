@@ -41,6 +41,11 @@ section {
   text-align: center;
 }
 
+img {
+  border-radius: 2.5% 2.5%;
+  box-shadow: 6px 8px 5px 0px rgba(0, 0, 0, 0.38);
+}
+
 ol::-webkit-scrollbar {
   display: none;
 }
@@ -115,6 +120,18 @@ li {
   background: rgba(64, 72, 84, .5);
 }
 
+.carousel-inner {
+  max-width: 800px
+}
+
+.carousel-item {
+  min-width: 100%;
+}
+
+.playlist-carousel {
+  justify-content: space-around;
+}
+
 .tracklist {
   min-height: auto;
   max-height: 155px;
@@ -147,12 +164,13 @@ li {
 
 @media screen and (min-width: 1000px) {
   body {
-    overflow: hidden;
+    overflow-y: auto;
   }
 
   main {
     min-height: 92%;
     margin: 0 auto;
+    margin-bottom: 5%;
   }
 
   .container-fluid {
@@ -175,6 +193,15 @@ li {
 
   .row {
     flex-direction: row;
+  }
+
+  .playlistImageDiv {
+    max-height: 25%;
+  }
+
+  .playlist-carousel {
+    min-height: 100%;
+    justify-content: center;
   }
 }
 

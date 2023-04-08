@@ -9,7 +9,8 @@ const PopoverComponent = ({checked, onChange}) => {
     <Popover id="popoverTip" style={{ marginTop: "20%", marginLeft: "5%", minWidth: "100%" }}>
       <Popover.Header as="h3" style={{ color: "black" }}>Getting Started</Popover.Header>
       <Popover.Body style={{ backgroundColor: "black", color: "white" }}>
-        <strong>Select a playlist</strong> from the card viewer or <strong>sort playlists by genre</strong> to start exploring new music.
+        1. <strong>Log in </strong> with your Spotify account<br/>
+        2. <strong>Select a playlist</strong> from the card viewer or <strong>sort playlists by genre</strong> to start exploring new music.
       </Popover.Body>
     </Popover>
   )
