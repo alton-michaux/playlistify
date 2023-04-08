@@ -3,11 +3,14 @@ import "@blueprintjs/core/lib/css/blueprint.css";
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 import { Navbar, Button, Alignment } from "@blueprintjs/core"
 import PopoverComponent from "./utitlityComponents/popover";
-import API from "../../utils/spotifyAPI";
 
-const Nav = ({ token, isOpen, popoverHandler, user }) => {
+const Nav = ({ isOpen, popoverHandler, user, handleUser }) => {
   const toggleControlledTooltip = () => {
     popoverHandler(!isOpen)
+  }
+
+  const handleClick = () => {
+    handleUser("user")
   }
   return (
     <Navbar
@@ -32,7 +35,7 @@ const Nav = ({ token, isOpen, popoverHandler, user }) => {
             className="bp4-minimal bp4-align-right"
             icon={user ? "log-out" : "log-in"}
             text={user ? "Log-Out" : "Log-In"}
-            onClick={() => API.login(token)}
+            onClick={() => handleClick()}
           />
         </Navbar.Group>
       </div>

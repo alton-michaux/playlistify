@@ -150,14 +150,11 @@ function App() {
     fetchTrackInfo()
   }
 
-  const userhandler = (type, target) => {
-    if (type === "user") {
-      const token = API.login(state.token)
-      console.log('userToken', token)
-    }
-    if (type === "modal") {
-      dispatch({ type: 'show', payload: target})
-    }
+  const userhandler = () => {
+    const userToken = API.login(state.token)
+    console.log('userToken', userToken)
+    const access = API.access(userToken)
+    console.log('access token', access)
   }
 
   const filterPlaylists = (genreParam) => {
@@ -187,7 +184,7 @@ function App() {
       handleTracklistFetch(target)
     }
   }
-console.log('state', state)
+  // console.log('state', state)
   return (
     <Container
       style={{ paddingTop: "5%", height: "100%" }}
