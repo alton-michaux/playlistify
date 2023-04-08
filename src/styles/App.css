@@ -115,6 +115,18 @@ li {
   background: rgba(64, 72, 84, .5);
 }
 
+.carousel-inner {
+  max-width: 800px
+}
+
+.carousel-item {
+  min-width: 100%;
+}
+
+.playlist-carousel {
+  justify-content: space-around;
+}
+
 .tracklist {
   min-height: auto;
   max-height: 155px;
@@ -178,7 +190,6 @@ li {
   }
 
   .playlist-carousel {
-    margin: 0 auto;
     min-height: 100%;
     justify-content: center;
   }
