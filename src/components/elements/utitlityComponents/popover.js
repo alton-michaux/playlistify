@@ -1,4 +1,5 @@
 
+import PropTypes from 'prop-types';
 import { Switch } from "@blueprintjs/core"
 import { Classes, Tooltip2 } from "@blueprintjs/popover2";
 import Popover from 'react-bootstrap/Popover';
@@ -31,6 +32,11 @@ const PopoverComponent = ({checked, onChange}) => {
       />
     </>
   )
+}
+
+PopoverComponent.propTypes = {
+  checked: PropTypes.bool,
+  onChange: PropTypes.func
 }
 
 export default PopoverComponent
