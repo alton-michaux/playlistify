@@ -8,13 +8,10 @@ import API from './utils/spotifyAPI.js'
 import utils from './utils/utils.js';
 import Container from 'react-bootstrap/Container'
 import Home from './components/routes/Home'
-import LandingPage from './components/routes/LandingPage'
 import NotFound from './components/routes/NotFound'
 
 function App() {
   const [state, dispatch] = useReducer(stateHandler, initialState)
-
-  const spotify = new SpotifyWebApi()
 
   // initial api calls
 
@@ -70,6 +67,8 @@ function App() {
   }, [state.token])
 
   useEffect(() => {
+    const spotify = new SpotifyWebApi()
+  
     const _spotifyToken = utils.URLToken().access_token
 
     window.location.hash = ""
