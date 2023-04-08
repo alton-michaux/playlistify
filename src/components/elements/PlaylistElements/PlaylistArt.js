@@ -6,12 +6,13 @@ const PlaylistArt = ({ image }) => {
   return (
     <div
       className="playlistImageDiv"
+      style={{
+        maxHeight: "75%",
+        margin: "0 auto"
+      }}
     >
       <Image
         src={image}
-        style={{
-          maxHeight: "400px"
-        }}
         fluid
       >
       </Image>
