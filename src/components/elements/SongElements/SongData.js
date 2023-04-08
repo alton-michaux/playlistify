@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import utils from "../../../utils/utils"
 
 const SongData = ({ song }) => {
@@ -10,6 +11,10 @@ const SongData = ({ song }) => {
       </div> :
       <p>Song data will appear here once a song is selected from tracklist</p>
   )
+}
+
+SongData.propTypes = {
+  song: PropTypes.object
 }
 
 export default SongData

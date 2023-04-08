@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import SongArt from './SongArt'
 import SongData from './SongData'
 
@@ -14,6 +15,11 @@ const TrackWindow = ({ song, songImage }) => {
       ></SongData>
     </section>
   )
+}
+
+TrackWindow.propTypes = {
+  song: PropTypes.object,
+  songImage: PropTypes.string
 }
 
 export default TrackWindow
