@@ -176,8 +176,10 @@ function App() {
         dispatch({ type: 'failure' })
       }
     } else {
-      alert('logging out!')
+      dispatch({ type: 'authToken', payload: '' })
+      dispatch({ type: 'user', payload: '' })
       dispatch({ type: 'success' })
+      alert("You logged out")
     }
   }
 

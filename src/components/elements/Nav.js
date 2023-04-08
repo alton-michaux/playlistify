@@ -12,7 +12,7 @@ const Nav = ({ isOpen, popoverHandler, user, handleUser }) => {
   const handleClick = (type) => {
     handleUser(type, "user")
   }
-  console.log('user', user)
+
   return (
     <Navbar
       className="bp4-navbar bp4-dark"
