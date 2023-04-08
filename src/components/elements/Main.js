@@ -54,7 +54,7 @@ Main.propTypes = {
   filterPlaylists: PropTypes.func,
   globalHandler: PropTypes.func,
   selectedPlaylist: PropTypes.object,
-  tracklist: PropTypes.array,
+  tracklist: PropTypes.object,
   title: PropTypes.string,
   image: PropTypes.string,
   song: PropTypes.object,
