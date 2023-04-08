@@ -150,16 +150,16 @@ function App() {
   }
 
   async function userhandler() {
-    console.log('clicked')
-    dispatch({type: 'loading'})
+    dispatch({ type: 'loading' })
     try {
       const userToken = await API.login()
+      dispatch({type: "authToken", payload: userToken})
       console.log('userToken', userToken)
       const access = await API.access(userToken)
       console.log('access token', access)
-      dispatch({type: 'success'})
+      dispatch({ type: 'success' })
     } catch {
-      dispatch({type: 'failure'})
+      dispatch({ type: 'failure' })
     }
   }
 
@@ -190,41 +190,42 @@ function App() {
       handleTracklistFetch(target)
     }
   }
-  // console.log('state', state)
+  console.log('state', state)
   return (
     <Container
       style={{ paddingTop: "5%", height: "100%" }}
       fluid
     >
       <Routes>
-      {['/', '/callback'].map(path =>
-        <Route
-          exact
-          path={path}
-          element={
-            <Home
-              loading={state.isLoading}
-              error={state.isError}
-              handleUser={userhandler}
-              show={state.show}
-              user={state.user}
-              token={state.token}
-              genres={state.genres}
-              genre={state.genre}
-              playlists={state.playlists}
-              playlist={state.playlist}
-              tracklist={state.tracklist}
-              song={state.song}
-              title={state.title}
-              image={state.image}
-              songImage={state.songImage}
-              isOpen={state.isOpen}
-              popoverHandler={handlePopover}
-              fetchHandler={fetchHandler}
-              filterPlaylists={filterPlaylists}
-            />}
-        ></Route>
-      )}
+        {['/', '/callback'].map(path =>
+          <Route
+            key={path}
+            exact
+            path={path}
+            element={
+              <Home
+                loading={state.isLoading}
+                error={state.isError}
+                handleUser={userhandler}
+                show={state.show}
+                user={state.user}
+                token={state.token}
+                genres={state.genres}
+                genre={state.genre}
+                playlists={state.playlists}
+                playlist={state.playlist}
+                tracklist={state.tracklist}
+                song={state.song}
+                title={state.title}
+                image={state.image}
+                songImage={state.songImage}
+                isOpen={state.isOpen}
+                popoverHandler={handlePopover}
+                fetchHandler={fetchHandler}
+                filterPlaylists={filterPlaylists}
+              />}
+          ></Route>
+        )}
         <Route
           exact
           path='/login'
