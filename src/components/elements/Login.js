@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import { propTypes } from 'react-bootstrap/esm/Image';
 
 function Login({ handleUser, user, show }) {
   const handleFormSubmit = (event) => {
@@ -61,10 +60,10 @@ function Login({ handleUser, user, show }) {
   );
 }
 
-Login.PropTypes = {
-  handleUser: propTypes.func,
-  user: propTypes.object,
-  show: propTypes.bool
+Login.propTypes = {
+  handleUser: PropTypes.func,
+  user: PropTypes.object,
+  show: PropTypes.bool
 }
 
 export default Login
