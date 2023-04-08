@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import Input from '../Input';
+import PropTypes from 'prop-types';
 import Carousel from 'react-bootstrap/Carousel';
 import utils from '../../../utils/utils';
 import "../../../styles/App.css"
@@ -60,6 +61,12 @@ const PlaylistList = ({ playlists, handleTracklistFetch, genre }) => {
       </Carousel> :
       <p>No Matches for selected Genre</p>
   )
+}
+
+PlaylistList.propTypes = {
+  playslists: PropTypes.array,
+  handleTracklistFetch: PropTypes.func,
+  genre: PropTypes.string
 }
 
 export default PlaylistList

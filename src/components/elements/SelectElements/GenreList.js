@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 
 const GenreList = ({ genres, handlePlaylistFilter }) => {
@@ -32,6 +33,11 @@ const GenreList = ({ genres, handlePlaylistFilter }) => {
       </Form.Select>
     </section>
   )
+}
+
+GenreList.propTypes = {
+  genres: PropTypes.array,
+  handlePlaylistFilter: PropTypes.func
 }
 
 export default GenreList

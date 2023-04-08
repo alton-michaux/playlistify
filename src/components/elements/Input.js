@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const Input = ({ type, value, inputRef }) => {
   return (
     <input
@@ -6,6 +8,12 @@ const Input = ({ type, value, inputRef }) => {
       ref={inputRef}
     />
   )
+}
+
+Input.propTypes = {
+  type: PropTypes.string,
+  value: PropTypes.string,
+  inputRef: PropTypes.func
 }
 
 export default Input

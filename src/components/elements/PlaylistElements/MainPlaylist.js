@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import PlaylistTitle from './PlaylistTitle'
 import PlaylistArt from './PlaylistArt'
 
@@ -14,6 +15,11 @@ const MainPlaylist = ({ title, image }) => {
       ></PlaylistArt>
     </section>
   )
+}
+
+MainPlaylist.propTypes = {
+  title: PropTypes.string,
+  image: PropTypes.string
 }
 
 export default MainPlaylist
