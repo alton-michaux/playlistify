@@ -33,7 +33,6 @@ const Home = ({
       <main>
         <Row>
           <Nav
-            token={token}
             isOpen={isOpen}
             popoverHandler={popoverHandler}
             handleUser={handleUser}

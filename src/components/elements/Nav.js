@@ -9,9 +9,10 @@ const Nav = ({ isOpen, popoverHandler, user, handleUser }) => {
     popoverHandler(!isOpen)
   }
 
-  const handleClick = () => {
-    handleUser("user")
+  const handleClick = (type) => {
+    handleUser(type, "user")
   }
+  console.log('user', user)
   return (
     <Navbar
       className="bp4-navbar bp4-dark"
@@ -33,9 +34,9 @@ const Nav = ({ isOpen, popoverHandler, user, handleUser }) => {
           <Button className="bp4-minimal bp4-align-right" icon="home" text="Home" />
           <Button
             className="bp4-minimal bp4-align-right"
-            icon={user ? "log-out" : "log-in"}
-            text={user ? "Log-Out" : "Log-In"}
-            onClick={() => handleClick()}
+            icon={user.display_name ? "log-out" : "log-in"}
+            text={user.display_name ? "Log-Out" : "Log-In"}
+            onClick={user.display_name ? () => handleClick('log-out') : () => handleClick('log-in')}
           />
         </Navbar.Group>
       </div>
