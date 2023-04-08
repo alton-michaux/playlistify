@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Badge from 'react-bootstrap/Badge';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { Button } from "@blueprintjs/core";
@@ -50,6 +51,14 @@ const TrackList = ({ tracklist, handleSongInfoFetch }) => {
       }
     </ListGroup>
   )
+}
+
+TrackList.propTypes = {
+  tracklist: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object
+  ]),
+  handleSongInfoFetch: PropTypes.func
 }
 
 export default TrackList

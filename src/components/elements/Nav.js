@@ -3,6 +3,7 @@ import "@blueprintjs/core/lib/css/blueprint.css";
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 import { Navbar, Button, Alignment } from "@blueprintjs/core"
 import PopoverComponent from "./utitlityComponents/popover";
+import PropTypes from 'prop-types';
 
 const Nav = ({ isOpen, popoverHandler, user, handleUser }) => {
   const toggleControlledTooltip = () => {
@@ -19,7 +20,10 @@ const Nav = ({ isOpen, popoverHandler, user, handleUser }) => {
       style={{ margin: "0 auto", width: "100%", height: "8vh" }}
       fixedToTop
     >
-      <div className="toggleSwitch">
+      <div
+        className="toggleSwitch"
+        style={{marginTop: ".5%"}}
+      >
         <div
           className="innerToggleSwitch"
         >
@@ -42,6 +46,13 @@ const Nav = ({ isOpen, popoverHandler, user, handleUser }) => {
       </div>
     </Navbar>
   )
+}
+
+Nav.propTypes = {
+  isOpen: PropTypes.bool,
+  popoverHandler: PropTypes.func,
+  user: PropTypes.object,
+  handleUser: PropTypes.func
 }
 
 export default Nav

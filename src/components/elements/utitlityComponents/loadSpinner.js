@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Spinner from 'react-bootstrap/Spinner';
 
 function BasicSpinner({ children, isLoading }) {
@@ -10,6 +11,11 @@ function BasicSpinner({ children, isLoading }) {
       <span className="visually-hidden">{children}</span>
     </Spinner>
   );
+}
+
+BasicSpinner.propTypes = {
+  children: PropTypes.string,
+  isLoading: PropTypes.bool
 }
 
 export default BasicSpinner;

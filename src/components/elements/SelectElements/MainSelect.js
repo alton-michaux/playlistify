@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import TrackList from './Tracklist'
 import GenreList from './GenreList'
 import PlaylistList from './PlaylistList'
@@ -29,6 +30,18 @@ const MainSelect = ({
       ></PlaylistList>
     </section>
   )
+}
+
+MainSelect.propTypes = {
+  tracklist: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object
+  ]),
+  genres: PropTypes.array,
+  genre: PropTypes.string,
+  playlists: PropTypes.array,
+  filterPlaylists: PropTypes.func,
+  globalHandler: PropTypes.func
 }
 
 export default MainSelect

@@ -1,4 +1,5 @@
 import Col from 'react-bootstrap/Col';
+import PropTypes from 'prop-types';
 import MainSong from './SongElements/MainSong'
 import MainPlaylist from './PlaylistElements/MainPlaylist'
 import MainSelect from './SelectElements/MainSelect'
@@ -44,6 +45,23 @@ const Main = ({
       </Col>
     </>
   )
+}
+
+Main.propTypes = {
+  genres: PropTypes.array,
+  genre: PropTypes.string,
+  playlists: PropTypes.array,
+  filterPlaylists: PropTypes.func,
+  globalHandler: PropTypes.func,
+  selectedPlaylist: PropTypes.object,
+  tracklist: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object
+  ]),
+  title: PropTypes.string,
+  image: PropTypes.string,
+  song: PropTypes.object,
+  songImage: PropTypes.string
 }
 
 export default Main

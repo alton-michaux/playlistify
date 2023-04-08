@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Row from 'react-bootstrap/Row';
 import Nav from '../elements/Nav'
 import Main from '../elements/Main'
@@ -68,6 +69,29 @@ const Home = ({
       </Row>
     </>
   );
+}
+
+Home.propTypes = {
+  loading: PropTypes.bool,
+  error: PropTypes.bool,
+  handleUser: PropTypes.func,
+  user: PropTypes.object,
+  genres: PropTypes.array,
+  genre: PropTypes.string,
+  playlists: PropTypes.array,
+  playlist: PropTypes.object,
+  tracklist: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object
+  ]),
+  song: PropTypes.object,
+  title: PropTypes.string,
+  image: PropTypes.string,
+  songImage: PropTypes.string,
+  fetchHandler: PropTypes.func,
+  filterPlaylists: PropTypes.func,
+  isOpen: PropTypes.bool,
+  popoverHandler: PropTypes.func
 }
 
 export default Home;
