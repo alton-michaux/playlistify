@@ -80,7 +80,10 @@ Home.propTypes = {
   genre: PropTypes.string,
   playlists: PropTypes.array,
   playlist: PropTypes.object,
-  tracklist: PropTypes.object,
+  tracklist: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object
+  ]),
   song: PropTypes.object,
   title: PropTypes.string,
   image: PropTypes.string,

@@ -54,7 +54,10 @@ Main.propTypes = {
   filterPlaylists: PropTypes.func,
   globalHandler: PropTypes.func,
   selectedPlaylist: PropTypes.object,
-  tracklist: PropTypes.object,
+  tracklist: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object
+  ]),
   title: PropTypes.string,
   image: PropTypes.string,
   song: PropTypes.object,
