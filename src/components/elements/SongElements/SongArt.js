@@ -6,6 +6,7 @@ const SongArt = ({ songImage }) => {
     <section>
       <Image
         src={songImage}
+        alt="song image"
         fluid
       >
       </Image>
