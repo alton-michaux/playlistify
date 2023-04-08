@@ -166,8 +166,8 @@ function App() {
   }
 
   async function userhandler(type) {
+    dispatch({ type: 'loading' })
     if (type === 'log-in') {
-      dispatch({ type: 'loading' })
       try {
         const userToken = await API.login()
         dispatch({ type: "authToken", payload: userToken })
@@ -175,7 +175,8 @@ function App() {
         dispatch({ type: 'failure' })
       }
     } else {
-      console.log('logging out!')
+      alert('logging out!')
+      dispatch({ type: 'success' })
     }
   }
 
