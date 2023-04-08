@@ -10,6 +10,8 @@ import "../../styles/App.css"
 const Home = ({
   loading,
   error,
+  handleUser,
+  user,
   genres,
   genre,
   playlists,
@@ -31,6 +33,8 @@ const Home = ({
           <Nav
             isOpen={isOpen}
             popoverHandler={popoverHandler}
+            handleUser={handleUser}
+            user={user}
           ></Nav>
         </Row>
         <Row
@@ -42,7 +46,8 @@ const Home = ({
           </BasicSpinner>
           <ErrorCallout
             isError={error}
-          >There was an error...</ErrorCallout>
+          >There was an error...
+          </ErrorCallout>
           <Main
             genres={genres}
             genre={genre}
