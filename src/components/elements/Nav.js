@@ -4,10 +4,15 @@ import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 import { Navbar, Button, Alignment } from "@blueprintjs/core"
 import PopoverComponent from "./utitlityComponents/popover";
 
-const Nav = ({ isOpen, popoverHandler }) => {
+const Nav = ({ isOpen, popoverHandler, user, handleUser }) => {
   const toggleControlledTooltip = () => {
     popoverHandler(!isOpen)
   }
+
+  const handleClick = (type) => {
+    handleUser(type, "user")
+  }
+
   return (
     <Navbar
       className="bp4-navbar bp4-dark"
@@ -27,7 +32,12 @@ const Nav = ({ isOpen, popoverHandler }) => {
           <Navbar.Heading className="bp4-align-left">Playlistify</Navbar.Heading>
           <Navbar.Divider />
           <Button className="bp4-minimal bp4-align-right" icon="home" text="Home" />
-          <Button className="bp4-minimal bp4-align-right" icon="log-out" text="Logout" />
+          <Button
+            className="bp4-minimal bp4-align-right"
+            icon={user.display_name ? "log-out" : "log-in"}
+            text={user.display_name ? "Log-Out" : "Log-In"}
+            onClick={user.display_name ? () => handleClick('log-out') : () => handleClick('log-in')}
+          />
         </Navbar.Group>
       </div>
     </Navbar>

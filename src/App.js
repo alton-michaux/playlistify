@@ -1,13 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useReducer } from 'react';
 import { Routes, Route } from "react-router-dom";
+import SpotifyWebApi from "spotify-web-api-js";
 import stateHandler from "./reducers/StateHandler.js";
 import initialState from "./initialState.js"
 import API from './utils/spotifyAPI.js'
 import utils from './utils/utils.js';
 import Container from 'react-bootstrap/Container'
 import Home from './components/routes/Home'
-import LandingPage from './components/routes/LandingPage'
 import NotFound from './components/routes/NotFound'
 
 function App() {
@@ -65,6 +65,28 @@ function App() {
       fetchPlaylists()
     }
   }, [state.token])
+
+  useEffect(() => {
+    const spotify = new SpotifyWebApi()
+  
+    const _spotifyToken = utils.URLToken().access_token
+
+    window.location.hash = ""
+
+    if (_spotifyToken) {
+      dispatch({ type: 'authToken', payload: _spotifyToken })
+
+      spotify.setAccessToken(_spotifyToken)
+
+      spotify.getMe().then((user) => {
+        dispatch({ type: 'user', payload: user })
+        dispatch({ type: 'success' })
+        alert(`Welcome ${user.display_name}`)
+      })
+    } else {
+      dispatch({ type: 'failure' })
+    }
+  }, [state.authToken])
 
   // song/playlist data update
 
@@ -143,6 +165,23 @@ function App() {
     fetchTrackInfo()
   }
 
+  async function userhandler(type) {
+    dispatch({ type: 'loading' })
+    if (type === 'log-in') {
+      try {
+        const userToken = await API.login()
+        dispatch({ type: "authToken", payload: userToken })
+      } catch {
+        dispatch({ type: 'failure' })
+      }
+    } else {
+      dispatch({ type: 'authToken', payload: '' })
+      dispatch({ type: 'user', payload: '' })
+      dispatch({ type: 'success' })
+      alert("You logged out")
+    }
+  }
+
   const filterPlaylists = (genreParam) => {
     if (genreParam !== "Sort By Genre") {
       const storedPlaylists = JSON.parse(localStorage.getItem('playlists'))
@@ -177,34 +216,35 @@ function App() {
       fluid
     >
       <Routes>
-        <Route
-          exact
-          path='/'
-          element={
-            <Home
-              loading={state.isLoading}
-              error={state.isError}
-              token={state.token}
-              genres={state.genres}
-              genre={state.genre}
-              playlists={state.playlists}
-              playlist={state.playlist}
-              tracklist={state.tracklist}
-              song={state.song}
-              title={state.title}
-              image={state.image}
-              songImage={state.songImage}
-              isOpen={state.isOpen}
-              popoverHandler={handlePopover}
-              fetchHandler={fetchHandler}
-              filterPlaylists={filterPlaylists}
-            />}
-        ></Route>
-        <Route
-          exact
-          path='/login'
-          element={<LandingPage />}
-        ></Route>
+        {['/', '/callback'].map(path =>
+          <Route
+            key={path}
+            exact
+            path={path}
+            element={
+              <Home
+                loading={state.isLoading}
+                error={state.isError}
+                handleUser={userhandler}
+                show={state.show}
+                user={state.user}
+                token={state.token}
+                genres={state.genres}
+                genre={state.genre}
+                playlists={state.playlists}
+                playlist={state.playlist}
+                tracklist={state.tracklist}
+                song={state.song}
+                title={state.title}
+                image={state.image}
+                songImage={state.songImage}
+                isOpen={state.isOpen}
+                popoverHandler={handlePopover}
+                fetchHandler={fetchHandler}
+                filterPlaylists={filterPlaylists}
+              />}
+          ></Route>
+        )}
         <Route
           path='*'
           element={<NotFound />}

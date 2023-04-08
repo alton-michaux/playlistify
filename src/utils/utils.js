@@ -56,6 +56,18 @@ const utils = {
         default:
           return "https://media.istockphoto.com/id/1294603953/vector/abstract-black-stripes-diagonal-background.jpg?s=612x612&w=0&k=20&c=nQZHTk-o97cNVqWnUe8BJg0A5jQG0tqylquzbt9YtcQ="
       }
+    },
+  URLToken:
+    function getTokenFromURL() {
+      return window.location.hash
+        .substring(1)
+        .split('&')
+        .reduce((initial, item) => {
+          let parts = item.split("=");
+          initial[parts[0]] = decodeURIComponent(parts[1])
+
+          return initial
+        }, []);
     }
 }
 
