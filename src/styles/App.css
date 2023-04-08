@@ -43,7 +43,7 @@ section {
 
 img {
   border-radius: 2.5% 2.5%;
-  box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.38);
+  box-shadow: 6px 8px 5px 0px rgba(0, 0, 0, 0.38);
 }
 
 ol::-webkit-scrollbar {
