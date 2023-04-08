@@ -82,6 +82,7 @@ function App() {
       spotify.getMe().then((user) => {
         dispatch({ type: 'user', payload: user })
         dispatch({ type: 'success' })
+        alert(`Welcome ${user.display_name}`)
       })
     } else {
       dispatch({ type: 'failure' })
@@ -243,11 +244,6 @@ function App() {
               />}
           ></Route>
         )}
-        <Route
-          exact
-          path='/login'
-          element={<LandingPage />}
-        ></Route>
         <Route
           path='*'
           element={<NotFound />}
