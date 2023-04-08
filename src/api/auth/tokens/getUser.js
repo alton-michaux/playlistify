@@ -3,7 +3,7 @@ import axios from "axios";
 //get access token for User
 async function GetUser(authCode) {
   uiCtrl.displayLoadingMessage();
-  const response = await axios.post('https://accounts.spotify.com/api/token', {
+  const response = await axios.get('https://accounts.spotify.com/api/token', {
     headers: {
         'Content-Type' : 'application/x-www-form-urlencoded', 
         'Authorization' : 'Basic ' + btoa(process.env.CLIENT_ID + ':' + process.env.CLIENT_SECRET)

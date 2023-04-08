@@ -12,9 +12,9 @@ const API = {
   // returns access_token for playlist data
   token: () => getToken(),
   // open auth popup
-  login: (token, dispatch) => UserLogin(token, dispatch),
+  login: () => UserLogin(),
   // get access token for user
-  access: (token, dispatch) => GetUserToken(token, dispatch),
+  access: (token) => GetUserToken(token),
   // retrieve user
   user: (authCode) => GetUser(authCode),
   // return genres

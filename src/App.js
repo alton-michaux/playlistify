@@ -69,7 +69,6 @@ function App() {
   useEffect(() => {
     if (window.location.search.length > 0) {
       window.history.pushState("", "", process.env.REACT_APP_REDIRECT_URI)
-      API.access(state.authToken, dispatch)
     }
   }, [state.authToken])
 
@@ -150,11 +149,18 @@ function App() {
     fetchTrackInfo()
   }
 
-  const userhandler = () => {
-    const userToken = API.login(state.token)
-    console.log('userToken', userToken)
-    const access = API.access(userToken)
-    console.log('access token', access)
+  async function userhandler() {
+    console.log('clicked')
+    dispatch({type: 'loading'})
+    try {
+      const userToken = await API.login()
+      console.log('userToken', userToken)
+      const access = await API.access(userToken)
+      console.log('access token', access)
+      dispatch({type: 'success'})
+    } catch {
+      dispatch({type: 'failure'})
+    }
   }
 
   const filterPlaylists = (genreParam) => {
@@ -191,9 +197,10 @@ function App() {
       fluid
     >
       <Routes>
+      {['/', '/callback'].map(path =>
         <Route
           exact
-          path='/'
+          path={path}
           element={
             <Home
               loading={state.isLoading}
@@ -217,6 +224,7 @@ function App() {
               filterPlaylists={filterPlaylists}
             />}
         ></Route>
+      )}
         <Route
           exact
           path='/login'
