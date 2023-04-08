@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useReducer } from 'react';
 import { Routes, Route } from "react-router-dom";
+import SpotifyWebApi from "spotify-web-api-js";
 import stateHandler from "./reducers/StateHandler.js";
 import initialState from "./initialState.js"
 import API from './utils/spotifyAPI.js'
@@ -12,6 +13,8 @@ import NotFound from './components/routes/NotFound'
 
 function App() {
   const [state, dispatch] = useReducer(stateHandler, initialState)
+
+  const spotify = new SpotifyWebApi()
 
   // initial api calls
 
@@ -67,10 +70,10 @@ function App() {
   }, [state.token])
 
   useEffect(() => {
-    if (window.location.search.length > 0) {
-      window.history.pushState("", "", process.env.REACT_APP_REDIRECT_URI)
-    }
-  }, [state.authToken])
+    const _spotifyToken = utils.URLToken().access_token
+    console.log('access token', _spotifyToken)
+    dispatch({ type: 'authToken', payload: _spotifyToken })
+  }, [window.location.hash])
 
   // song/playlist data update
 
@@ -153,7 +156,7 @@ function App() {
     dispatch({ type: 'loading' })
     try {
       const userToken = await API.login()
-      dispatch({type: "authToken", payload: userToken})
+      dispatch({ type: "authToken", payload: userToken })
       console.log('userToken', userToken)
       const access = await API.access(userToken)
       console.log('access token', access)

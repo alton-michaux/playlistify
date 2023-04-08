@@ -59,7 +59,7 @@ const utils = {
     },
   URLToken:
     function getTokenFromURL() {
-      return Window.location.hash
+      return window.location.hash
         .substring(1)
         .split('&')
         .reduce((initial, item) => {

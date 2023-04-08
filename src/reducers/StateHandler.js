@@ -1,18 +1,18 @@
 const stateHandler = (state, action) => {
   switch (action.type) {
-    case "loading":
+    case 'loading':
       return {
         ...state,
         isLoading: true,
         isError: false
       };
-    case "success":
+    case 'success':
       return {
         ...state,
         isLoading: false,
         isError: false
       };
-    case "failure":
+    case 'failure':
       return {
         ...state,
         isLoading: false,
@@ -21,12 +21,12 @@ const stateHandler = (state, action) => {
     case 'authToken':
       return {
         ...state,
-        token: action.payload
+        authToken: action.payload
       };
     case 'user':
       return {
         ...state,
-        token: action.payload
+        user: action.payload
       };
     case 'token':
       return {
