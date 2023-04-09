@@ -63,7 +63,8 @@ Main.propTypes = {
   title: PropTypes.string,
   image: PropTypes.string,
   song: PropTypes.object,
-  songImage: PropTypes.string
+  songImage: PropTypes.string,
+  handleTrack: PropTypes.func
 }
 
 export default Main

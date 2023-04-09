@@ -5,7 +5,6 @@ import "../../../styles/App.css"
 
 const Playback = ({handleTrack}) => {
   function handleAction(type){
-    console.log('type', type)
     handleTrack(type)
   }
 
