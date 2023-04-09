@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import TrackList from './Tracklist'
+import Playback from './Playback';
 import GenreList from './GenreList'
 import PlaylistList from './PlaylistList'
 
@@ -19,6 +20,7 @@ const MainSelect = ({
         tracklist={tracklist}
         handleSongInfoFetch={globalHandler}
       ></TrackList>
+      <Playback></Playback>
       <GenreList
         genres={genres}
         handlePlaylistFilter={filterPlaylists}

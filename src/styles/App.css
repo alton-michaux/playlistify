@@ -96,8 +96,9 @@ li {
 }
 
 .buttonDiv {
-  min-height: auto;
-  max-height: 250px;
+  margin-top: 5%;
+  display: flex;
+  justify-content: center;
 }
 
 .carousel-item.active,
