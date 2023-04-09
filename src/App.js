@@ -182,6 +182,10 @@ function App() {
     }
   }
 
+  const handleTrack = (type) => {
+    console.log('App.js', type)
+  }
+
   const filterPlaylists = (genreParam) => {
     if (genreParam !== "Sort By Genre") {
       const storedPlaylists = JSON.parse(localStorage.getItem('playlists'))
@@ -242,6 +246,7 @@ function App() {
                 popoverHandler={handlePopover}
                 fetchHandler={fetchHandler}
                 filterPlaylists={filterPlaylists}
+                handleTrack={handleTrack}
               />}
           ></Route>
         )}
