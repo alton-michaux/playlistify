@@ -51,7 +51,10 @@ const Nav = ({ isOpen, popoverHandler, user, handleUser }) => {
 Nav.propTypes = {
   isOpen: PropTypes.bool,
   popoverHandler: PropTypes.func,
-  user: PropTypes.object,
+  user: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string
+  ]),
   handleUser: PropTypes.func
 }
 

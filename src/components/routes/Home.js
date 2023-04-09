@@ -75,7 +75,10 @@ Home.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.bool,
   handleUser: PropTypes.func,
-  user: PropTypes.object,
+  user: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string
+  ]),
   genres: PropTypes.array,
   genre: PropTypes.string,
   playlists: PropTypes.array,

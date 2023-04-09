@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import TrackList from './Tracklist'
-import Playback from './Playback';
 import GenreList from './GenreList'
 import PlaylistList from './PlaylistList'
 
