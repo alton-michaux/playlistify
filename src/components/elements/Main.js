@@ -15,7 +15,8 @@ const Main = ({
   title,
   image,
   song,
-  songImage
+  songImage,
+  handleTrack
 }) => {
   return (
     <>
@@ -41,6 +42,7 @@ const Main = ({
           filterPlaylists={filterPlaylists}
           globalHandler={globalHandler}
           genre={genre}
+          handleTrack={handleTrack}
         ></MainSelect>
       </Col>
     </>

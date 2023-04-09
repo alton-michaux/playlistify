@@ -4,10 +4,11 @@ import { ButtonGroup } from "@blueprintjs/core"
 import "../../../styles/App.css"
 
 const Playback = ({handleTrack}) => {
-  const handleAction = (type) => {
+  function handleAction(type){
     console.log('type', type)
     handleTrack(type)
   }
+
   return (
     <ButtonGroup
       className="buttonDiv"
@@ -16,17 +17,20 @@ const Playback = ({handleTrack}) => {
       <CtrlButtons
         icon="fast-backward"
         intent="None"
-        onClick={() => handleAction("backwards")}
+        text="backwards"
+        handler={handleAction}
       ></CtrlButtons>
       <CtrlButtons
         icon="play"
         intent="None"
-        onClick={() => handleAction("play")}
+        text="play"
+        handler={handleAction}
       ></CtrlButtons>
       <CtrlButtons
         icon="fast-forward"
         intent="None"
-        onClick={() => handleAction("forward")}
+        text="forward"
+        handler={handleAction}
       ></CtrlButtons>
     </ButtonGroup>
   )

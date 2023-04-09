@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import { Button, Icon, Divider } from "@blueprintjs/core";
 
-const CtrlButtons = ({ icon, intent }) => {
+const CtrlButtons = ({ icon, intent, text, handler }) => {
   return (
     <>
       <Button
         intent={intent}
+        onClick={() => handler(text)}
       >
         <Icon
           icon={icon}
@@ -20,7 +21,8 @@ const CtrlButtons = ({ icon, intent }) => {
 Button.propTypes = {
   icon: PropTypes.string,
   intent: PropTypes.string,
-  text: PropTypes.string
+  text: PropTypes.string,
+  handler: PropTypes.func
 }
 
 export default CtrlButtons
