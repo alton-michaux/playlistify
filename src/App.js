@@ -68,7 +68,7 @@ function App() {
 
   useEffect(() => {
     const spotify = new SpotifyWebApi()
-  
+
     const _spotifyToken = utils.URLToken().access_token
 
     window.location.hash = ""
@@ -80,9 +80,43 @@ function App() {
 
       spotify.getMe().then((user) => {
         dispatch({ type: 'user', payload: user })
-        dispatch({ type: 'success' })
         alert(`Welcome ${user.display_name}`)
       })
+
+      const script = document.createElement("script");
+      script.src = "https://sdk.scdn.co/spotify-player.js";
+      script.async = true;
+
+      document.body.appendChild(script);
+
+      const device_id = spotify.getMyDevices
+
+      console.log('device', device_id)
+
+      window.onSpotifyWebPlaybackSDKReady = () => {
+
+        const player = new window.Spotify.Player({
+          name: 'Web Playback SDK',
+          getOAuthToken: cb => { cb(state.authToken); },
+          volume: 0.5
+        });
+
+        dispatch({type: 'player', payload: player});
+        console.log('state', state)
+
+        player.addListener('ready', ({ device_id }) => {
+          console.log('Ready with Device ID', device_id);
+        });
+
+        player.addListener('not_ready', ({ device_id }) => {
+          console.log('Device ID has gone offline', device_id);
+        });
+
+
+        player.connect();
+
+        dispatch({ type: 'success' })
+      };
     } else {
       dispatch({ type: 'failure' })
     }
@@ -110,7 +144,12 @@ function App() {
       }
     }
 
+    function handleTrack() {
+      console.log(`${state.song.name} should be playing`)
+    }
+
     assignImage()
+    handleTrack()
   }, [state.song])
 
   // handlers
@@ -182,10 +221,6 @@ function App() {
     }
   }
 
-  const handleTrack = (type) => {
-    console.log('App.js', type)
-  }
-
   const filterPlaylists = (genreParam) => {
     if (genreParam !== "Sort By Genre") {
       const storedPlaylists = JSON.parse(localStorage.getItem('playlists'))
@@ -246,7 +281,6 @@ function App() {
                 popoverHandler={handlePopover}
                 fetchHandler={fetchHandler}
                 filterPlaylists={filterPlaylists}
-                handleTrack={handleTrack}
               />}
           ></Route>
         )}

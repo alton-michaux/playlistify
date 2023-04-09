@@ -2,6 +2,7 @@ const initialState = {
   isLoading: false,
   isError: false,
   authToken: "",
+  player: {},
   user: {},
   token: "",
   genres: [],

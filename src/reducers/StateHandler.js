@@ -23,6 +23,11 @@ const stateHandler = (state, action) => {
         ...state,
         authToken: action.payload
       };
+    case 'player':
+      return {
+        ...state,
+        player: action.payload
+      };
     case 'user':
       return {
         ...state,

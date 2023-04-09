@@ -15,8 +15,7 @@ const Main = ({
   title,
   image,
   song,
-  songImage,
-  handleTrack
+  songImage
 }) => {
   return (
     <>
@@ -42,7 +41,6 @@ const Main = ({
           filterPlaylists={filterPlaylists}
           globalHandler={globalHandler}
           genre={genre}
-          handleTrack={handleTrack}
         ></MainSelect>
       </Col>
     </>
@@ -63,8 +61,7 @@ Main.propTypes = {
   title: PropTypes.string,
   image: PropTypes.string,
   song: PropTypes.object,
-  songImage: PropTypes.string,
-  handleTrack: PropTypes.func
+  songImage: PropTypes.string
 }
 
 export default Main

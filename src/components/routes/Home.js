@@ -25,8 +25,7 @@ const Home = ({
   fetchHandler,
   filterPlaylists,
   isOpen,
-  popoverHandler,
-  handleTrack
+  popoverHandler
 }) => {
   return (
     <>
@@ -62,7 +61,6 @@ const Home = ({
             title={title}
             image={image}
             songImage={songImage}
-            handleTrack={handleTrack}
           ></Main>
         </Row>
       </main>
@@ -93,8 +91,7 @@ Home.propTypes = {
   fetchHandler: PropTypes.func,
   filterPlaylists: PropTypes.func,
   isOpen: PropTypes.bool,
-  popoverHandler: PropTypes.func,
-  handleTrack: PropTypes.func
+  popoverHandler: PropTypes.func
 }
 
 export default Home;

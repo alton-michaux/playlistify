@@ -10,8 +10,7 @@ const MainSelect = ({
   genre,
   playlists,
   filterPlaylists,
-  globalHandler,
-  handleTrack
+  globalHandler
 }) => {
   return (
     <section
@@ -21,9 +20,6 @@ const MainSelect = ({
         tracklist={tracklist}
         handleSongInfoFetch={globalHandler}
       ></TrackList>
-      <Playback
-        handleTrack={handleTrack}
-      ></Playback>
       <GenreList
         genres={genres}
         handlePlaylistFilter={filterPlaylists}
@@ -47,7 +43,6 @@ MainSelect.propTypes = {
   playlists: PropTypes.array,
   filterPlaylists: PropTypes.func,
   globalHandler: PropTypes.func,
-  handleTrack: PropTypes.func
 }
 
 export default MainSelect
