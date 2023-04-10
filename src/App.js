@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useRef } from 'react';
 import { Routes, Route } from "react-router-dom";
 import stateHandler from "./reducers/StateHandler.js";
 import initialState from "./initialState.js"
@@ -12,19 +12,25 @@ import NotFound from './components/routes/NotFound'
 function App() {
   const [state, dispatch] = useReducer(stateHandler, initialState)
 
+  const initialRender = useRef(true)
+
   // initial api calls
 
   useEffect(() => {
-    async function fetchToken() {
-      dispatch({ type: 'loading' })
-      try {
-        dispatch({ type: 'token', payload: await API.token() })
-        dispatch({ type: 'success' })
-      } catch {
-        dispatch({ type: 'failure' })
+    if (initialRender.current) {
+      initialRender.current = false
+    } else {
+      async function fetchToken() {
+        dispatch({ type: 'loading' })
+        try {
+          dispatch({ type: 'token', payload: await API.token() })
+          dispatch({ type: 'success' })
+        } catch {
+          dispatch({ type: 'failure' })
+        }
       }
+      fetchToken()
     }
-    fetchToken()
   }, [])
 
   useEffect(() => {
