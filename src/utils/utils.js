@@ -68,6 +68,23 @@ const utils = {
 
           return initial
         }, []);
+    },
+  addScriptTag:
+    function addScript() {
+      const url = "https://sdk.scdn.co/spotify-player.js"
+
+      const scripts = document.getElementsByTagName('script');
+      for (let i = scripts.length; i--;) {
+        if (scripts[i].src === url) {
+          return
+        } else {
+          const script = document.createElement("script");
+          script.src = url;
+          script.async = true;
+
+          document.body.appendChild(script);
+        }
+      }
     }
 }
 

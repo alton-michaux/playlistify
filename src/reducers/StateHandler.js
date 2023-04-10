@@ -18,10 +18,15 @@ const stateHandler = (state, action) => {
         isLoading: false,
         isError: true
       };
-    case 'authToken':
+    case 'accessToken':
       return {
         ...state,
-        authToken: action.payload
+        accessToken: action.payload
+      };
+    case 'deviceID':
+      return {
+        ...state,
+        deviceID: action.payload
       };
     case 'player':
       return {

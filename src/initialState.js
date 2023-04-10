@@ -1,7 +1,11 @@
+import SpotifyWebApi from "spotify-web-api-js";
+
 const initialState = {
   isLoading: false,
   isError: false,
-  authToken: "",
+  spotifyAPI: new SpotifyWebApi(),
+  accessToken: "",
+  deviceID: "",
   player: {},
   user: {},
   token: "",

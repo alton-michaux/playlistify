@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useReducer } from 'react';
 import { Routes, Route } from "react-router-dom";
-import SpotifyWebApi from "spotify-web-api-js";
 import stateHandler from "./reducers/StateHandler.js";
 import initialState from "./initialState.js"
 import API from './utils/spotifyAPI.js'
@@ -19,8 +18,7 @@ function App() {
     async function fetchToken() {
       dispatch({ type: 'loading' })
       try {
-        const token = await API.token()
-        dispatch({ type: 'token', payload: token })
+        dispatch({ type: 'token', payload: await API.token() })
         dispatch({ type: 'success' })
       } catch {
         dispatch({ type: 'failure' })
@@ -66,61 +64,76 @@ function App() {
     }
   }, [state.token])
 
+  // user login
+
   useEffect(() => {
-    const spotify = new SpotifyWebApi()
+    async function spotifyAPI() {
 
-    const _spotifyToken = utils.URLToken().access_token
+      const _spotifyToken = utils.URLToken().access_token
 
-    window.location.hash = ""
+      window.location.hash = ""
 
-    if (_spotifyToken) {
-      dispatch({ type: 'authToken', payload: _spotifyToken })
+      if (typeof _spotifyToken === "string") {
+        try {
+          dispatch({ type: 'accessToken', payload: _spotifyToken })
+          await state.spotifyAPI.setAccessToken(_spotifyToken)
 
-      spotify.setAccessToken(_spotifyToken)
-
-      spotify.getMe().then((user) => {
-        dispatch({ type: 'user', payload: user })
-        alert(`Welcome ${user.display_name}`)
-      })
-
-      const script = document.createElement("script");
-      script.src = "https://sdk.scdn.co/spotify-player.js";
-      script.async = true;
-
-      document.body.appendChild(script);
-
-      const device_id = spotify.getMyDevices
-
-      console.log('device', device_id)
-
-      window.onSpotifyWebPlaybackSDKReady = () => {
-
-        const player = new window.Spotify.Player({
-          name: 'Web Playback SDK',
-          getOAuthToken: cb => { cb(state.authToken); },
-          volume: 0.5
-        });
-
-        dispatch({type: 'player', payload: player});
-        console.log('state', state)
-
-        player.addListener('ready', ({ device_id }) => {
-          console.log('Ready with Device ID', device_id);
-        });
-
-        player.addListener('not_ready', ({ device_id }) => {
-          console.log('Device ID has gone offline', device_id);
-        });
-
-
-        player.connect();
-
-        dispatch({ type: 'success' })
-      };
-    } else {
-      dispatch({ type: 'failure' })
+          await state.spotifyAPI.getMe().then(async (user) => {
+            dispatch({ type: 'user', payload: user })
+            alert(`Welcome ${user.display_name}`)
+          })
+          dispatch({ type: 'success' })
+        } catch {
+          dispatch({ type: 'failure' })
+        }
+      }
     }
+    spotifyAPI()
   }, [state.authToken])
+
+  // playback
+
+  useEffect(() => {
+    async function getPlayer() {
+      try {
+        utils.addScriptTag()
+
+        const device_id = await state.spotifyAPI.getMyDevices(state.accessToken)
+
+        console.log('device', device_id)
+
+        window.onSpotifyWebPlaybackSDKReady = () => {
+
+          const player = new window.Spotify.Player({
+            name: 'Web Playback SDK',
+            getOAuthToken: cb => { cb(state.accessToken); },
+            volume: 0.5
+          });
+
+          dispatch({ type: 'player', payload: player });
+
+          // console.log('player should show', state)
+
+          player.addListener('ready', ({ device_id }) => {
+            console.log('Ready with Device ID', device_id);
+          });
+
+          player.addListener('not_ready', ({ device_id }) => {
+            console.log('Device ID has gone offline', device_id);
+          });
+
+
+          player.connect();
+
+          dispatch({ type: 'success' })
+        }
+      } catch {
+        dispatch({ type: 'failure' })
+      }
+    }
+
+    getPlayer()
+  }, [state.user]);
 
   // song/playlist data update
 
@@ -145,7 +158,7 @@ function App() {
     }
 
     function handleTrack() {
-      console.log(`${state.song.name} should be playing`)
+      // console.log(`${state.song.name} should be playing`)
     }
 
     assignImage()
@@ -208,8 +221,8 @@ function App() {
     dispatch({ type: 'loading' })
     if (type === 'log-in') {
       try {
-        const userToken = await API.login()
-        dispatch({ type: "authToken", payload: userToken })
+        await API.login()
+        dispatch({ type: 'success' })
       } catch {
         dispatch({ type: 'failure' })
       }
@@ -249,6 +262,7 @@ function App() {
     }
   }
 
+  // console.log('state', state)
   return (
     <Container
       style={{ paddingTop: "5%", height: "100%" }}
