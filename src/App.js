@@ -84,9 +84,11 @@ function App() {
           dispatch({ type: 'accessToken', payload: _spotifyToken })
           await state.spotifyAPI.setAccessToken(_spotifyToken)
 
-          await state.spotifyAPI.getMe().then(async (user) => {
+          await state.spotifyAPI.getMe().then((user) => {
             dispatch({ type: 'user', payload: user })
             alert(`Welcome ${user.display_name}`)
+          }).then(() => {
+            getPlayer()
           })
           dispatch({ type: 'success' })
         } catch {
@@ -95,51 +97,8 @@ function App() {
       }
     }
     spotifyAPI()
+    // eslint-disable-next-line
   }, [state.authToken])
-
-  // playback
-
-  useEffect(() => {
-    async function getPlayer() {
-      try {
-        utils.addScriptTag()
-
-        const device_id = await state.spotifyAPI.getMyDevices(state.accessToken)
-
-        console.log('device', device_id)
-
-        window.onSpotifyWebPlaybackSDKReady = () => {
-
-          const player = new window.Spotify.Player({
-            name: 'Web Playback SDK',
-            getOAuthToken: cb => { cb(state.accessToken); },
-            volume: 0.5
-          });
-
-          dispatch({ type: 'player', payload: player });
-
-          // console.log('player should show', state)
-
-          player.addListener('ready', ({ device_id }) => {
-            console.log('Ready with Device ID', device_id);
-          });
-
-          player.addListener('not_ready', ({ device_id }) => {
-            console.log('Device ID has gone offline', device_id);
-          });
-
-
-          player.connect();
-
-          dispatch({ type: 'success' })
-        }
-      } catch {
-        dispatch({ type: 'failure' })
-      }
-    }
-
-    getPlayer()
-  }, [state.user]);
 
   // song/playlist data update
 
@@ -239,6 +198,44 @@ function App() {
       alert("You logged out")
     }
   }
+  
+  async function getPlayer() {
+    try {
+      utils.addScriptTag()
+
+      // const device_id = await state.spotifyAPI.getMyDevices(state.accessToken)
+
+      // console.log('device', device_id)
+
+      window.onSpotifyWebPlaybackSDKReady = () => {
+
+        const player = new window.Spotify.Player({
+          name: 'Playlistify Player',
+          getOAuthToken: cb => { cb(state.accessToken); },
+          volume: 0.5
+        });
+
+        dispatch({ type: 'player', payload: player });
+
+        // console.log('player should show', state)
+
+        player.addListener('ready', ({ device_id }) => {
+          console.log('Ready with Device ID', device_id);
+        });
+
+        player.addListener('not_ready', ({ device_id }) => {
+          console.log('Device ID has gone offline', device_id);
+        });
+
+
+        player.connect();
+
+        dispatch({ type: 'success' })
+      }
+    } catch {
+      dispatch({ type: 'failure' })
+    }
+  }
 
   const filterPlaylists = (genreParam) => {
     if (genreParam !== "Sort By Genre") {
@@ -268,7 +265,7 @@ function App() {
     }
   }
 
-  // console.log('state', state)
+  console.log('state', state)
   return (
     <Container
       style={{ paddingTop: "5%", height: "100%" }}
