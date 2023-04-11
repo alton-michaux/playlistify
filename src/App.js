@@ -123,7 +123,7 @@ function App() {
     }
 
     function handleTrack() {
-      // console.log(`${state.song.name} should be playing`)
+      console.log(`${state.song.name} should be playing`)
     }
 
     assignImage()
@@ -203,10 +203,6 @@ function App() {
     try {
       utils.addScriptTag()
 
-      // const device_id = await state.spotifyAPI.getMyDevices(state.accessToken)
-
-      // console.log('device', device_id)
-
       window.onSpotifyWebPlaybackSDKReady = () => {
 
         const player = new window.Spotify.Player({
@@ -216,8 +212,6 @@ function App() {
         });
 
         dispatch({ type: 'player', payload: player });
-
-        // console.log('player should show', state)
 
         player.addListener('ready', ({ device_id }) => {
           console.log('Ready with Device ID', device_id);
@@ -265,7 +259,6 @@ function App() {
     }
   }
 
-  console.log('state', state)
   return (
     <Container
       style={{ paddingTop: "5%", height: "100%" }}

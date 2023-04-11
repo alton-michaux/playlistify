@@ -2,13 +2,9 @@ import utils from "../../../utils/utils"
 
 async function UserLogin() {
   const scopes = [
-    "user-read-playback-state",
-    "user-modify-playback-state", 
-    'user-read-playback-position',
-    "user-read-currently-playing",
     "user-read-email",
     "user-read-private",
-    "streaming",
+    "streaming"
   ];
   // Open the auth popup
   window.location.href = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=token&scopes=${scopes}`
