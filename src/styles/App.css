@@ -91,6 +91,7 @@ li {
 }
 
 .playlistImageDiv {
+  padding: 5%;
   min-height: auto;
   max-height: 400px;
 }

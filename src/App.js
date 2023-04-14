@@ -278,6 +278,7 @@ function App() {
                 show={state.show}
                 user={state.user}
                 token={state.token}
+                uris={state.uris}
                 genres={state.genres}
                 genre={state.genre}
                 playlists={state.playlists}
