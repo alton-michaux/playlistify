@@ -17,7 +17,8 @@ const Main = ({
   song,
   songImage,
   token,
-  uris
+  uri,
+  user
 }) => {
   return (
     <>
@@ -34,7 +35,8 @@ const Main = ({
           image={image}
           title={title}
           token={token}
-          uris={uris}
+          uri={uri}
+          user={user}
         ></MainPlaylist>
       </Col>
       <Col>
@@ -67,7 +69,11 @@ Main.propTypes = {
   song: PropTypes.object,
   songImage: PropTypes.string,
   token: PropTypes.string,
-  uris: PropTypes.string
+  uri: PropTypes.string,
+  user: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string
+  ])
 }
 
 export default Main

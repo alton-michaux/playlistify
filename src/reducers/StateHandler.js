@@ -43,6 +43,11 @@ const stateHandler = (state, action) => {
         ...state,
         token: action.payload
       };
+    case 'uri':
+      return {
+        ...state,
+        uri: action.payload
+      };
     case 'genres':
       return {
         ...state,

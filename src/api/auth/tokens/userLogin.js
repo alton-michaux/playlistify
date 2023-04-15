@@ -2,6 +2,8 @@ import utils from "../../../utils/utils"
 
 async function UserLogin() {
   const scopes = [
+    "user-library-read",
+    "user-library-modify",
     "user-read-playback-state",
     "user-modify-playback-state",
     "user-read-email",

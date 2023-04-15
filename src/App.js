@@ -87,8 +87,6 @@ function App() {
           await state.spotifyAPI.getMe().then((user) => {
             dispatch({ type: 'user', payload: user })
             alert(`Welcome ${user.display_name}`)
-          }).then(() => {
-            getPlayer()
           })
           dispatch({ type: 'success' })
         } catch {
@@ -123,7 +121,7 @@ function App() {
     }
 
     function handleTrack() {
-      console.log(`${state.song.name} should be playing`)
+      // console.log(`${state.song.name} should be playing`)
     }
 
     assignImage()
@@ -173,6 +171,7 @@ function App() {
       try {
         const newToken = state.token
         const song = await API.song(id, newToken)
+        dispatch({ type: 'uri', payload: song.uri})
         dispatch({ type: 'song', payload: song })
         dispatch({ type: 'success' })
       } catch {
@@ -196,38 +195,6 @@ function App() {
       dispatch({ type: 'user', payload: '' })
       dispatch({ type: 'success' })
       alert("You logged out")
-    }
-  }
-  
-  async function getPlayer() {
-    try {
-      utils.addScriptTag()
-
-      window.onSpotifyWebPlaybackSDKReady = () => {
-
-        const player = new window.Spotify.Player({
-          name: 'Playlistify Player',
-          getOAuthToken: cb => { cb(state.accessToken); },
-          volume: 0.5
-        });
-
-        dispatch({ type: 'player', payload: player });
-
-        player.addListener('ready', ({ device_id }) => {
-          console.log('Ready with Device ID', device_id);
-        });
-
-        player.addListener('not_ready', ({ device_id }) => {
-          console.log('Device ID has gone offline', device_id);
-        });
-
-
-        player.connect();
-
-        dispatch({ type: 'success' })
-      }
-    } catch {
-      dispatch({ type: 'failure' })
     }
   }
 
@@ -258,7 +225,7 @@ function App() {
       handleTracklistFetch(target)
     }
   }
-
+console.log('state', state)
   return (
     <Container
       style={{ paddingTop: "5%", height: "100%" }}
@@ -277,8 +244,8 @@ function App() {
                 handleUser={userhandler}
                 show={state.show}
                 user={state.user}
-                token={state.token}
-                uris={state.uris}
+                token={state.access_token}
+                uri={state.uri}
                 genres={state.genres}
                 genre={state.genre}
                 playlists={state.playlists}

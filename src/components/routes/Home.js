@@ -27,7 +27,7 @@ const Home = ({
   isOpen,
   popoverHandler,
   token,
-  uris
+  uri
 }) => {
   return (
     <>
@@ -64,7 +64,8 @@ const Home = ({
             image={image}
             songImage={songImage}
             token={token}
-            uris={uris}
+            uri={uri}
+            user={user}
           ></Main>
         </Row>
       </main>
@@ -100,7 +101,7 @@ Home.propTypes = {
   isOpen: PropTypes.bool,
   popoverHandler: PropTypes.func,
   token: PropTypes.string,
-  uris: PropTypes.string
+  uri: PropTypes.string
 }
 
 export default Home;

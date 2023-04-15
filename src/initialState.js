@@ -9,6 +9,7 @@ const initialState = {
   player: {},
   user: {},
   token: "",
+  uri: "",
   genres: [],
   genre: "",
   playlists: [],

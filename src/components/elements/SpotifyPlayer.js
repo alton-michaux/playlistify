@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import SpotifyPlayer from 'react-spotify-web-playback';
 
-function Player({ token, uris }) {
+function Player({ token, uri }) {
   return (
     <>
       <SpotifyPlayer
@@ -15,7 +15,7 @@ function Player({ token, uris }) {
           trackNameColor: '#fff',
         }}
         token={token}
-        uris={[uris]}
+        uri={[uri]}
       />
     </>
   )
@@ -23,7 +23,7 @@ function Player({ token, uris }) {
 
 SpotifyPlayer.propTypes = {
   token: PropTypes.string,
-  uris: PropTypes.string
+  uri: PropTypes.string
 }
 
 export default Player
