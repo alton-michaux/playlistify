@@ -12,6 +12,7 @@ import NotFound from './components/routes/NotFound'
 
 function App() {
   const [state, dispatch] = useReducer(stateHandler, initialState)
+  console.log("🚀 ~ file: App.js:15 ~ App ~ state:", state)
 
   // initial api calls
 
@@ -20,6 +21,7 @@ function App() {
       dispatch({ type: 'loading' })
       try {
         const token = await API.token()
+        console.log("🚀 ~ file: App.js:24 ~ fetchToken ~ token:", token)
         dispatch({ type: 'token', payload: token })
         dispatch({ type: 'success' })
       } catch {
@@ -170,6 +172,7 @@ function App() {
     if (type === 'log-in') {
       try {
         const userToken = await API.login()
+        console.log("🚀 ~ file: App.js:174 ~ userhandler ~ userToken:", userToken)
         dispatch({ type: "authToken", payload: userToken })
       } catch {
         dispatch({ type: 'failure' })
