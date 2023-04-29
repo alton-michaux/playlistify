@@ -22,9 +22,9 @@ function App() {
         const token = await API.token()
         dispatch({ type: 'token', payload: token })
         dispatch({ type: 'success' })
-      } catch(error) {
+      } catch (error) {
         dispatch({ type: 'error', payload: error })
-        dispatch({ type: 'failure'})
+        dispatch({ type: 'failure' })
       }
     }
     fetchToken()
@@ -38,9 +38,9 @@ function App() {
           const genres = await API.genres(state.token)
           dispatch({ type: 'genres', payload: genres })
           dispatch({ type: 'success' })
-        } catch(error) {
+        } catch (error) {
           dispatch({ type: 'error', payload: error })
-          dispatch({ type: 'failure'})
+          dispatch({ type: 'failure' })
         }
       }
 
@@ -58,9 +58,9 @@ function App() {
           localStorage.setItem('playlists', JSON.stringify(updatedPlaylists))
 
           dispatch({ type: 'playlists', payload: updatedPlaylists })
-        } catch(error) {
+        } catch (error) {
           dispatch({ type: 'error', payload: error })
-          dispatch({ type: 'failure'})
+          dispatch({ type: 'failure' })
         }
       }
 
@@ -71,27 +71,17 @@ function App() {
 
   useEffect(() => {
     const spotify = new SpotifyWebApi()
-  
-    const _spotifyToken = utils.URLToken().access_token
 
-    window.location.hash = ""
+    spotify.setAccessToken(state.authToken)
 
-    if (_spotifyToken) {
-      dispatch({ type: 'authToken', payload: _spotifyToken })
-
-      spotify.setAccessToken(_spotifyToken)
-
-      spotify.getMe().then((user) => {
-        dispatch({ type: 'user', payload: user })
-        dispatch({ type: 'success' })
-        alert(`Welcome ${user.display_name}`)
-      }).catch((error) => {
-        dispatch({ type: 'error', payload: error })
-        dispatch({ type: 'failure'})
-      })
-    } else {
+    spotify.getMe().then((user) => {
+      dispatch({ type: 'user', payload: user })
+      dispatch({ type: 'success' })
+      alert(`Welcome ${user.display_name}`)
+    }).catch((error) => {
+      dispatch({ type: 'error', payload: error })
       dispatch({ type: 'failure' })
-    }
+    })
   }, [state.authToken])
 
   // song/playlist data update
@@ -134,9 +124,9 @@ function App() {
         const playlist = await API.playlist(id, newToken)
         dispatch({ type: 'playlist', payload: playlist })
         dispatch({ type: 'success' })
-      } catch(error) {
+      } catch (error) {
         dispatch({ type: 'error', payload: error })
-        dispatch({ type: 'failure'})
+        dispatch({ type: 'failure' })
       }
     }
     fetchPlaylist()
@@ -150,9 +140,9 @@ function App() {
         const tracklist = await API.tracklist(id, newToken)
         dispatch({ type: 'tracklist', payload: tracklist })
         dispatch({ type: 'success' })
-      } catch(error) {
+      } catch (error) {
         dispatch({ type: 'error', payload: error })
-        dispatch({ type: 'failure'})
+        dispatch({ type: 'failure' })
       }
     }
     fetchTracklist()
@@ -166,9 +156,9 @@ function App() {
         const song = await API.song(id, newToken)
         dispatch({ type: 'song', payload: song })
         dispatch({ type: 'success' })
-      } catch(error) {
+      } catch (error) {
         dispatch({ type: 'error', payload: error })
-        dispatch({ type: 'failure'})
+        dispatch({ type: 'failure' })
       }
     }
     fetchTrackInfo()
@@ -181,9 +171,9 @@ function App() {
         const userToken = await API.login()
         console.log("🚀 ~ file: App.js:174 ~ userhandler ~ userToken:", userToken)
         dispatch({ type: "authToken", payload: userToken })
-      } catch(error) {
+      } catch (error) {
         dispatch({ type: 'error', payload: error })
-        dispatch({ type: 'failure'})
+        dispatch({ type: 'failure' })
       }
     } else {
       dispatch({ type: 'authToken', payload: '' })

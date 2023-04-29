@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Callout } from "@blueprintjs/core"
 
-const ErrorCallout = ({ children, isError }) => {
+const ErrorCallout = ({ error, isError }) => {
   return (
     <Callout
       icon="error"
@@ -9,13 +9,13 @@ const ErrorCallout = ({ children, isError }) => {
       showheader="true"
       className={isError ? "errorDiv" : "nonError"}
     >
-      {children}
+      {isError ? error.message : <></>}
     </Callout>
   )
 }
 
 ErrorCallout.propTypes = {
-  children: PropTypes.string,
+  error: PropTypes.object,
   isError: PropTypes.bool
 }
 

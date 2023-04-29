@@ -48,8 +48,8 @@ const Home = ({
           </BasicSpinner>
           <ErrorCallout
             isError={isError}
-          >{error.message}
-          </ErrorCallout>
+            error={error}
+          />
           <Main
             genres={genres}
             genre={genre}
