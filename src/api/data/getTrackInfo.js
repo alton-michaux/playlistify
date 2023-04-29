@@ -6,7 +6,7 @@ async function getTrackInfo(trackID, token) {
   }).then((res) => {
     return res.data;
   }).catch((res) => {
-    throw new Error(`Error! status: ${res.status}`);
+    throw new Error(res);
   });
   return response  
 };

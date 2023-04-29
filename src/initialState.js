@@ -1,6 +1,7 @@
 const initialState = {
   isLoading: false,
   isError: false,
+  error: "",
   authToken: "",
   user: {},
   token: "",

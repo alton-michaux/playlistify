@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import SpotifyWebApi from "spotify-web-api-js";
 import stateHandler from "./reducers/StateHandler.js";
 import initialState from "./initialState.js"
-import API from './utils/spotifyAPI.js'
+import API from './utils/API.js'
 import utils from './utils/utils.js';
 import Container from 'react-bootstrap/Container'
 import Home from './components/routes/Home'
@@ -22,8 +22,9 @@ function App() {
         const token = await API.token()
         dispatch({ type: 'token', payload: token })
         dispatch({ type: 'success' })
-      } catch {
-        dispatch({ type: 'failure' })
+      } catch(error) {
+        dispatch({ type: 'error', payload: error })
+        dispatch({ type: 'failure'})
       }
     }
     fetchToken()
@@ -37,8 +38,9 @@ function App() {
           const genres = await API.genres(state.token)
           dispatch({ type: 'genres', payload: genres })
           dispatch({ type: 'success' })
-        } catch {
-          dispatch({ type: 'failure' })
+        } catch(error) {
+          dispatch({ type: 'error', payload: error })
+          dispatch({ type: 'failure'})
         }
       }
 
@@ -56,8 +58,9 @@ function App() {
           localStorage.setItem('playlists', JSON.stringify(updatedPlaylists))
 
           dispatch({ type: 'playlists', payload: updatedPlaylists })
-        } catch {
-          dispatch({ type: 'failure' })
+        } catch(error) {
+          dispatch({ type: 'error', payload: error })
+          dispatch({ type: 'failure'})
         }
       }
 
@@ -82,6 +85,9 @@ function App() {
         dispatch({ type: 'user', payload: user })
         dispatch({ type: 'success' })
         alert(`Welcome ${user.display_name}`)
+      }).catch((error) => {
+        dispatch({ type: 'error', payload: error })
+        dispatch({ type: 'failure'})
       })
     } else {
       dispatch({ type: 'failure' })
@@ -128,8 +134,9 @@ function App() {
         const playlist = await API.playlist(id, newToken)
         dispatch({ type: 'playlist', payload: playlist })
         dispatch({ type: 'success' })
-      } catch {
-        dispatch({ type: 'failure' })
+      } catch(error) {
+        dispatch({ type: 'error', payload: error })
+        dispatch({ type: 'failure'})
       }
     }
     fetchPlaylist()
@@ -143,8 +150,9 @@ function App() {
         const tracklist = await API.tracklist(id, newToken)
         dispatch({ type: 'tracklist', payload: tracklist })
         dispatch({ type: 'success' })
-      } catch {
-        dispatch({ type: 'failure' })
+      } catch(error) {
+        dispatch({ type: 'error', payload: error })
+        dispatch({ type: 'failure'})
       }
     }
     fetchTracklist()
@@ -158,8 +166,9 @@ function App() {
         const song = await API.song(id, newToken)
         dispatch({ type: 'song', payload: song })
         dispatch({ type: 'success' })
-      } catch {
-        dispatch({ type: 'failure' })
+      } catch(error) {
+        dispatch({ type: 'error', payload: error })
+        dispatch({ type: 'failure'})
       }
     }
     fetchTrackInfo()
@@ -172,8 +181,9 @@ function App() {
         const userToken = await API.login()
         console.log("🚀 ~ file: App.js:174 ~ userhandler ~ userToken:", userToken)
         dispatch({ type: "authToken", payload: userToken })
-      } catch {
-        dispatch({ type: 'failure' })
+      } catch(error) {
+        dispatch({ type: 'error', payload: error })
+        dispatch({ type: 'failure'})
       }
     } else {
       dispatch({ type: 'authToken', payload: '' })
@@ -210,6 +220,7 @@ function App() {
       handleTracklistFetch(target)
     }
   }
+  console.log('state', state)
 
   return (
     <Container
@@ -225,7 +236,8 @@ function App() {
             element={
               <Home
                 loading={state.isLoading}
-                error={state.isError}
+                isError={state.isError}
+                error={state.error}
                 handleUser={userhandler}
                 show={state.show}
                 user={state.user}

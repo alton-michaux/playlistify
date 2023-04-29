@@ -6,7 +6,7 @@ async function getToken() {
       const data = res.data
       return data
     }).catch((res) => {
-      throw new Error(`Error! status: ${res.status}`);
+      throw new Error(res);
     })
 
   return response

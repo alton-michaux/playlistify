@@ -11,6 +11,7 @@ import "../../styles/App.css"
 const Home = ({
   loading,
   error,
+  isError,
   handleUser,
   user,
   genres,
@@ -46,8 +47,8 @@ const Home = ({
           >Loading...
           </BasicSpinner>
           <ErrorCallout
-            isError={error}
-          >There was an error...
+            isError={isError}
+          >{error.message}
           </ErrorCallout>
           <Main
             genres={genres}
@@ -73,7 +74,8 @@ const Home = ({
 
 Home.propTypes = {
   loading: PropTypes.bool,
-  error: PropTypes.bool,
+  isError: PropTypes.bool,
+  error: PropTypes.string,
   handleUser: PropTypes.func,
   user: PropTypes.object,
   genres: PropTypes.array,
