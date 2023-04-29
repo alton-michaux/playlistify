@@ -1,16 +1,10 @@
 import axios from "axios";
 
 async function getPlaylistByID(playlistID, token) {
-  const response = await axios.get(
-    `https://api.spotify.com/v1/playlists/${playlistID}`,
-    {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      }
-    }
-  ).then((response) => {
+  const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/playlist`, {
+    params: { playlistID, token }
+  }).then((response) => {
+    console.log("🚀 ~ file: getPlaylistByID.js:7 ~ getPlaylistByID ~ response:", response)
     return response.data;
   }).catch((response) => {
     throw new Error(`Error! status: ${response.status}`);
