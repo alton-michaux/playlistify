@@ -1,12 +1,14 @@
 import axios from "axios";
 
 async function getToken() {
-  const response = await axios.get('/token').then((response) => {
-    const data = response.json()
-    console.log("🚀 ~ file: getToken.js:6 ~ response ~ data:", data)
-  }).catch((response) => {
-    throw new Error(`Error! status: ${response.status}`);
-  })
+  const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/token`)
+    .then((res) => {
+      const data = res.data
+      return data
+    }).catch((res) => {
+      throw new Error(`Error! status: ${res.status}`);
+    })
+
   return response
 }
 
