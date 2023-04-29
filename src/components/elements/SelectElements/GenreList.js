@@ -24,11 +24,13 @@ const GenreList = ({ genres, handlePlaylistFilter }) => {
       >
         <option>Sort by Genre</option>
         {
-          genres.map((genre) => {
-            return (
-              <option value={genre} key={genres.indexOf(genre, 0)}>{genre}</option>
-            )
-          })
+          genres
+            ? genres.map((genre) => {
+              return (
+                <option value={genre} key={genres.indexOf(genre, 0)}>{genre}</option>
+              )
+            }) :
+            <></>
         }
       </Form.Select>
     </section>
