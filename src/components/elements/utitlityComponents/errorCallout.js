@@ -15,7 +15,10 @@ const ErrorCallout = ({ error, isError }) => {
 }
 
 ErrorCallout.propTypes = {
-  error: PropTypes.object,
+  error: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string
+  ]),
   isError: PropTypes.bool
 }
 

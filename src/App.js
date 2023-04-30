@@ -73,15 +73,17 @@ function App() {
     const spotify = new SpotifyWebApi()
 
     spotify.setAccessToken(state.authToken)
+    
+    window.location.hash = ""
 
-    spotify.getMe().then((user) => {
-      dispatch({ type: 'user', payload: user })
-      dispatch({ type: 'success' })
-      alert(`Welcome ${user.display_name}`)
-    }).catch((error) => {
-      dispatch({ type: 'error', payload: error })
-      dispatch({ type: 'failure' })
-    })
+    // spotify.getMe().then((user) => {
+    //   dispatch({ type: 'user', payload: user })
+    //   dispatch({ type: 'success' })
+    //   alert(`Welcome ${user.display_name}`)
+    // }).catch((error) => {
+    //   dispatch({ type: 'error', payload: error })
+    //   dispatch({ type: 'failure' })
+    // })
   }, [state.authToken])
 
   // song/playlist data update
@@ -168,9 +170,9 @@ function App() {
     dispatch({ type: 'loading' })
     if (type === 'log-in') {
       try {
-        const userToken = await API.login()
-        console.log("🚀 ~ file: App.js:174 ~ userhandler ~ userToken:", userToken)
-        dispatch({ type: "authToken", payload: userToken })
+        const token = await API.login()
+        window.location.hash = ""
+        dispatch({ type: "authToken", payload: token })
       } catch (error) {
         dispatch({ type: 'error', payload: error })
         dispatch({ type: 'failure' })

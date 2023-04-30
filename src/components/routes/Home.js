@@ -75,7 +75,10 @@ const Home = ({
 Home.propTypes = {
   loading: PropTypes.bool,
   isError: PropTypes.bool,
-  error: PropTypes.string,
+  error: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string
+  ]),
   handleUser: PropTypes.func,
   user: PropTypes.object,
   genres: PropTypes.array,
