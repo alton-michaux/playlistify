@@ -59,15 +59,21 @@ const utils = {
     },
   URLToken:
     function getTokenFromURL() {
-      return window.location.href
+      const tokenFetchObj = {}
+      const authCode = window.location.search
         .substring(1)
-        .split('&')
-        .reduce((initial, item) => {
-          let parts = item.split("=");
-          initial[parts[0]] = decodeURIComponent(parts[1])
+        .split('=')[1]
+        .split('&')[0]
 
-          return initial
-        }, []);
+      const state = window.location.search
+        .substring(1)
+        .split('&')[1]
+        .split('=')[1]
+
+      tokenFetchObj.state = state
+      tokenFetchObj.authCode = authCode
+
+      return tokenFetchObj
     }
 }
 

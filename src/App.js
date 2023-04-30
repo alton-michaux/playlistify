@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useReducer } from 'react';
 import { Routes, Route } from "react-router-dom";
-import SpotifyWebApi from "spotify-web-api-js";
 import stateHandler from "./reducers/StateHandler.js";
 import initialState from "./initialState.js"
 import API from './utils/API.js'
@@ -70,21 +69,21 @@ function App() {
   }, [state.token])
 
   useEffect(() => {
-    const spotify = new SpotifyWebApi()
-
-    spotify.setAccessToken(state.authToken)
-    
-    window.location.hash = ""
-
-    // spotify.getMe().then((user) => {
-    //   dispatch({ type: 'user', payload: user })
-    //   dispatch({ type: 'success' })
-    //   alert(`Welcome ${user.display_name}`)
-    // }).catch((error) => {
-    //   dispatch({ type: 'error', payload: error })
-    //   dispatch({ type: 'failure' })
-    // })
-  }, [state.authToken])
+    if (state.code) {
+      try {
+        API.redeem(state.code, state.state)
+          .then((user) => {
+            dispatch({ type: 'user', payload: user })
+            dispatch({ type: 'success' })
+            alert(`Welcome ${user.display_name}`)
+          })
+      } catch (error) {
+        const parsedError = JSON.parse(error.response).error
+        dispatch({ type: 'error', payload: parsedError })
+        dispatch({ type: 'failure' })
+      }
+    }
+  }, [state.code, state.state])
 
   // song/playlist data update
 
@@ -170,9 +169,9 @@ function App() {
     dispatch({ type: 'loading' })
     if (type === 'log-in') {
       try {
-        const token = await API.login()
-        window.location.hash = ""
-        dispatch({ type: "authToken", payload: token })
+        const tokenObj = await API.login()
+        dispatch({ type: "code", payload: tokenObj.authCode })
+        dispatch({ type: "state", payload: tokenObj.state })
       } catch (error) {
         dispatch({ type: 'error', payload: error })
         dispatch({ type: 'failure' })
