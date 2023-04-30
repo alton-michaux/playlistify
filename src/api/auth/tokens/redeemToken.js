@@ -4,8 +4,7 @@ async function redeemToken(code, state) {
   const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/callback`, {
     params: { code, state }
   }).then((res) => {
-    console.log("🚀 ~ file: redeemToken.js:8 ~ .then ~ res:", res)
-    return res.data
+    return res.data.access_token
   }).catch((error) => {
     throw new Error(error)
   })

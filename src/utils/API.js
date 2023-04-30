@@ -13,7 +13,7 @@ const API = {
   // open auth popup
   login: () => UserLogin(),
   // redeem token
-  redeem: (code) => redeemToken(code),
+  redeem: (code, state) => redeemToken(code, state),
   // return genres
   genres: (token) => getGenres(token),
   // fetch user playlists
