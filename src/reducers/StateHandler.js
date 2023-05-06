@@ -25,6 +25,11 @@ const stateHandler = (state, action) => {
         isError: true,
         error: action.payload,
       };
+    case 'authString':
+      return {
+        ...state,
+        authString: action.payload,
+      }
     case 'authToken':
       return {
         ...state,

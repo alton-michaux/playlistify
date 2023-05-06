@@ -12,6 +12,7 @@ const Home = ({
   loading,
   error,
   isError,
+  loginLink,
   handleUser,
   user,
   genres,
@@ -35,6 +36,7 @@ const Home = ({
           <Nav
             isOpen={isOpen}
             popoverHandler={popoverHandler}
+            loginLink={loginLink}
             handleUser={handleUser}
             user={user}
           ></Nav>
@@ -89,6 +91,7 @@ Home.propTypes = {
     PropTypes.array,
     PropTypes.object
   ]),
+  loginLink: PropTypes.string,
   song: PropTypes.object,
   title: PropTypes.string,
   image: PropTypes.string,

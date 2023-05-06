@@ -3,8 +3,6 @@ import axios from "axios";
 async function UserLogin() {
   const user = await axios.get(`${process.env.REACT_APP_BASE_URL}/login`)
     .then((res) => {
-      window.location.href = ""
-
       return res.data
     }).catch((res) => {
       throw new Error(res);

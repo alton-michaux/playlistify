@@ -1,11 +1,11 @@
 import "normalize.css";
 import "@blueprintjs/core/lib/css/blueprint.css";
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
-import { Navbar, Button, Alignment } from "@blueprintjs/core"
+import { Navbar, Button, AnchorButton, Alignment } from "@blueprintjs/core"
 import PopoverComponent from "./utitlityComponents/popover";
 import PropTypes from 'prop-types';
 
-const Nav = ({ isOpen, popoverHandler, user, handleUser }) => {
+const Nav = ({ isOpen, popoverHandler, user, handleUser, loginLink }) => {
   const toggleControlledTooltip = () => {
     popoverHandler(!isOpen)
   }
@@ -36,7 +36,8 @@ const Nav = ({ isOpen, popoverHandler, user, handleUser }) => {
           <Navbar.Heading className="bp4-align-left">Playlistify</Navbar.Heading>
           <Navbar.Divider />
           <Button className="bp4-minimal bp4-align-right" icon="home" text="Home" />
-          <Button
+          <AnchorButton
+            href={loginLink}
             className="bp4-minimal bp4-align-right"
             icon={user.display_name ? "log-out" : "log-in"}
             text={user.display_name ? "Log-Out" : "Log-In"}
@@ -52,7 +53,8 @@ Nav.propTypes = {
   isOpen: PropTypes.bool,
   popoverHandler: PropTypes.func,
   user: PropTypes.object,
-  handleUser: PropTypes.func
+  handleUser: PropTypes.func,
+  loginLink: PropTypes.string,
 }
 
 export default Nav

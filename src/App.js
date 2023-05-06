@@ -30,6 +30,20 @@ function App() {
   }, [])
 
   useEffect(() => {
+    async function fetchUser() {
+      try {
+        const authString = await API.login()
+        dispatch({ type: 'authString', payload: authString })
+      } catch (error) {
+        dispatch({ type: 'error', payload: error })
+        dispatch({ type: 'failure' })
+      }
+    }
+
+    fetchUser()
+  }, [state.token])
+
+  useEffect(() => {
     if (state.token) {
       dispatch({ type: 'loading' })
       async function fetchGenres() {
@@ -151,13 +165,7 @@ function App() {
   async function userhandler(type) {
     dispatch({ type: 'loading' })
     if (type === 'log-in') {
-      try {
-        const user = await API.login()
-        dispatch({ type: "user", payload: user })
-      } catch (error) {
-        dispatch({ type: 'error', payload: error })
-        dispatch({ type: 'failure' })
-      }
+      return
     } else {
       dispatch({ type: 'authToken', payload: '' })
       dispatch({ type: 'user', payload: '' })
@@ -212,6 +220,7 @@ function App() {
                 isError={state.isError}
                 error={state.error}
                 handleUser={userhandler}
+                loginLink={state.loginLink}
                 show={state.show}
                 user={state.user}
                 token={state.token}
