@@ -2,8 +2,6 @@ const initialState = {
   isLoading: false,
   isError: false,
   error: "",
-  code: "",
-  state: "",
   authToken: "",
   user: {},
   token: "",

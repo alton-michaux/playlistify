@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useReducer } from 'react';
 import { Routes, Route } from "react-router-dom";
-import SpotifyWebApi from "spotify-web-api-js";
 import stateHandler from "./reducers/StateHandler.js";
 import initialState from "./initialState.js"
 import API from './utils/API.js'
@@ -68,33 +67,6 @@ function App() {
       fetchPlaylists()
     }
   }, [state.token])
-
-  useEffect(() => {
-    if (state.code) {
-      async function redeemToken() {
-        await API.redeem(state.code, state.state)
-          .then((token) => {
-            const spotify = new SpotifyWebApi()
-            spotify.setAccessToken(token)
-            window.location.hash = ""
-            spotify.getMe().then((user) => {
-              dispatch({ type: 'user', payload: user })
-              dispatch({ type: 'success' })
-              alert(`Welcome ${user.display_name}`)
-            }).catch((error) => {
-              const parsedError = JSON.parse(error.response).error
-              dispatch({ type: 'error', payload: parsedError })
-              dispatch({ type: 'failure' })
-            })
-          }).catch((error) => {
-            dispatch({ type: 'error', payload: error })
-            dispatch({ type: 'failure' })
-          })
-      }
-
-      redeemToken()
-    }
-  }, [state.code, state.state])
 
   // song/playlist data update
 
@@ -180,9 +152,8 @@ function App() {
     dispatch({ type: 'loading' })
     if (type === 'log-in') {
       try {
-        const tokenObj = await API.login()
-        dispatch({ type: "code", payload: tokenObj.authCode })
-        dispatch({ type: "state", payload: tokenObj.state })
+        const user = await API.login()
+        dispatch({ type: "user", payload: user })
       } catch (error) {
         dispatch({ type: 'error', payload: error })
         dispatch({ type: 'failure' })

@@ -1,24 +1,16 @@
 import axios from "axios";
-import utils from "../../../utils/utils";
 
 async function UserLogin() {
-  try {
-    const authString = await axios.get(`${process.env.REACT_APP_BASE_URL}/login`)
-      .then((res) => {
-        return res.data
-      }).catch((res) => {
-        throw new Error(res);
-      })
+  const user = await axios.get(`${process.env.REACT_APP_BASE_URL}/login`)
+    .then((res) => {
+      window.location.href = ""
 
-    // Open the auth popup
-    window.location.href = authString
+      return res.data
+    }).catch((res) => {
+      throw new Error(res);
+    })
 
-    const tokenObj = utils.URLToken()
-  
-    return tokenObj
-  } catch (error) {
-    throw new Error(error)
-  }
+  return user
 }
 
 export default UserLogin
