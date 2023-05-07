@@ -12,7 +12,9 @@ const Home = ({
   loading,
   error,
   isError,
-  loginLink,
+  redirect,
+  handleError,
+  handleLogin,
   handleUser,
   user,
   genres,
@@ -36,8 +38,10 @@ const Home = ({
           <Nav
             isOpen={isOpen}
             popoverHandler={popoverHandler}
-            loginLink={loginLink}
+            redirect={redirect}
+            handleError={handleError}
             handleUser={handleUser}
+            handleLogin={handleLogin}
             user={user}
           ></Nav>
         </Row>
@@ -81,6 +85,8 @@ Home.propTypes = {
     PropTypes.object,
     PropTypes.string
   ]),
+  handleError: PropTypes.func,
+  handleLogin: PropTypes.func,
   handleUser: PropTypes.func,
   user: PropTypes.object,
   genres: PropTypes.array,
@@ -91,7 +97,7 @@ Home.propTypes = {
     PropTypes.array,
     PropTypes.object
   ]),
-  loginLink: PropTypes.string,
+  redirect: PropTypes.string,
   song: PropTypes.object,
   title: PropTypes.string,
   image: PropTypes.string,

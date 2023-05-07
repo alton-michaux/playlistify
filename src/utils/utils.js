@@ -61,14 +61,14 @@ const utils = {
     function getTokenFromURL() {
       const tokenFetchObj = {}
       const authCode = window.location.search
-        .substring(1)
-        .split('=')[1]
-        .split('&')[0]
+        ?.substring(1)
+        ?.split('=')[1]
+        ?.split('&')[0]
 
       const state = window.location.search
-        .substring(1)
-        .split('&')[1]
-        .split('=')[1]
+        ?.substring(1)
+        ?.split('&')[1]
+        ?.split('=')[1]
 
       tokenFetchObj.state = state
       tokenFetchObj.authCode = authCode

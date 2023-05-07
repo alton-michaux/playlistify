@@ -162,7 +162,7 @@ function App() {
     fetchTrackInfo()
   }
 
-  async function userhandler(type) {
+  async function loginHandler(type) {
     dispatch({ type: 'loading' })
     if (type === 'log-in') {
       return
@@ -172,6 +172,15 @@ function App() {
       dispatch({ type: 'success' })
       alert("You logged out")
     }
+  }
+
+  const handleUser = (user) => {
+    dispatch({ type: "user", payload: user})
+  }
+
+  const errorHandler = (error) => {
+    console.log("🚀 ~ file: App.js:184 ~ errorHandler ~ error:", error)
+    dispatch({type: "error", payload: error})
   }
 
   const filterPlaylists = (genreParam) => {
@@ -201,7 +210,6 @@ function App() {
       handleTracklistFetch(target)
     }
   }
-  // console.log('state', state)
 
   return (
     <Container
@@ -219,8 +227,10 @@ function App() {
                 loading={state.isLoading}
                 isError={state.isError}
                 error={state.error}
-                handleUser={userhandler}
-                loginLink={state.loginLink}
+                handleError={errorHandler}
+                handleLogin={loginHandler}
+                handleUser={handleUser}
+                redirect={state.authString}
                 show={state.show}
                 user={state.user}
                 token={state.token}
