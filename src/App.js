@@ -109,6 +109,23 @@ function App() {
 
   // handlers
 
+  if (window.location.href.includes('callback') && !state.error) {
+    async function getUser() {
+      const tokenObj = await utils.URLToken()
+      const state = tokenObj.state
+      const code = tokenObj.authCode
+
+      await API.user(state, code).then((user) => {
+        console.log("🚀 ~ file: Nav.js:17 ~ Nav ~ user:", user)
+        dispatch({ type: 'user', payload: user })
+      }).catch((error) => {
+        dispatch({ type: 'error', payload: error })
+      })
+    }
+
+    getUser()
+  }
+
   const handlePopover = (bool) => {
     const isOpen = bool
     dispatch({ type: 'isOpen', payload: isOpen })
@@ -174,15 +191,6 @@ function App() {
     }
   }
 
-  const handleUser = (user) => {
-    dispatch({ type: "user", payload: user})
-  }
-
-  const errorHandler = (error) => {
-    console.log("🚀 ~ file: App.js:184 ~ errorHandler ~ error:", error)
-    dispatch({type: "error", payload: error})
-  }
-
   const filterPlaylists = (genreParam) => {
     if (genreParam !== "Sort By Genre") {
       const storedPlaylists = JSON.parse(localStorage.getItem('playlists'))
@@ -227,9 +235,7 @@ function App() {
                 loading={state.isLoading}
                 isError={state.isError}
                 error={state.error}
-                handleError={errorHandler}
                 handleLogin={loginHandler}
-                handleUser={handleUser}
                 redirect={state.authString}
                 show={state.show}
                 user={state.user}

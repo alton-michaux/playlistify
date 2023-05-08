@@ -5,11 +5,12 @@ async function redeemToken(state, code) {
     params: { state, code }
   }).then((res) => {
     if (!res.data.error) {
-      window.location.hash = ""
+      window.location.search = ""
       const user = res.data
       console.log("🚀 ~ file: redeemToken.js:9 ~ redeemToken ~ user:", user)
       return user
     } else {
+      console.log('redeem error')
       throw new Error(res.data.error)
     }
   }).catch((error) => {
