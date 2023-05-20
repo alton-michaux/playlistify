@@ -30,22 +30,18 @@ function App() {
   }, [])
 
   useEffect(() => {
-    async function fetchUser() {
-      try {
-        const authString = await API.login()
-        dispatch({ type: 'authString', payload: authString })
-      } catch (error) {
-        dispatch({ type: 'error', payload: error })
-        dispatch({ type: 'failure' })
-      }
-    }
-
-    fetchUser()
-  }, [state.token])
-
-  useEffect(() => {
     if (state.token) {
       dispatch({ type: 'loading' })
+      async function fetchAuthString() {
+        try {
+          const authString = await API.login()
+          dispatch({ type: 'authString', payload: authString })
+        } catch (error) {
+          dispatch({ type: 'error', payload: error })
+          dispatch({ type: 'failure' })
+        }
+      }
+  
       async function fetchGenres() {
         try {
           const genres = await API.genres(state.token)
@@ -79,6 +75,7 @@ function App() {
 
       fetchGenres()
       fetchPlaylists()
+      fetchAuthString()
     }
   }, [state.token])
 
@@ -179,11 +176,9 @@ function App() {
     fetchTrackInfo()
   }
 
-  async function loginHandler(type) {
+  const loginHandler = (type) => {
     dispatch({ type: 'loading' })
-    if (type === 'log-in') {
-      return
-    } else {
+    if (type === 'log-out') {
       dispatch({ type: 'authToken', payload: '' })
       dispatch({ type: 'user', payload: '' })
       dispatch({ type: 'success' })
@@ -218,7 +213,7 @@ function App() {
       handleTracklistFetch(target)
     }
   }
-
+console.log('state', state)
   return (
     <Container
       style={{ paddingTop: "5%", height: "100%" }}
