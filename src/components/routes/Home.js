@@ -11,7 +11,9 @@ import "../../styles/App.css"
 const Home = ({
   loading,
   error,
-  handleUser,
+  isError,
+  redirect,
+  handleLogin,
   user,
   genres,
   genre,
@@ -34,7 +36,8 @@ const Home = ({
           <Nav
             isOpen={isOpen}
             popoverHandler={popoverHandler}
-            handleUser={handleUser}
+            redirect={redirect}
+            handleLogin={handleLogin}
             user={user}
           ></Nav>
         </Row>
@@ -46,9 +49,9 @@ const Home = ({
           >Loading...
           </BasicSpinner>
           <ErrorCallout
-            isError={error}
-          >There was an error...
-          </ErrorCallout>
+            isError={isError}
+            error={error}
+          />
           <Main
             genres={genres}
             genre={genre}
@@ -73,8 +76,12 @@ const Home = ({
 
 Home.propTypes = {
   loading: PropTypes.bool,
-  error: PropTypes.bool,
-  handleUser: PropTypes.func,
+  isError: PropTypes.bool,
+  error: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string
+  ]),
+  handleLogin: PropTypes.func,
   user: PropTypes.object,
   genres: PropTypes.array,
   genre: PropTypes.string,
@@ -84,6 +91,7 @@ Home.propTypes = {
     PropTypes.array,
     PropTypes.object
   ]),
+  redirect: PropTypes.string,
   song: PropTypes.object,
   title: PropTypes.string,
   image: PropTypes.string,

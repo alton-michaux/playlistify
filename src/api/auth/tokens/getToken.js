@@ -1,19 +1,14 @@
-import axios from 'axios';
+import axios from "axios";
 
 async function getToken() {
-  const response = await axios.post('https://accounts.spotify.com/api/token',
-    'grant_type=client_credentials',
-    {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Basic ' + btoa(process.env.REACT_APP_CLIENT_ID + ':' + process.env.REACT_APP_CLIENT_SECRET)
-      }
-    }
-  ).then(async (response) => {
-    return response.data.access_token
-  }).catch((response) => {
-    throw new Error(`Error! status: ${response.status}`);
-  })
+  const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/token`)
+    .then((res) => {
+      const data = res.data
+      return data
+    }).catch((res) => {
+      throw new Error(res);
+    })
+
   return response
 }
 

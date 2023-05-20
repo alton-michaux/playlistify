@@ -5,12 +5,15 @@ import getPlaylistByID from "../api/data/getPlaylistByID";
 import getMyPlaylistsTrackList from "../api/data/getTracklist";
 import getTrackInfo from "../api/data/getTrackInfo";
 import UserLogin from "../api/auth/tokens/userLogin";
+import redeemToken from "../api/auth/tokens/redeemToken";
 
 const API = {
   // returns access_token for playlist data
   token: () => getToken(),
   // open auth popup
   login: () => UserLogin(),
+  // redeem token
+  user: (state, code) => redeemToken(state, code),
   // return genres
   genres: (token) => getGenres(token),
   // fetch user playlists

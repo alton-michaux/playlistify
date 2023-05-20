@@ -1,23 +1,14 @@
 import axios from "axios";
 
 async function getMyPlaylists(token) {
-  const limit = 21;
-
-  const response = await axios.get(
-    `https://api.spotify.com/v1/users/${process.env.REACT_APP_USER_ID}/playlists?limit=${limit}&offset=0`,
-    {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      }
-    }
-  ).then((response) => {
-    return response.data.items;
-  }).catch((response) => {
-    throw new Error(`Error! status: ${response.status}`);
+  const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/playlists`, {
+    params: { token }
+  }).then((res) => {
+    return res.data;
+  }).catch((res) => {
+    throw new Error(`Error! status: ${res}`);
   });
-  return response
+  return response  
 }
 
 export default getMyPlaylists

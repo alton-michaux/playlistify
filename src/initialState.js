@@ -1,7 +1,10 @@
 const initialState = {
   isLoading: false,
   isError: false,
+  error: "",
+  authString: "",
   authToken: "",
+  loginLink: "",
   user: {},
   token: "",
   genres: [],

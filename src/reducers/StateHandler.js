@@ -4,20 +4,32 @@ const stateHandler = (state, action) => {
       return {
         ...state,
         isLoading: true,
-        isError: false
+        isError: false,
       };
     case 'success':
       return {
         ...state,
         isLoading: false,
-        isError: false
+        isError: false,
       };
     case 'failure':
       return {
         ...state,
         isLoading: false,
-        isError: true
+        isError: true,
       };
+    case 'error':
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        error: action.payload,
+      };
+    case 'authString':
+      return {
+        ...state,
+        authString: action.payload,
+      }
     case 'authToken':
       return {
         ...state,

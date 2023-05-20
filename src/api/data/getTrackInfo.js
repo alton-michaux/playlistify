@@ -1,20 +1,14 @@
 import axios from "axios";
 
 async function getTrackInfo(trackID, token) {
-  const response = await axios.get(`https://api.spotify.com/v1/tracks/${trackID}`,
-    {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  ).then((response) => {
-    return response.data
-  }).catch((response) => {
-    throw new Error(`Error! status: ${response.status}`);
-  })
-  return response
+  const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/song`, {
+    params: { token, trackID }
+  }).then((res) => {
+    return res.data;
+  }).catch((res) => {
+    throw new Error(res);
+  });
+  return response  
 };
 
 export default getTrackInfo

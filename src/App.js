@@ -1,10 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useReducer } from 'react';
 import { Routes, Route } from "react-router-dom";
-import SpotifyWebApi from "spotify-web-api-js";
 import stateHandler from "./reducers/StateHandler.js";
 import initialState from "./initialState.js"
-import API from './utils/spotifyAPI.js'
+import API from './utils/API.js'
 import utils from './utils/utils.js';
 import Container from 'react-bootstrap/Container'
 import Home from './components/routes/Home'
@@ -22,7 +21,8 @@ function App() {
         const token = await API.token()
         dispatch({ type: 'token', payload: token })
         dispatch({ type: 'success' })
-      } catch {
+      } catch (error) {
+        dispatch({ type: 'error', payload: error })
         dispatch({ type: 'failure' })
       }
     }
@@ -32,12 +32,23 @@ function App() {
   useEffect(() => {
     if (state.token) {
       dispatch({ type: 'loading' })
+      async function fetchAuthString() {
+        try {
+          const authString = await API.login()
+          dispatch({ type: 'authString', payload: authString })
+        } catch (error) {
+          dispatch({ type: 'error', payload: error })
+          dispatch({ type: 'failure' })
+        }
+      }
+  
       async function fetchGenres() {
         try {
           const genres = await API.genres(state.token)
           dispatch({ type: 'genres', payload: genres })
           dispatch({ type: 'success' })
-        } catch {
+        } catch (error) {
+          dispatch({ type: 'error', payload: error })
           dispatch({ type: 'failure' })
         }
       }
@@ -56,37 +67,17 @@ function App() {
           localStorage.setItem('playlists', JSON.stringify(updatedPlaylists))
 
           dispatch({ type: 'playlists', payload: updatedPlaylists })
-        } catch {
+        } catch (error) {
+          dispatch({ type: 'error', payload: error })
           dispatch({ type: 'failure' })
         }
       }
 
       fetchGenres()
       fetchPlaylists()
+      fetchAuthString()
     }
   }, [state.token])
-
-  useEffect(() => {
-    const spotify = new SpotifyWebApi()
-  
-    const _spotifyToken = utils.URLToken().access_token
-
-    window.location.hash = ""
-
-    if (_spotifyToken) {
-      dispatch({ type: 'authToken', payload: _spotifyToken })
-
-      spotify.setAccessToken(_spotifyToken)
-
-      spotify.getMe().then((user) => {
-        dispatch({ type: 'user', payload: user })
-        dispatch({ type: 'success' })
-        alert(`Welcome ${user.display_name}`)
-      })
-    } else {
-      dispatch({ type: 'failure' })
-    }
-  }, [state.authToken])
 
   // song/playlist data update
 
@@ -115,6 +106,23 @@ function App() {
 
   // handlers
 
+  if (window.location.href.includes('callback') && !state.error) {
+    async function getUser() {
+      const tokenObj = await utils.URLToken()
+      const state = tokenObj.state
+      const code = tokenObj.authCode
+
+      await API.user(state, code).then((user) => {
+        console.log("🚀 ~ file: Nav.js:17 ~ Nav ~ user:", user)
+        dispatch({ type: 'user', payload: user })
+      }).catch((error) => {
+        dispatch({ type: 'error', payload: error })
+      })
+    }
+
+    getUser()
+  }
+
   const handlePopover = (bool) => {
     const isOpen = bool
     dispatch({ type: 'isOpen', payload: isOpen })
@@ -128,7 +136,8 @@ function App() {
         const playlist = await API.playlist(id, newToken)
         dispatch({ type: 'playlist', payload: playlist })
         dispatch({ type: 'success' })
-      } catch {
+      } catch (error) {
+        dispatch({ type: 'error', payload: error })
         dispatch({ type: 'failure' })
       }
     }
@@ -143,7 +152,8 @@ function App() {
         const tracklist = await API.tracklist(id, newToken)
         dispatch({ type: 'tracklist', payload: tracklist })
         dispatch({ type: 'success' })
-      } catch {
+      } catch (error) {
+        dispatch({ type: 'error', payload: error })
         dispatch({ type: 'failure' })
       }
     }
@@ -158,23 +168,17 @@ function App() {
         const song = await API.song(id, newToken)
         dispatch({ type: 'song', payload: song })
         dispatch({ type: 'success' })
-      } catch {
+      } catch (error) {
+        dispatch({ type: 'error', payload: error })
         dispatch({ type: 'failure' })
       }
     }
     fetchTrackInfo()
   }
 
-  async function userhandler(type) {
+  const loginHandler = (type) => {
     dispatch({ type: 'loading' })
-    if (type === 'log-in') {
-      try {
-        const userToken = await API.login()
-        dispatch({ type: "authToken", payload: userToken })
-      } catch {
-        dispatch({ type: 'failure' })
-      }
-    } else {
+    if (type === 'log-out') {
       dispatch({ type: 'authToken', payload: '' })
       dispatch({ type: 'user', payload: '' })
       dispatch({ type: 'success' })
@@ -209,7 +213,7 @@ function App() {
       handleTracklistFetch(target)
     }
   }
-
+console.log('state', state)
   return (
     <Container
       style={{ paddingTop: "5%", height: "100%" }}
@@ -224,8 +228,10 @@ function App() {
             element={
               <Home
                 loading={state.isLoading}
-                error={state.isError}
-                handleUser={userhandler}
+                isError={state.isError}
+                error={state.error}
+                handleLogin={loginHandler}
+                redirect={state.authString}
                 show={state.show}
                 user={state.user}
                 token={state.token}

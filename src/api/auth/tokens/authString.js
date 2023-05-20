@@ -1,6 +1,6 @@
 import axios from "axios";
 
-async function UserLogin() {
+async function AuthString() {
   const user = await axios.get(`${process.env.REACT_APP_BASE_URL}/login`)
     .then((res) => {
       return res.data
@@ -11,4 +11,4 @@ async function UserLogin() {
   return user
 }
 
-export default UserLogin
+export default AuthString
